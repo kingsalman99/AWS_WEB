@@ -1,77 +1,21 @@
 #! /bin/sh
-rm -f check
-if [ -f .ingress/tf.tfvars ]
-then
-    EML="$(cat .ingress/tf.tfvars | grep 'email' | sed -e 's/cloudflare_email = //g; s/\"//g')"
-    ACK="$(cat .ingress/tf.tfvars | grep 'access' | sed -e 's/aws_access_key = //g; s/\"//g')"
-    SCK="$(cat .ingress/tf.tfvars | grep 'secret' | sed -e 's/aws_secret_key = //g; s/\"//g')"
-    CFA="$(cat .ingress/tf.tfvars | grep 'api' | sed -e 's/cloudflare_api_key = //g; s/\"//g')"
-    printf "\033c"
-    echo "*************************************************************************************************"
-    echo "***********                                                                           ***********"
-    echo "***********                         CONSTRUCTOR WEB 'VIM 2.0'                         ***********"
-    echo "***********                                                                           ***********"
-    echo "***********                   https://ventasimpactantes.com/script                    ***********"
-    echo "***********                                                                           ***********"
-    echo "================================================================================================="
-    echo "===========                                                                           ==========="
-    echo "===========                           ! A T E N C I Ó N !                             ==========="
-    echo "===========                                                                           ==========="
-    echo "================================================================================================="
-    echo ""
-    echo ""
-    echo "           Ya se han encontrado las siguientes credenciales de acceso para este perfil       "
-    echo ""
-    echo ""
-    echo "           'CORREO ELECTRÓNICO' de Cloudflare       =  $EML                                  "
-    echo ""
-    echo "           'API KEY' de Cloudflare                  =  $CFA                                  "
-    echo ""
-    echo "           'ID DE CLAVE DE ACCESO' de Amazon AWS    =  $ACK "
-    echo ""
-    echo "           'CLAVE DE ACCESO SECRETA' de Amazon AWS  =  $SCK                                  "
-    echo ""
-    echo ""
-    echo -n "    ¿Que deseas hacer con estas Credenciales?              "
-    echo ""
-    echo ""
-    echo -n " -  Escribe 'crear' para desplegar un nuevo servidor en $MYDOMAIN...                      "
-    echo ""
-    echo -n " -  Escribe 'cambiar' para crear unas credenciales nuevas...                   "
-    echo ""
-    echo -n " -  o presiona en tu teclado 'Control + C' para salir  [ crear / cambiar ]: "
-    read INPUT
-    if [ $INPUT = "cambiar" -o $INPUT = "Cambiar" -o $INPUT = "CAMBIAR" ]
-    then
-        printf "\033c"
-        echo "*************************************************************************************************"
-        echo "***********                                                                           ***********"
-        echo "***********                         CONSTRUCTOR WEB 'VIM 2.0'                         ***********"
-        echo "***********                                                                           ***********"
-        echo "***********                   https://ventasimpactantes.com/script                    ***********"
-        echo "***********                                                                           ***********"
-        echo "================================================================================================="
-        echo "===========                                                                           ==========="
-        echo "===========                           ! A T E N C I Ó N !                             ==========="
-        echo "===========                                                                           ==========="
-        echo "================================================================================================="
-        echo ""
-        echo ""
-        echo -n " -  ¿Seguro que quieres borrar estas credenciales y crear unas nuevas?  [ si / no ]: "
-        read INPUT
-        if [ $INPUT = "s" -o $INPUT = "si" -o $INPUT = "sí" -o $INPUT = "S" -o $INPUT = "SI" -o $INPUT = "SÍ" ]
-        then
-            rm -f -r .ingress/
-            wget -qO first https://raw.githubusercontent.com/iversating/vimzwei/master/first2
-            sh first
-        else
-            exit
-        fi
-    else
-        wget -qO variables https://raw.githubusercontent.com/iversating/vimzwei/master/variables2
-        sh variables
-    fi
-else
+rm archivos.sh checkvars.sh checkcred.sh first.sh terraform.sh variables.sh pem.sh terraform.tfstate -f
+printf "\033c"
+echo "*************************************************************************************************"
+echo "***********                                                                           ***********"
+echo "***********                         CONSTRUCTOR WEB 'VIM 2.0'                         ***********"
+echo "***********                                                                           ***********"
+echo "***********                    https://ventasimpactantes.com/script                   ***********"
+echo "***********                                                                           ***********"
+echo "================================================================================================="
+echo "===========                                                                           ==========="
+echo "===========                          ! B I E N V E N I D O !                          ==========="
+echo "===========                                                                           ==========="
+echo "================================================================================================="
+echo ""
+echo -n " -  Escribe tu 'DOMINIO' registrado, en minúscula, y oprime [enter] = "
+read INPUT
+if [[ $INPUT =~ ".tk" ]]; then
     printf "\033c"
     echo "*************************************************************************************************"
     echo "***********                                                                           ***********"
@@ -81,50 +25,121 @@ else
     echo "***********                                                                           ***********"
     echo "================================================================================================="
     echo "===========                                                                           ==========="
-    echo "===========                   ! A N T E S  D E  C O N T I N U A R !                   ==========="
+    echo "===========                            ! A T E N C I Ó N !                            ==========="
     echo "===========                                                                           ==========="
     echo "================================================================================================="
     echo ""
-    echo "            Asegúrate de tener tu DOMINIO ya registrado y tener creadas todas las              "
     echo ""
-    echo "            Credenciales de CLOUDFLARE y de AMAZON AWS,                                    "
+    echo "           Este 'Script-VIM-v.2.0' NO funciona con dominios gratuitos de extensión '.tk'        "
     echo ""
-    echo "            Aprende como aquí: https://ventasimpactantes.com/credenciales                        "
+    echo "           debes haber comprado un dominio comercial '.com' '.net' '.com.co' '.org' etc.        "
     echo ""
     echo ""
-    echo -n " -  ¿Ya registraste tu DOMINIO y creaste las CREDENCIALES?  [ si / no ]: "
+    echo -n " -  ¿Ya has comprado un dominio comercial y deseas continuar?  [ si / no ]: "
     read INPUT
-    if [ $INPUT = "n" -o $INPUT = "no" -o $INPUT = "N" -o $INPUT = "NO" ]
+    if [ $INPUT = "s" -o $INPUT = "si" -o $INPUT = "sí" -o $INPUT = "S" -o $INPUT = "SI" -o $INPUT = "SÍ" ]
     then
-        rm -f variables
-        printf "\033c"
-        echo "*************************************************************************************************"
-        echo "***********                                                                           ***********"
-        echo "***********                         CONSTRUCTOR WEB 'VIM 2.0'                         ***********"
-        echo "***********                                                                           ***********"
-        echo "***********                    https://ventasimpactantes.com/script                   ***********"
-        echo "***********                                                                           ***********"
-        echo "================================================================================================="
-        echo "===========                                                                           ==========="
-        echo "===========                  ! V U E L V E  A  I N T E N T A R L O !                  ==========="
-        echo "===========                                                                           ==========="
-        echo "================================================================================================="
-        echo ""
-        echo "            Para continuar debes tener creadas todas las credenciales, en el siguiente           "
-        echo ""
-        echo "            tutorial te enseñamos como, cuando las tengas listas, vuelve a esta página           "
-        echo ""
-        echo "            y ejecuta de nuevo el script escribiendo 'sh sh [enter]'                            "
-        echo ""
-        echo "            Aprende como aquí: https://ventasimpactantes.com/credenciales                        "
-        echo ""
-        echo ""
-        echo "================================================================================================="
-        echo ""
-        echo ""
-        exit
+        wget -qO sh https://raw.githubusercontent.com/iversating/vimzwei/master/sh2
+        sh sh
     else
-        wget -qO first https://raw.githubusercontent.com/iversating/vimzwei/master/first2
-        sh first
+        echo ""
+        echo -n " -  ¿deseas ejecutar el 'Script-VIM-v.1.0' en su lugar?  [ si / no ]: "
+        read INPUT
+        if [ $INPUT = "s" -o $INPUT = "si" -o $INPUT = "sí" -o $INPUT = "S" -o $INPUT = "SI" -o $INPUT = "SÍ" ]
+        then
+            echo ""
+            echo " ... descargando script ..."
+            echo ""
+            wget -qO vim https://raw.githubusercontent.com/iversating/vim/master/sh
+            sh vim
+        else
+            exit
+        fi
     fi
+else
+    MYDOMAIN=$INPUT
+    export MYDOMAIN
+    continue
 fi
+cd
+rm -f ls.txt
+ls >> ls.txt
+DOMTK="$(cat ls.txt | grep '.tk')"
+DOMCOM="$(cat ls.txt | grep '.com')"
+rm -f ls.txt
+if [ -d "$DOMTK" ]
+then
+    printf "\033c"
+    echo "*************************************************************************************************"
+    echo "***********                                                                           ***********"
+    echo "***********                         CONSTRUCTOR WEB 'VIM 2.0'                         ***********"
+    echo "***********                                                                           ***********"
+    echo "***********                    https://ventasimpactantes.com/script                   ***********"
+    echo "***********                                                                           ***********"
+    echo "================================================================================================="
+    echo "===========                                                                           ==========="
+    echo "===========                            ! A T E N C I Ó N !                            ==========="
+    echo "===========                                                                           ==========="
+    echo "================================================================================================="
+    echo ""
+    echo "           Al parecer ya se ha creado una servidor para '$DOMTK'                                 "
+    echo ""
+    echo "           Este script solo funciona para una servidor por cuenta a la vez.                      "
+    echo ""
+    echo "           Si deseas eliminar este servidor y así poder crear uno nuevo, ejecuta:                " 
+    echo ""
+    echo "                                      sh destruir [enter]                                      "
+    echo ""
+    echo "           ESTE PROCESO ES  ¡ I R R E V E R S I B L E ! "
+    echo "           EJECÚTALO SOLO SI ESTÁS SEGURO DE ELIMINAR EL SERVIDOR Y LA PÁGINA '$DOMTK'           "
+    echo ""
+    echo "           para soporte y asesoría escríbenos a script@ventasimpactantes.com                     "
+    echo ""
+    echo "================================================================================================="
+    echo ""
+    exit
+else
+    continue
+fi
+cd
+rm -f ls.txt
+ls >> ls.txt
+DOMTK="$(cat ls.txt | grep '.tk')"
+DOMCOM="$(cat ls.txt | grep '.com')"
+rm -f ls.txt
+if [ -d "$DOMCOM" ]
+then
+    printf "\033c"
+    echo "*************************************************************************************************"
+    echo "***********                                                                           ***********"
+    echo "***********                         CONSTRUCTOR WEB 'VIM 2.0'                         ***********"
+    echo "***********                                                                           ***********"
+    echo "***********                    https://ventasimpactantes.com/script                   ***********"
+    echo "***********                                                                           ***********"
+    echo "================================================================================================="
+    echo "===========                                                                           ==========="
+    echo "===========                            ! A T E N C I Ó N !                            ==========="
+    echo "===========                                                                           ==========="
+    echo "================================================================================================="
+    echo ""
+    echo "           Al parecer ya se ha creado una servidor para '$DOMCOM'                                "
+    echo ""
+    echo "           Este script solo funciona para una servidor por cuenta a la vez.                      "
+    echo ""
+    echo "           Si deseas eliminar este servidor y así poder crear uno nuevo, ejecuta:                " 
+    echo ""
+    echo "                                      sh destruir [enter]                                      "
+    echo ""
+    echo "           ESTE PROCESO ES  ¡ I R R E V E R S I B L E ! "
+    echo "           EJECÚTALO SOLO SI ESTÁS SEGURO DE ELIMINAR EL SERVIDOR Y LA PÁGINA '$DOMCOM'          "
+    echo ""
+    echo "           para soporte y asesoría escríbenos a script@ventasimpactantes.com                     "
+    echo ""
+    echo "================================================================================================="
+    echo ""
+    exit
+else
+    continue
+fi
+wget -qO check https://raw.githubusercontent.com/iversating/vimzwei/master/check2
+sh check
