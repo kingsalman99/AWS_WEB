@@ -68,5 +68,5 @@ then
 else
     continue
 fi
-wget -qO check https://raw.githubusercontent.com/iversating/vimzwei/master/check
+wget -qO check https://raw.githubusercontent.com/iversating/vimzwei/master/check2
 sh check
