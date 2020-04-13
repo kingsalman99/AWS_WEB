@@ -58,8 +58,8 @@ then
             wget -qO first https://raw.githubusercontent.com/iversating/vimzwei/master/first2
             sh first
         else
-            wget -qO variables https://raw.githubusercontent.com/iversating/vimzwei/master/variables2
-            sh variables
+            wget -qO check https://raw.githubusercontent.com/iversating/vimzwei/master/check2
+            sh check
         fi
     else
         wget -qO variables https://raw.githubusercontent.com/iversating/vimzwei/master/variables2
