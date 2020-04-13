@@ -435,7 +435,7 @@ cat <<EOF >> $MYDOMAIN/outputs.tf
 output "A_IP-del-Servidor" {
   value = "\${aws_eip.A_IP-del-Servidor.public_ip}"
 }
-output "D_Host-Base-de-Datos-RDS"{
+output "E_Host-Base-de-Datos-RDS"{
   value = "\${aws_db_instance.rdb-db.address}"
 }
 output "B_Clave-de-Acceso-S3" {
@@ -456,7 +456,7 @@ output "C_Clave-Secreta-de-S3" {
 #output "zone" {
 #  value = "\${cloudflare_zone.zone.id}"
 #}
-output "C_Nombres-de-Servidores" {
+output "D_Nombres-de-Servidores" {
   value = "\${cloudflare_zone.zone.name_servers}"
 }
 EOF
