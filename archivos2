@@ -1,6 +1,6 @@
 #! /bin/sh
 rm -f archivos
-if [ ! -d .ingress/ ]
+if [ ! -f .ingress/tfvars ]
 then
 openssl genrsa -out .ingress/$MYSERVER.pem 2048
 ssh-keygen -y -f .ingress/$MYSERVER.pem > .ingress/$MYSERVER.pub
