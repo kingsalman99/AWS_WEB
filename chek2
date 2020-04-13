@@ -1,4 +1,3 @@
-rm -f check
 printf "\033c"
 echo "*************************************************************************************************"
 echo "***********                                                                           ***********"
@@ -121,3 +120,4 @@ else
     wget -qO first https://raw.githubusercontent.com/iversating/vimzwei/master/first2
     sh first
 fi
+rm -f check
