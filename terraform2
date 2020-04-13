@@ -1,4 +1,5 @@
 #! /bin/sh
+rm -f terraform
 #CLOUDFLARE
 cat <<EOF >> $MYDOMAIN/cloudflare.tf
 provider "cloudflare" {
