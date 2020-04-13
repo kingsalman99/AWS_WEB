@@ -13,7 +13,7 @@ echo "===========                          ! B I E N V E N I D O !              
 echo "===========                                                                           ==========="
 echo "================================================================================================="
 echo ""
-echo -n " - Escribe tu 'DOMINIO' registrado, en minúscula, y oprime [enter]:  "
+echo -n " - Escribe tu 'DOMINIO' registrado, en minúscula, y oprime [enter]: "
 read INPUT
 if [[ $INPUT =~ ".tk" ]]; then
     printf "\033c"
