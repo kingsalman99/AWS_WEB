@@ -195,7 +195,7 @@ fpmrestart
 echo "$CFEMAIL" >> /etc/centminmod/email-primary.ini
 echo "$CFEMAIL" >> /etc/centminmod/email-secondary.ini
 rm -f /root/centminmod.sh /root/betainstaller73.sh betainstaller73.sh
-sudo sed -i "s/PUREFTPD_DISABLED='n'/PUREFTPD_DISABLED='y'/g" /usr/local/src/centminmod/centmin.sh
+sed -i "s/PUREFTPD_DISABLED='n'/PUREFTPD_DISABLED='y'/g" /usr/local/src/centminmod/centmin.sh
 #centmin
 EOF
 
