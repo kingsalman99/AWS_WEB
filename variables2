@@ -45,7 +45,7 @@ then
         export secretkey
     fi
     echo ""
-    echo -n " - Confirma tu 'DOMINIO' registrado, en minúscula, sin www, y oprime  [enter] = $MYDOMAIN"
+    echo -n " - Confirma tu 'DOMINIO' registrado, en minúscula, sin www y oprime  [enter] = $MYDOMAIN"
     read INPUT
     if [ $INPUT ]; then
         MYDOMAIN="$INPUT"
@@ -137,7 +137,7 @@ else
     echo -n " - Esta es tu 'CLAVE DE ACCESO SECRETA' de 'Amazon AWS'     = $SCK                            "
     echo ""
     echo ""
-    echo -n " - Confirma tu 'DOMINIO' en minúscula y sin 'www', [enter]  = $MYDOMAIN"
+    echo -n " - Confirma tu 'DOMINIO' en minúscula y sin www, [enter]  = $MYDOMAIN"
     read INPUT
     if [ $INPUT ]; then
         MYDOMAIN="$INPUT"
