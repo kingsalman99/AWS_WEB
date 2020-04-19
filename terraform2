@@ -455,7 +455,7 @@ output "C_Clave-Secreta-de-S3" {
 }
 output "D_Nombre_Ubicación_de_s3" {
   description = "The name bucket"
-  value       = "${aws_s3_bucket.s3-bak.bucket}"
+  value       = "\${aws_s3_bucket.s3-bak.bucket}"
 }
 output "E_Nombres-de-Servidores" {
   value = "\${cloudflare_zone.zone.name_servers}"
