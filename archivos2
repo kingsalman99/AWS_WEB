@@ -74,7 +74,7 @@ cat <<EOF >> $MYDOMAIN/.sh/sh.sh
 DOMINIO=$MYDOMAIN
 mkdir \$DOMINIO
 sudo chmod +x *.sh
-sudo mv vim.sh centminmod.sh aws-config.sh ssllabs.sh cloudflare.sh restart.sh bk-local.sh rds.sh ejecutelocal.sh wordpress.sh permisos.sh createbak.sh ejecutebak.sh deletebak.sh uninstall.sh mysql.sh \$DOMINIO
+sudo mv vim.sh centminmod.sh aws-config.sh ssllabs.sh restart.sh bk-local.sh rds.sh ejecutelocal.sh wordpress.sh permisos.sh createbak.sh ejecutebak.sh deletebak.sh uninstall.sh mysql.sh \$DOMINIO
 sudo yum -y update
 sudo yum install nano wget curl bind-utils -y
 sudo cp -ar "\$DOMINIO" /root/
