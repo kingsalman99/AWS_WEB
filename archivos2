@@ -309,8 +309,8 @@ wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/thrive-u
 #wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/thrive-apprentice.zip --activate --path="\$PTH" --allow-root
 wp plugin install https://docs.easysendy.com/email-campaigns/wp-content/uploads/sites/2/2018/09/wp-easysendy-form-integrator.zip --activate --path="\$PTH" --allow-root
 wp plugin install https://github.com/iversating/vim/raw/master/plgwp/updraftplus-premium.zip --activate --path="\$PTH" --allow-root
-#wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/cartflows.zip --activate --path="\$PTH" --allow-root
-#wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/cartflows-pro.zip --activate --path="\$PTH" --allow-root
+#wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/cartflows.zip --path="\$PTH" --allow-root
+#wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/cartflows-pro.zip --path="\$PTH" --allow-root
 #wp plugin install duplicate-page --activate --path="\$PTH" --allow-root
 wp plugin install wps-menu-exporter --activate --path="\$PTH" --allow-root
 wp plugin install duracelltomi-google-tag-manager --activate --activate --path="\$PTH" --allow-root
