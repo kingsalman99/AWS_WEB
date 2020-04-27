@@ -282,7 +282,7 @@ variable "key_name" {
   description = "Name of the SSH keypair to use in AWS"
 }
 variable "instance_type" {
-  default     = "t2.micro"
+  default     = "t3a.small"
   description = "AWS instance type"
 }
 EOF
@@ -479,5 +479,5 @@ echo "***********                                                               
 echo "***********        !  E S T A M O S   C R E A N D O   T U   S E R V I D O R  !        ***********"
 echo "***********                                                                           ***********"
 echo "================================================================================================="
-#cd ~/$MYDOMAIN/
-#terraform apply --auto-approve
+cd ~/$MYDOMAIN/
+terraform apply --auto-approve
