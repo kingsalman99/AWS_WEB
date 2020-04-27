@@ -402,6 +402,7 @@ wp plugin install https://github.com/iversating/vim/raw/master/plgwp/updraftplus
 wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/cartflows.zip --path="\$PTH" --allow-root
 wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/cartflows-pro.zip --path="\$PTH" --allow-root
 wp plugin activate akismet --path="\$PTH" --allow-root
+wp plugin install groundhogg --activate --activate --path="\$PTH" --allow-root
 wp plugin install duracelltomi-google-tag-manager --activate --activate --path="\$PTH" --allow-root
 wp plugin install smartcrawl-seo --activate --path="\$PTH" --allow-root
 wp plugin install post-smtp --activate --path="\$PTH" --allow-root
