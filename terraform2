@@ -179,10 +179,6 @@ resource "aws_instance" "web" {
     destination = "/home/centos/vim"
   }
   provisioner "file" {
-    source      = ".sh/centmin"
-    destination = "/home/centos/centmin"
-  }
-  provisioner "file" {
     source      = ".sh/wordpress"
     destination = "/home/centos/wordpress"
   }
@@ -195,8 +191,8 @@ resource "aws_instance" "web" {
     destination = "/home/centos/ssllabs.sh"
   }
   provisioner "file" {
-    source      = ".sh/centminmod.sh"
-    destination = "/home/centos/centminmod.sh"
+    source      = ".sh/vim.sh"
+    destination = "/home/centos/vim.sh"
   }
   provisioner "file" {
     source      = ".sh/restart.sh"
