@@ -1,5 +1,5 @@
 #! /bin/sh
-rm -f files
+rm -f archivos
 if [ ! -f .ingress/tf.tfvars ]
 then
 openssl genrsa -out .ingress/$MYSERVER.pem 2048
@@ -70,12 +70,12 @@ cat <<EOF >> $MYDOMAIN/.sh/sh.sh
 DOMINIO=$MYDOMAIN
 mkdir \$DOMINIO
 sudo chmod +x *.sh
-sudo mv centminmod.sh aws-config.sh ssllabs.sh restart.sh bk-local.sh rds.sh ejecutelocal.sh wordpress wordpress.sh permisos.sh createbak.sh ejecutebak.sh deletebak.sh uninstall.sh mysql.sh \$DOMINIO
+sudo mv aws-config.sh ssllabs.sh restart.sh bk-local.sh rds.sh ejecutelocal.sh wordpress wordpress.sh permisos.sh createbak.sh ejecutebak.sh deletebak.sh uninstall.sh mysql.sh \$DOMINIO
 sudo yum install nano wget curl bind-utils -y
 sudo cp -ar "\$DOMINIO" /root/
 sudo rm -f sh.sh
 sudo sh hostname.sh
-sudo sh centmin
+sudo mv vim.sh /root/vim
 EOF
 
 #DATE HOSTNAME REBOOT
@@ -92,14 +92,7 @@ sudo service network restart
 rm -f hostname.sh
 EOF
 
-cat <<EOF >> $MYDOMAIN/.sh/centmin
-DOMINIO=$MYDOMAIN
-sudo mv /root/"\$DOMINIO"/centminmod.sh /root/
-sudo rm -f /root/centmin centmin
-sudo sh /root/centminmod.sh
-EOF
-
-cat <<EOF >> $MYDOMAIN/.sh/centminmod.sh
+cat <<EOF >> $MYDOMAIN/.sh/vim.sh
 #CUSTOM CONFIG
 mkdir -p /etc/centminmod
 touch /etc/centminmod/custom_config.inc
@@ -186,10 +179,12 @@ sudo echo -e "y" | ./acmetool.sh acmeinstall
 #INIT CENTMINMOD
 echo "$EML" >> /etc/centminmod/email-primary.ini
 echo "$EML" >> /etc/centminmod/email-secondary.ini
-rm -f /root/centminmod.sh /root/betainstaller73.sh betainstaller73.sh
+rm -f /root/vim /root/betainstaller73.sh betainstaller73.sh
 sed -i "s/PUREFTPD_DISABLED='n'/PUREFTPD_DISABLED='y'/g" /usr/local/src/centminmod/centmin.sh
 sudo touch /etc/ssl/private/pure-ftpd-dhparams.pem
-rm centminmod.sh -f
+sed -i '5i return 444;' /usr/local/nginx/conf/conf.d/virtual.conf
+rm -rf /usr/local/nginx/conf/conf.d/demodomain.com.conf
+rm -rf /home/nginx/domains/demodomain.com
 EOF
 
 cat <<EOF >> $MYDOMAIN/.sh/aws-config.sh
@@ -281,14 +276,6 @@ echo "===========                                                               
 echo "===========              ! C O N F I G U R A N D O   W O R D P R E S S !              ==========="
 echo "===========                                                                           ==========="
 echo "================================================================================================="
-if ! grep -q "return 444" /usr/local/nginx/conf/conf.d/virtual.conf ;
-then
-  sed -i '5i return 444;' /usr/local/nginx/conf/conf.d/virtual.conf
-else
-  continue
-fi
-rm -rf /usr/local/nginx/conf/conf.d/demodomain.com.conf
-rm -rf /home/nginx/domains/demodomain.com
 sh /root/"\$DOMINIO"/ssllabs.sh
 sh /root/"\$DOMINIO"/bk-local.sh
 sh /root/"\$DOMINIO"/rds.sh
@@ -395,8 +382,6 @@ wp theme install astra --activate --path="\$PTH" --allow-root
 wp theme delete twentytwenty --path="\$PTH" --allow-root
 wp theme delete twentyseventeen --path="\$PTH" --allow-root
 wp theme delete twentynineteen --path="\$PTH" --allow-root
-wp plugin install https://github.com/iversating/vim/raw/master/plgwp/astra-pro-addon.zip --activate --path="\$PTH" --allow-root
-wp plugin install https://github.com/iversating/vim/raw/master/plgwp/astra-pro-addon.zip --activate --path="\$PTH" --allow-root
 wp plugin install https://github.com/iversating/vim/raw/master/plgwp/elementor-free.zip --activate --path="\$PTH" --allow-root
 wp plugin install https://github.com/iversating/vim/raw/master/plgwp/elementor-pro.zip --activate --path="\$PTH" --allow-root
 wp plugin install https://github.com/iversating/vim/raw/master/plgwp/ultimate-elementor.zip --path="\$PTH" --allow-root
@@ -412,6 +397,7 @@ wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/cartflow
 wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/cartflows-pro.zip --path="\$PTH" --allow-root
 wp plugin activate akismet --path="\$PTH" --allow-root
 wp plugin install groundhogg --activate --activate --path="\$PTH" --allow-root
+wp plugin install tutor --activate --path="\$PTH" --allow-root
 wp plugin install duracelltomi-google-tag-manager --activate --activate --path="\$PTH" --allow-root
 wp plugin install smartcrawl-seo --activate --path="\$PTH" --allow-root
 wp plugin install post-smtp --activate --path="\$PTH" --allow-root
