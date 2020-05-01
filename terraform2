@@ -242,6 +242,10 @@ resource "aws_instance" "web" {
     source      = ".sh/hostname.sh"
     destination = "/home/centos/hostname.sh"
   }
+  provisioner "file" {
+    source      = ".sh/createwp.sh"
+    destination = "/home/centos/createwp.sh"
+  }
   provisioner "remote-exec" {
     inline = [
       "sudo chmod +x /home/centos/sh.sh",
@@ -471,5 +475,5 @@ echo "***********                                                               
 echo "***********        !  E S T A M O S   C R E A N D O   T U   S E R V I D O R  !        ***********"
 echo "***********                                                                           ***********"
 echo "================================================================================================="
-cd ~/$MYDOMAIN/
-terraform apply --auto-approve
+#cd ~/$MYDOMAIN/
+#terraform apply --auto-approve
