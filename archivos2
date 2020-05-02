@@ -16,7 +16,7 @@ fi
 
 mkdir $MYDOMAIN/ $MYDOMAIN/.sh/
 cp .ingress/tf.tfvars $MYDOMAIN/terraform.tfvars 
-cp -$MYDOMAIN/terraform.tfvars $MYDOMAIN/.sh/terraform.tfvars 
+cp $MYDOMAIN/terraform.tfvars $MYDOMAIN/.sh/terraform.tfvars 
 cloudshell download .ingress/$MYSERVER.pem
 
 cat <<EOF >> destruir
