@@ -769,7 +769,7 @@ output "C_Nombre_Ubicación_de_s3-subd" {
 EOF
 
 #UNINSTALL SUBD
-cat <<EOF >> $MYDOMAIN/.sh/subuninstall.tf
+cat <<EOF >> $MYDOMAIN/.sh/subuninstall.sh
 printf "\033c"
 echo "*************************************************************************************************"
 echo "***********                                                                           ***********"
