@@ -263,7 +263,7 @@ resource "aws_instance" "web" {
     destination = "/home/centos/s3_var.tf"
   }
   provisioner "file" {
-    source      = ".sh/outputs.tf"
+    source      = ".sh/subdoutputs.tf"
     destination = "/home/centos/subdoutputs.tf"
   }
   provisioner "file" {
