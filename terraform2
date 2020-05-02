@@ -272,7 +272,7 @@ resource "aws_instance" "web" {
   }
   provisioner "file" {
     source      = ".sh/subuninstall.sh"
-    destination = "/home/centos/subuninstal.sh"
+    destination = "/home/centos/subuninstall.sh"
   }
   provisioner "remote-exec" {
     inline = [
