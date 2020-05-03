@@ -75,6 +75,7 @@ DOMINIO=$MYDOMAIN
 mkdir ".\$DOMINIO"
 sudo chmod +x *.sh
 sudo mv aws-config.sh ssllabs.sh restart.sh bk-local.sh rds.sh ejecutelocal.sh wordpress.sh permisos.sh createbak.sh ejecutebak.sh deletebak.sh uninstall.sh sub.sh mysql.sh loginrds.sh terraform.tfvars s3.tf s3.tf s3_var.tf outputs.tf subdoutputs.tf cfsubd subuninstall.sh .\$DOMINIO
+sudo yum -y update
 sudo yum install nano wget curl bind-utils unzip -y
 sudo cp -ar ".\$DOMINIO" /root/"\$DOMINIO"
 wget https://releases.hashicorp.com/terraform/0.12.24/terraform_0.12.24_linux_amd64.zip
@@ -100,6 +101,9 @@ rm -f hostname.sh
 EOF
 
 cat <<EOF >> $MYDOMAIN/.sh/vim.sh
+SERVIDOR=servidor.$MYDOMAIN
+IP="\$(dig myip.opendns.com @resolver1.opendns.com +short)"
+echo \$IP \$SERVIDOR hostname >> /etc/hosts
 printf "\033c"
 echo "*************************************************************************************************"
 echo "***********                                                                           ***********"
@@ -201,7 +205,9 @@ echo "PHPFINFO='y'" >> /etc/centminmod/custom_config.inc
 echo "VHOSTCTRL_CLOUDFLAREINC='y'"  >> /etc/centminmod/custom_config.inc
 
 #INSTALL CMM
-yum -y update; curl -O https://centminmod.com/betainstaller73.sh && chmod 0700 betainstaller73.sh && bash betainstaller73.sh
+curl -O https://centminmod.com/betainstaller73.sh
+chmod 0700 betainstaller73.sh
+bash betainstaller73.sh >> cntmmd
 
 #PRE-CREATE-PEM
 openssl dhparam -out /usr/local/nginx/conf/ssl/dhparam.pem 2048
