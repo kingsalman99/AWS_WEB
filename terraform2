@@ -509,4 +509,3 @@ echo "***********                                                               
 echo "================================================================================================="
 #cd ~/$MYDOMAIN/
 #terraform apply --auto-approve >> trfm
-cloudshell download .ingress/$MYSERVER.pem
