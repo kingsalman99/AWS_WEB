@@ -34,7 +34,7 @@ then
     echo ""
     echo -n " -  Escribe 'cambiar' para crear unas credenciales nuevas...                   "
     echo ""
-    echo -n " -  Escribe 'salir' para cancelar esta operación  [ continuar / cambiar / salir ]: "
+    echo -n " -  Escribe 'salir' para cancelar esta operación  [ salir / cambiar / continuar ]: "
     read INPUT
     if [ $INPUT = "cambiar" -o $INPUT = "Cambiar" -o $INPUT = "CAMBIAR" ]
     then
