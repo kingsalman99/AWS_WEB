@@ -168,7 +168,7 @@ else
     MYSERVER=$(echo "$MYDOMAIN" | sed 's/\.//g')
     export MYSERVER
     echo ""
-    echo -n " - Escribe una  'CONTRASEÑA'  para Amazon RDS [enter]      = "
+    echo -n " - Escribe una 'CONTRASEÑA' para Amazon RDS [enter]      = "
     read INPUT
     if [ $INPUT ]; then
         DBPASS="$INPUT"
