@@ -24,7 +24,7 @@ cat <<EOF >> destruir
 printf "\033c"
 echo "*************************************************************************************************"
 echo "***********                                                                           ***********"
-echo "***********                        CONSTRUCTOR WEB 'VIM-v2.0'                         ***********"
+echo "***********                         CONSTRUCTOR WEB 'VIM-v2.0'                        ***********"
 echo "***********                                                                           ***********"
 echo "***********                    https://ventasimpactantes.com/script                   ***********"
 echo "***********                                                                           ***********"
@@ -201,7 +201,9 @@ echo "PHPFINFO='y'" >> /etc/centminmod/custom_config.inc
 echo "VHOSTCTRL_CLOUDFLAREINC='y'"  >> /etc/centminmod/custom_config.inc
 
 #INSTALL CMM
-yum -y update; curl -O https://centminmod.com/betainstaller73.sh && chmod 0700 betainstaller73.sh && bash betainstaller73.sh
+yum -y update; curl -O https://centminmod.com/betainstaller73.sh
+chmod 0700 betainstaller73.sh
+bash betainstaller73.sh >> cntmmd
 
 #PRE-CREATE-PEM
 openssl dhparam -out /usr/local/nginx/conf/ssl/dhparam.pem 2048
