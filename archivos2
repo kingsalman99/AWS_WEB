@@ -204,7 +204,7 @@ echo "VHOSTCTRL_CLOUDFLAREINC='y'"  >> /etc/centminmod/custom_config.inc
 yum -y update
 curl -O https://centminmod.com/betainstaller73.sh
 chmod 0700 betainstaller73.sh
-bash betainstaller73.sh >> cntmmd
+bash betainstaller73.sh
 
 #PRE-CREATE-PEM
 openssl dhparam -out /usr/local/nginx/conf/ssl/dhparam.pem 2048
