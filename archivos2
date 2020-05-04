@@ -137,7 +137,7 @@ echo ""
 echo -n " - 'CORREO' para la cuenta, en lo posible comercial ejm: web@\$DOMINIO [enter] = "
 read INPUT
 if [ \$INPUT ]; then
-EMAILL="\$INPUT"
+EMAIL="\$INPUT"
 sed -i "s/EMIL/\$EMAIL/g" /root/wordpress
 fi
 echo ""
@@ -272,10 +272,10 @@ rm -r /root/aws-config.sh
 EOF
 
 cat <<EOF >> $MYDOMAIN/.sh/wordpress
-DOMINIO=$MYDOMAIN
-WPUSER=WPSR
-WPPASS=WPPS
-EMAIL='EMIL'
+DOMINIO="$MYDOMAIN"
+WPUSER="WPSR"
+WPPASS="WPPS"
+EMAIL="EMIL"
 printf "\033c"
 echo "*************************************************************************************************"
 echo "***********                                                                           ***********"
