@@ -74,7 +74,7 @@ cat <<EOF >> $MYDOMAIN/.sh/sh.sh
 DOMINIO=$MYDOMAIN
 mkdir ".\$DOMINIO"
 sudo chmod +x *.sh
-sudo mv aws-config.sh ssllabs.sh restart.sh bk-local.sh rds.sh ejecutelocal.sh wordpress.sh permisos.sh createbak.sh ejecutebak.sh deletebak.sh uninstall.sh sub.sh mysql.sh loginrds.sh terraform.tfvars s3.tf s3.tf s3_var.tf subdoutputs.tf cfsubd subuninstall.sh .\$DOMINIO
+sudo mv centminmod.sh aws-config.sh ssllabs.sh restart.sh bk-local.sh rds.sh ejecutelocal.sh wordpress.sh permisos.sh createbak.sh ejecutebak.sh deletebak.sh uninstall.sh sub.sh mysql.sh loginrds.sh terraform.tfvars s3.tf s3.tf s3_var.tf subdoutputs.tf subdominio.sh cfsubd subuninstall.sh .\$DOMINIO
 sudo yum -y update
 sudo yum install nano wget curl bind-utils unzip -y
 sudo cp -ar ".\$DOMINIO" /root/"\$DOMINIO"
@@ -96,7 +96,7 @@ sudo rm -f /etc/hostname
 sudo echo \$SERVIDOR >> /etc/hostname
 sudo hostnamectl set-hostname "\$SERVIDOR"
 sudo hostname \$SERVIDOR
-#sudo service network restart
+sudo service network restart
 rm -f hostname.sh
 EOF
 
@@ -123,7 +123,6 @@ echo -n " - Escribe un 'USUARIO' para ingresar al sitio WordPress, luego oprime 
 read INPUT
 if [ \$INPUT ]; then
 WPUSER="\$INPUT"
-sed -i "s/WPSR/\$WPUSER/g" /root/wordpress
 fi
 echo ""
 echo -n " - Escribe una 'CONTRASEÑA' para este usuario que haz creado y oprime [enter]  = "
@@ -132,16 +131,75 @@ if [ \$INPUT ]; then
 WPPASSS="\$INPUT"
 WPPAS="\$(echo "\$WPPASSS" | sed 's/\\$/\\\\$/g')"
 WPPASS="\$(echo "\$WPPAS" | sed 's/\\$/\\\\$/g')"
-sed -i "s/WPPS/\$WPPASS/g" /root/wordpress
 fi
 echo ""
 echo -n " - 'CORREO' para la cuenta, en lo posible comercial ejm: web@\$DOMINIO [enter] = "
 read INPUT
 if [ \$INPUT ]; then
 EMAIL="\$INPUT"
-sed -i "s/EMIL/\$EMAIL/g" /root/wordpress
 fi
+printf "\033c"
+echo "*************************************************************************************************"
+echo "***********                                                                           ***********"
+echo "***********             SERVIDOR CREADO CON EL CONSTRUCTOR WEB 'VIM-v2.0'             ***********"
+echo "***********                                                                           ***********"
+echo "***********                    https://ventasimpactantes.com/script                   ***********"
+echo "***********                                                                           ***********"
+echo "===========                                                                           ==========="
+echo "===========                          !  R E V I S E M O S  !                          ==========="
+echo "===========                                                                           ==========="
+echo "================================================================================================="
 echo ""
+echo "                     ESTAS SON LOS DATOS DE ACCESO PARA \$DOMINIO:                  "
+echo ""
+echo "           'USUARIO' de WordPress  = \$WPUSER                                 "
+echo "           'CONTRASEÑA' De Usuario = \$WPPASSS                       "
+echo "           'CORREO' Electrónico    = \$EMAIL                             "
+echo ""
+echo -n "   ¿ Son Correctas Estas Credenciales ?                                                       "
+echo ""
+echo ""
+echo -n " -  Escribe 'crear' para crear tu página web de wordpress"
+echo ""
+echo -n " -  Escribe 'cambiar' para editar las credenciales de nuevo...                   "
+echo ""
+echo -n " -  Escribe 'cancelar' para salir del script  [ cancelar / cambiar / crear ]: "   
+read INPUT
+if [ \$INPUT = "cancelar" -o \$INPUT = "Cancelar" -o \$INPUT = "CANCELAR" ]
+then
+  printf "\033c"
+  echo "*************************************************************************************************"
+  echo "***********                                                                           ***********"
+  echo "***********             SERVIDOR CREADO CON EL CONSTRUCTOR WEB 'VIM-v2.0'             ***********"
+  echo "***********                                                                           ***********"
+  echo "***********                    https://ventasimpactantes.com/script                   ***********"
+  echo "***********                                                                           ***********"
+  echo "===========                                                                           ==========="
+  echo "===========                          !  C A N C E L A D O  !                          ==========="
+  echo "===========                                                                           ==========="
+  echo "===========                                                                           ==========="
+  echo "================================================================================================="
+  echo "***********                                                                           ***********"
+  echo "***********                                                                           ***********" 
+  echo "***********    Para ejecutar de nuevo el Script escribe 'sh vim' y oprime [enter]     ***********"
+  echo "***********                                                                           ***********"
+  echo "***********                                                                           ***********"
+  echo "*************************************************************************************************"
+  echo ""
+  exit
+elif [ \$INPUT = "cambiar" -o \$INPUT = "CAMBIAR" -o \$INPUT = "Cambiar"  ]
+then
+  sh /root/vim
+else
+  sed -i "s/WPPS/\$WPPASS/g" /root/wordpress
+  sed -i "s/WPSR/\$WPUSER/g" /root/wordpress
+  sed -i "s/EMIL/\$EMAIL/g" /root/wordpress
+  mv /root/\$DOMINIO/centminmod.sh /root/
+  sh /root/centminmod.sh
+fi
+EOF
+
+cat <<EOF >> $MYDOMAIN/.sh/centminmod.sh
 printf "\033c"
 echo "*************************************************************************************************"
 echo "***********                                                                           ***********"
@@ -584,42 +642,110 @@ DOMINIO="$MYDOMAIN"
 echo ""
 echo "                                   GENERA LOS DATOS DE ACCESO                                    "
 echo ""
-echo -n " - Escribe el nombre del subdominiso, ejm: para 'vim.\$DOMINIO' escribe solo vim = "
+echo -n " - Escribe el 'SUBDOMINIO', por ejm: para 'abc.\$DOMINIO' escribe solo el subdominio abc = "
 read INPUT
 if [ \$INPUT ]; then
 SUBB="\$INPUT"
-SUB="\$SUBB.$MYDOMAIN"
+SUB="\$SUBB.\$DOMINIO"
 export SUB
-mkdir /root/\$SUB
-rm -f /root/\$SUB/uninstall.sh
-cp -ar /root/$MYDOMAIN/* /root/\$SUB
-sed -i "s/$MYDOMAIN/\$SUB/g" /root/\$SUB/*.sh
-sed -i "s/$MYDBNAME/\$SUBB/g" /root/\$SUB/rds.sh
-sed -i "s/subd/\$SUBB/g" /root/\$SUB/*.tf
-sed -i "s/subd/\$SUBB/g" /root/\$SUB/cfsubd
 fi
 echo ""
-echo -n " - Escribe un 'USUARIO' para ingresar al sitio WordPress, luego oprime [enter] = "
+echo -n " - Escribe un 'USUARIO' para ingresar al subdominio de WordPress, luego oprime [enter] = "
 read INPUT
 if [ \$INPUT ]; then
 WPUSER="\$INPUT"
 export WPUSER
 fi
 echo ""
-echo -n " - Escribe una 'CONTRASEÑA' para este usuario que haz creado y oprime [enter]  = "
+echo -n " - Escribe una 'CONTRASEÑA' para este usuario que haz creado y oprime [enter] = "
 read INPUT
 if [ \$INPUT ]; then
 WPPASSS="\$INPUT"
-WPPASS="\$(echo "\$WPPASSS" | sed 's/\$/\\$/g')"
+WPPASS="\$(echo "\$WPPASSS" | sed 's/\\$/\\\\$/g')"
 export WPPASS
 fi
 echo ""
-echo -n " - 'CORREO' para la cuenta, en lo posible comercial web@\$DOMINIO [enter] = "
+echo -n " - 'CORREO' para WordPress, se recomienda uno comercial del tipo: web@\$DOMINIO [enter] = "
 read INPUT
 if [ \$INPUT ]; then
 EMAIL="\$INPUT"
 export EMAIL
 fi
+printf "\033c"
+echo "*************************************************************************************************"
+echo "***********                                                                           ***********"
+echo "***********             SERVIDOR CREADO CON EL CONSTRUCTOR WEB 'VIM-v2.0'             ***********"
+echo "***********                                                                           ***********"
+echo "***********                    https://ventasimpactantes.com/script                   ***********"
+echo "***********                                                                           ***********"
+echo "===========                                                                           ==========="
+echo "===========                          !  R E V I S E M O S  !                          ==========="
+echo "===========                                                                           ==========="
+echo "================================================================================================="
+echo ""
+echo "                    ESTAS SON LOS DATOS DE ACCESO PARA EL SUBDOMINIO WORDPRESS:                  "
+echo ""
+echo "           'SUBDOMINIO' a crear    = \$SUB           "
+echo "           'USUARIO' de WordPress  = \$WPUSER                                 "
+echo "           'CONTRASEÑA' De Usuario = \$WPPASSS                       "
+echo "           'CORREO' Electrónico    = \$EMAIL                             "
+echo ""
+echo -n "   ¿ Son Correctas Estas Credenciales ?                                                       "
+echo ""
+echo ""
+echo -n " -  Escribe 'crear' para construir el subdominio en wordpress"
+echo ""
+echo -n " -  Escribe 'cambiar' para editar las credenciales de nuevo...                   "
+echo ""
+echo -n " -  Escribe 'cancelar' para salir del script  [ cancelar / cambiar / crear ]: "   
+read INPUT
+if [ \$INPUT = "cancelar" -o \$INPUT = "Cancelar" -o \$INPUT = "CANCELAR" ]
+then
+  printf "\033c"
+  echo "*************************************************************************************************"
+  echo "***********                                                                           ***********"
+  echo "***********             SERVIDOR CREADO CON EL CONSTRUCTOR WEB 'VIM-v2.0'             ***********"
+  echo "***********                                                                           ***********"
+  echo "***********                    https://ventasimpactantes.com/script                   ***********"
+  echo "***********                                                                           ***********"
+  echo "===========                                                                           ==========="
+  echo "===========                          !  C A N C E L A D O  !                          ==========="
+  echo "===========                                                                           ==========="
+  echo "===========                                                                           ==========="
+  echo "================================================================================================="
+  echo "***********                                                                           ***********"
+  echo "***********                                                                           ***********" 
+  echo "***********      Para crear un nuevo subdominio escribe 'sh sub' y oprime [enter]     ***********"
+  echo "***********                                                                           ***********"
+  echo "***********                                                                           ***********"
+  echo "*************************************************************************************************"
+  echo ""
+  exit
+elif [ \$INPUT = "cambiar" -o \$INPUT = "CAMBIAR" -o \$INPUT = "Cambiar"  ]
+then
+  sh /root/sub
+else
+  mkdir /root/\$SUB
+  cp -ar /root/$MYDOMAIN/* /root/\$SUB
+  rm -f /root/\$SUB/uninstall.sh
+  sed -i "s/$MYDOMAIN/\$SUB/g" /root/\$SUB/*.sh
+  sed -i 's/RDSNAME="$MYDBNAME"/RDSNAME="\$SUBB"/g' /root/\$SUB/rds.sh
+  sed -i "s/subd/\$SUBB/g" /root/\$SUB/*.tf
+  sed -i "s/subd/\$SUBB/g" /root/\$SUB/cfsubd
+  cp /root/\$SUB/subdominio.sh /root/
+  sed -i 's/SUBDD/\$SUB/g' /root/subdominio.sh
+  sed -i 's/WPSR/\$WPUSER/g' /root/subdominio.sh
+  sed -i 's/WPPS/\$WPPASS/g' /root/subdominio.sh
+  sed -i 's/EMIL/\$EMAIL/g' /root/subdominio.sh
+  sh /root/subdominio.sh
+fi
+EOF
+
+cat <<EOF >> $MYDOMAIN/.sh/subdominio.sh
+SUB="SUBDD"
+WPUSER="WPSR"
+WPPASS="WPPS"
+EMAIL="EMIL"
 printf "\033c"
 echo "*************************************************************************************************"
 echo "***********                                                                           ***********"
