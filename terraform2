@@ -508,4 +508,4 @@ echo "***********        !  E S T A M O S   C R E A N D O   T U   S E R V I D O 
 echo "***********                                                                           ***********"
 echo "================================================================================================="
 cd ~/$MYDOMAIN/
-terraform apply --auto-approve >> trfm
+terraform apply --auto-approve
