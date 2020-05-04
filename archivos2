@@ -96,7 +96,7 @@ sudo rm -f /etc/hostname
 sudo echo \$SERVIDOR >> /etc/hostname
 sudo hostnamectl set-hostname "\$SERVIDOR"
 sudo hostname \$SERVIDOR
-sudo service network restart
+#sudo service network restart
 rm -f hostname.sh
 EOF
 
