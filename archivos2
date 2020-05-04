@@ -122,23 +122,23 @@ echo ""
 echo -n " - Escribe un 'USUARIO' para ingresar al sitio WordPress, luego oprime [enter] = "
 read INPUT
 if [ \$INPUT ]; then
-WPUSERR="\$INPUT"
-sed -i "s/WPUSER/$WPUSERR/g" /root/wordpress
+WPUSER="\$INPUT"
+sed -i "s/WPSR/\$WPUSER/g" /root/wordpress
 fi
 echo ""
 echo -n " - Escribe una 'CONTRASEÑA' para este usuario que haz creado y oprime [enter]  = "
 read INPUT
 if [ \$INPUT ]; then
 WPPASSS="\$INPUT"
-WPPAS="\$(echo "\$WPPASSS" | sed 's/\$/\\$/g')"
-sed -i "s/WPPASS/$WPPAS/g" /root/wordpress
+WPPASS="\$(echo "\$WPPASSS" | sed 's/\$/\\$/g')"
+sed -i "s/WPPS/\$WPPASS/g" /root/wordpress
 fi
 echo ""
-echo -n " - 'CORREO' para la cuenta, en lo posible comercial web@\$DOMINIO [enter] = "
+echo -n " - 'CORREO' para la cuenta, en lo posible comercial ejm: web@\$DOMINIO [enter] = "
 read INPUT
 if [ \$INPUT ]; then
 EMAILL="\$INPUT"
-sed -i "s/EMAIL/$EMAIL/g" /root/wordpress
+sed -i "s/EMIL/\$EMAIL/g" /root/wordpress
 fi
 echo ""
 printf "\033c"
@@ -220,8 +220,6 @@ openssl dhparam -out /usr/local/nginx/conf/ssl/dhparam.pem 2048
 # install and configure auditd https://community.centminmod.com/posts/37680/
 echo "AUDITD_ENABLE='y'" >> /etc/centminmod/custom_config.inc
 /usr/local/src/centminmod/tools/auditd.sh setup
-# setup extended CSF Firewall blocklists https://community.centminmod.com/posts/50060/
-/usr/local/src/centminmod/tools/csf-advancetweaks.sh
 
 #CRON EMAIL
 EMAIL=admin@$MYDOMAIN
@@ -254,7 +252,7 @@ sudo touch /etc/ssl/private/pure-ftpd-dhparams.pem
 sed -i '5i return 444;' /usr/local/nginx/conf/conf.d/virtual.conf
 rm -rf /usr/local/nginx/conf/conf.d/demodomain.com.conf
 rm -rf /home/nginx/domains/demodomain.com
-sh wordpress
+sh /root/wordpress
 EOF
 
 cat <<EOF >> $MYDOMAIN/.sh/aws-config.sh
@@ -274,6 +272,10 @@ rm -r /root/aws-config.sh
 EOF
 
 cat <<EOF >> $MYDOMAIN/.sh/wordpress
+DOMINIO=$MYDOMAIN
+WPUSER=WPSR
+WPPASS=WPPS
+EMAIL=EMIL
 printf "\033c"
 echo "*************************************************************************************************"
 echo "***********                                                                           ***********"
@@ -324,7 +326,7 @@ sh /root/"\$DOMINIO"/permisos.sh
 echo "Creando Copia de Seguridad"
 echo -e "inicio" | sh /root/"$DOMINIO"/createbak.sh > /dev/null 2>&1
 rm -f /root/wordpress
-mv /root/"$DOMINIO"/sub.sh /root/sub
+mv /root/"\$DOMINIO"/sub.sh /root/sub
 printf "\033c"
 echo "*************************************************************************************************"
 echo "***********                                                                           ***********"
