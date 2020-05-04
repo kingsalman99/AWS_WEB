@@ -275,7 +275,7 @@ cat <<EOF >> $MYDOMAIN/.sh/wordpress
 DOMINIO=$MYDOMAIN
 WPUSER=WPSR
 WPPASS=WPPS
-EMAIL=EMIL
+EMAIL='EMIL'
 printf "\033c"
 echo "*************************************************************************************************"
 echo "***********                                                                           ***********"
@@ -325,7 +325,7 @@ sh /root/"\$DOMINIO"/wordpress.sh
 sh /root/"\$DOMINIO"/permisos.sh
 echo "Creando Copia de Seguridad"
 echo -e "inicio" | sh /root/"$DOMINIO"/createbak.sh > /dev/null 2>&1
-rm -f /root/wordpress
+#rm -f /root/wordpress
 mv /root/"\$DOMINIO"/sub.sh /root/sub
 printf "\033c"
 echo "*************************************************************************************************"
