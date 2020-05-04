@@ -199,8 +199,8 @@ resource "aws_instance" "web" {
     destination = "/home/centos/restart.sh"
   }
   provisioner "file" {
-	source        = ".sh/bk-local.sh"
-	destination   = "/home/centos/bk-local.sh"
+    source        = ".sh/bk-local.sh"
+    destination   = "/home/centos/bk-local.sh"
   }
   provisioner "file" {
     source      = ".sh/ejecutelocal.sh"
@@ -265,10 +265,6 @@ resource "aws_instance" "web" {
   provisioner "file" {
     source      = ".sh/subdoutputs.tf"
     destination = "/home/centos/subdoutputs.tf"
-  }
-  provisioner "file" {
-    source      = "outputs.tf"
-    destination = "/home/centos/outputs.tf"
   }
   provisioner "file" {
     source      = ".sh/subuninstall.sh"
