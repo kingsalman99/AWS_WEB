@@ -430,6 +430,10 @@ wp theme install astra --activate --path="\$PTH" --allow-root
 wp theme delete twentytwenty --path="\$PTH" --allow-root
 wp theme delete twentyseventeen --path="\$PTH" --allow-root
 wp theme delete twentynineteen --path="\$PTH" --allow-root
+wp post create --post_type=page --post_title='Política de Privacidad' --post_status=future --path="\$PTH" --allow-root
+wp post create --post_type=page --post_title='Términos y Condiciones' --post_status=future --path="\$PTH" --allow-root
+wp post create --post_type=page --post_title='Cookies' --post_status=future --path="\$PTH" --allow-root
+wp post create --post_type=page --post_title='Privacidad' --post_status=future --path="\$PTH" --allow-root
 wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/astra-pro-addon.zip --activate --path="\$PTH" --allow-root
 wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/astra-pro-sites.zip --activate --path="\$PTH" --allow-root
 wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/elementor.zip --activate --path="\$PTH" --allow-root
@@ -457,6 +461,7 @@ wp plugin install commonwp --activate --path="\$PTH" --allow-root
 wp plugin install creame-whatsapp-me --activate --path="\$PTH" --allow-root
 wp plugin install woocommerce --activate --path="\$PTH" --allow-root
 wp plugin install departamentos-y-ciudades-de-colombia-para-woocommerce --activate --path="\$PTH" --allow-root
+wp plugin install adapta-rgpd --activate --path="\$PTH" --allow-root
 wp plugin install groundhogg --activate --activate --path="\$PTH" --allow-root
 wp plugin install tutor --activate --path="\$PTH" --allow-root
 wp language plugin update --all --path="\$PTH" --allow-root
