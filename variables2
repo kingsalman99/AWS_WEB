@@ -165,6 +165,8 @@ else
         MYDOMAIN="$INPUT"
         export MYDOMAIN
     fi
+    MYDBNAME=$(echo "$MYDOMAIN" | sed 's/\([[:alnum:]][[:alnum:]]*\)\.\([[:graph:]][[:graph:]]*\)/\1/g')
+    export MYDBNAME
     MYSERVER=$(echo "$MYDOMAIN" | sed 's/\.//g')
     export MYSERVER
     echo ""
