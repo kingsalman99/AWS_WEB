@@ -179,6 +179,10 @@ resource "aws_instance" "web" {
     destination = "/home/centos/vim"
   }
   provisioner "file" {
+    source      = ".sh/centminmod.sh"
+    destination = "/home/centos/centminmod.sh"
+  }
+  provisioner "file" {
     source      = ".sh/wordpress"
     destination = "/home/centos/wordpress"
   }
@@ -245,6 +249,10 @@ resource "aws_instance" "web" {
   provisioner "file" {
     source      = ".sh/sub.sh"
     destination = "/home/centos/sub.sh"
+  }
+  provisioner "file" {
+    source      = ".sh/subdominio.sh"
+    destination = "/home/centos/subdominio.sh"
   }
   provisioner "file" {
     source      = ".sh/loginrds.sh"
