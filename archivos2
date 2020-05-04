@@ -266,7 +266,7 @@ PATH=~/.local/bin:\$PATH
 sudo chmod 755 /root/.local/bin/aws
 sudo echo -e "\$accesskey\n\$secretkey\nus-east-1\njson\n" | aws configure
 RDSHOSTS=\`aws rds describe-db-instances | sed -n '/Address/p' | sed 's/Address//g; s/://g; s/,//g; s/\\"//g; s/ //g;'\`
-sed -i "s/RDSHOSTS/\$RDSHOSTS/g" \$DOMINIO/*.sh
+sed -i "s/RDSHOSTS/\$RDSHOSTS/g" /root/\$DOMINIO/*.sh
 rm -r /root/aws-config.sh
 EOF
 
@@ -323,7 +323,7 @@ echo "==========================================================================
 sh /root/"\$DOMINIO"/wordpress.sh
 sh /root/"\$DOMINIO"/permisos.sh
 echo "Creando Copia de Seguridad"
-echo -e "inicio" | sh /root/"$DOMINIO"/createbak.sh > /dev/null 2>&1
+echo -e "inicio" | sh /root/"\$DOMINIO"/createbak.sh > /dev/null 2>&1
 #rm -f /root/wordpress
 mv /root/"\$DOMINIO"/sub.sh /root/sub
 printf "\033c"
@@ -589,10 +589,10 @@ SUBB="\$INPUT"
 SUB="\$SUBB.$MYDOMAIN"
 export SUB
 mkdir /root/\$SUB
-rm -fr /root/\$SUB/uninstall.sh
+rm -f /root/\$SUB/uninstall.sh
 cp -ar /root/$MYDOMAIN/* /root/\$SUB
 sed -i "s/$MYDOMAIN/\$SUB/g" /root/\$SUB/*.sh
-sed -i "s/\\$RDSNAME/\$SUBB/g" /root/\$SUB/rds.sh
+sed -i "s/$MYSERVER/\$SUBB/g" /root/\$SUB/rds.sh
 sed -i "s/subd/\$SUBB/g" /root/\$SUB/*.tf
 sed -i "s/subd/\$SUBB/g" /root/\$SUB/cfsubd
 fi
@@ -649,7 +649,7 @@ echo "==========================================================================
 sh /root/"\$SUB"/wordpress.sh
 sh /root/"\$SUB"/permisos.sh
 echo "Creando Copia de Seguridad"
-echo -e "inicio" | sh /root/"$SUB"/createbak.sh > /dev/null 2>&1
+echo -e "inicio" | sh /root/"\$SUB"/createbak.sh > /dev/null 2>&1
 printf "\033c"
 echo "*************************************************************************************************"
 echo "***********                                                                           ***********"
@@ -662,9 +662,9 @@ echo "===========            !  C R E A N D O   B U K E T   A M A Z O N   S 3  !
 echo "===========                                                                           ==========="
 echo "===========                                                                           ==========="
 echo "================================================================================================="
-cd ~/$SUB/
+cd ~/\$SUB/
 terraform init
-cd ~/$SUB/
+cd ~/\$SUB/
 terraform apply --auto-approve
 printf "\033c"
 echo "*************************************************************************************************"
@@ -690,7 +690,7 @@ echo ""
 echo "Estos son las Credenciales para tus copias de seguridad"
 echo ""
 echo ""
-cd ~/$SUB/
+cd ~/\$SUB/
 terraform output
 echo ""
 EOF
@@ -825,10 +825,10 @@ DOMINIO=$MYDOMAIN
 MAIL=$EML
 CFAP=$CFAPI
 curl -X GET "https://api.cloudflare.com/client/v4/accounts?page=1&per_page=20&direction=desc" \-H "X-Auth-Email: \$MAIL" \-H "X-Auth-Key: \$CFAP" \-H "Content-Type: application/json" >> id.txt
-CFID="$(cat id.txt | sed -r 's/","/\n/g' | sed -n '/id/p' | sed 's/{.*":"//' )"
+CFID="\$(cat id.txt | sed -r 's/","/\n/g' | sed -n '/id/p' | sed 's/{.*":"//' )"
 rm -f id.txt
 curl -X GET "https://api.cloudflare.com/client/v4/zones?name=\$DOMINIO&page=1&per_page=20&order=status&direction=desc&match=all" \-H "X-Auth-Email: \$MAIL" \-H "X-Auth-Key: \$CFAP" \-H "Content-Type: application/json" >> zone.txt
-ZONEID="$(cat zone.txt | sed -r 's/","/\n/g' | sed '2,$d' | sed 's/{.*":"//' )"
+ZONEID="\$(cat zone.txt | sed -r 's/","/\n/g' | sed '2,$d' | sed 's/{.*":"//' )"
 rm -f zone.txt
 curl -X POST "https://api.cloudflare.com/client/v4/zones/\$ZONEID/dns_records" \-H "X-Auth-Email: \$MAIL" \-H "X-Auth-Key: \$CFAP" \-H "Content-Type: application/json" \--data '{"type":"CNAME","name":"subd","content":"@","ttl":1,"priority":10,"proxied":false}'
 EOF
