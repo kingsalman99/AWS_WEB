@@ -74,7 +74,7 @@ cat <<EOF >> $MYDOMAIN/.sh/sh.sh
 DOMINIO=$MYDOMAIN
 mkdir ".\$DOMINIO"
 sudo chmod +x *.sh
-sudo mv aws-config.sh ssllabs.sh restart.sh bk-local.sh rds.sh ejecutelocal.sh wordpress.sh permisos.sh createbak.sh ejecutebak.sh deletebak.sh uninstall.sh sub.sh mysql.sh loginrds.sh terraform.tfvars s3.tf s3.tf s3_var.tf outputs.tf subdoutputs.tf cfsubd subuninstall.sh .\$DOMINIO
+sudo mv aws-config.sh ssllabs.sh restart.sh bk-local.sh rds.sh ejecutelocal.sh wordpress.sh permisos.sh createbak.sh ejecutebak.sh deletebak.sh uninstall.sh sub.sh mysql.sh loginrds.sh terraform.tfvars s3.tf s3.tf s3_var.tf subdoutputs.tf cfsubd subuninstall.sh .\$DOMINIO
 sudo yum -y update
 sudo yum install nano wget curl bind-utils unzip -y
 sudo cp -ar ".\$DOMINIO" /root/"\$DOMINIO"
