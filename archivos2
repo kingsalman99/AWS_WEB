@@ -938,7 +938,7 @@ echo "===========                                                               
 echo "================================================================================================="
 SUB="$MYDOMAIN"
 echo ""
-echo -n " * ¿ ESTAS SEGURO DE ELIMINAR EL SITIO WORDPRESS \$DOMINIO Y BORRAR TODO EL CONTENIDO ? *"
+echo -n " * ¿ ESTAS SEGURO DE ELIMINAR EL SUBDOMINIO \$DOMINIO Y BORRAR TODO EL CONTENIDO ? *"
 echo ""
 echo -n " - Asegúrate de haber realizado una copia de seguridad de tus datos en \$DOMINIO"
 echo ""
