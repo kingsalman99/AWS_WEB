@@ -159,7 +159,6 @@ echo "***********                                                               
 echo "======================================  I N I C I A N D O  ======================================"
 sleep 11
 echo ""
-echo ""
 mkdir -p /etc/centminmod
 touch /etc/centminmod/custom_config.inc
 
