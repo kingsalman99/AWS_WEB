@@ -160,9 +160,15 @@ echo "======================================  I N I C I A N D O  ===============
 sleep 11
 echo ""
 echo ""
-#CUSTOM CONFIG
 mkdir -p /etc/centminmod
 touch /etc/centminmod/custom_config.inc
+
+#INSTALL CMM
+curl -O https://centminmod.com/betainstaller73.sh
+chmod 0700 betainstaller73.sh
+bash betainstaller73.sh
+
+#CUSTOM CONFIG
 # enable letsencrypt ssl certificate + dual RSA+ECDSA ssl certs https://centminmod.com/acmetool/
 echo "LETSENCRYPT_DETECT='y'" >> /etc/centminmod/custom_config.inc
 echo "DUALCERTS='y'" >> /etc/centminmod/custom_config.inc
@@ -206,11 +212,6 @@ echo "PHP_ZSTD='y'" >> /etc/centminmod/custom_config.inc
 # php file info
 echo "PHPFINFO='y'" >> /etc/centminmod/custom_config.inc
 echo "VHOSTCTRL_CLOUDFLAREINC='y'"  >> /etc/centminmod/custom_config.inc
-
-#INSTALL CMM
-curl -O https://centminmod.com/betainstaller73.sh
-chmod 0700 betainstaller73.sh
-bash betainstaller73.sh
 
 #PRE-CREATE-PEM
 openssl dhparam -out /usr/local/nginx/conf/ssl/dhparam.pem 2048
