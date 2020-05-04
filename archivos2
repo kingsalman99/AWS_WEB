@@ -130,7 +130,8 @@ echo -n " - Escribe una 'CONTRASEÑA' para este usuario que haz creado y oprime 
 read INPUT
 if [ \$INPUT ]; then
 WPPASSS="\$INPUT"
-WPPASS="\$(echo "\$WPPASSS" | sed 's/\\$/\\\\$/g')"
+WPPAS="\$(echo "\$WPPASSS" | sed 's/\\$/\\\\$/g')"
+WPPASS="\$(echo "\$WPPAS" | sed 's/\\$/\\\\$/g')"
 sed -i "s/WPPS/\$WPPASS/g" /root/wordpress
 fi
 echo ""
