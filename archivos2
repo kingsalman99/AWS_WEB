@@ -74,7 +74,7 @@ cat <<EOF >> $MYDOMAIN/.sh/sh.sh
 DOMINIO=$MYDOMAIN
 mkdir ".\$DOMINIO"
 sudo chmod +x *.sh
-sudo mv centminmod.sh aws-config.sh ssllabs.sh restart.sh bk-local.sh rds.sh ejecutelocal.sh wordpress.sh permisos.sh createbak.sh ejecutebak.sh deletebak.sh uninstall.sh sub.sh mysql.sh loginrds.sh terraform.tfvars s3.tf s3.tf s3_var.tf subdoutputs.tf subdominio.sh cfsubd subuninstall.sh .\$DOMINIO
+sudo mv centminmod.sh aws-config.sh ssllabs.sh restart.sh bk-local.sh rds.sh ejecutelocal.sh wordpress.sh permisos.sh createbak.sh ejecutebak.sh deletebak.sh uninstall.sh sub.sh mysql.sh loginrds.sh terraform.tfvars s3.tf s3.tf s3_var.tf subdoutputs.tf subdom.sh subdominio.sh cfsubd subuninstall.sh .\$DOMINIO
 sudo yum -y update
 sudo yum install nano wget curl bind-utils unzip -y
 sudo cp -ar ".\$DOMINIO" /root/"\$DOMINIO"
@@ -526,6 +526,7 @@ wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/thrive-a
 wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/thrive-leads.zip --activate --path="\$PTH" --allow-root
 wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/thrive-optimize.zip --activate --path="\$PTH" --allow-root
 wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/thrive-ultimatum.zip --activate --path="\$PTH" --allow-root
+wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/thrive-headline-optimizer.zip --activate --path="\$PTH" --allow-root
 wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/updraftplus-premium.zip --activate --path="\$PTH" --allow-root
 wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/wp-fusion.zip --activate --path="\$PTH" --allow-root
 wp plugin install cartflows --path="\$PTH" --allow-root
@@ -657,6 +658,41 @@ echo "***********             SERVIDOR CREADO CON EL CONSTRUCTOR WEB 'VIM-v2.0' 
 echo "***********                                                                           ***********"
 echo "***********                          ! B I E N V E N I D O !                          ***********"
 echo "***********                                                                           ***********"
+echo "================================================================================================="
+echo "===========                                                                           ==========="
+echo "===========                    A N T E S   D E   C O N T I N U A R                    ==========="
+echo "===========                                                                           ==========="
+echo "================================================================================================="
+echo ""
+echo " Crea una base de datos en RDS con el nombre del subdiminio que vas a crear: abc.$MYDOMAIN. "
+echo ""
+echo " Al dirigirte a RDS, crear la base de datos escribienso en mayúscula lo siguiente: "
+echo ""
+echo " CREATE DATABASE abc; (abc = solo el subdominio) pon el punto y coma (;) y oprime [enter]"
+echo ""
+echo " Luego escribe exit [enter] para salir y vuelve a ejecutar este Script escribiendo 'sh sub'  "
+echo ""
+echo " -  Si ya creaste la base de datos escribe 'sub' para seguir con la creación del subdominio "
+echo ""
+echo " -  Para ser redirigido a RDS y crear la base de datos escribe 'rds' ?  [ sub / rds ]: "
+read INPUT
+if [ $INPUT = "rds" -o $INPUT = "RDS" -o $INPUT = "Rds" ]
+then
+  sh /root/$MYDOMAIN/loginrds.sh
+else
+  mv /root/$MYDOMAIN/subdom.sh /root/
+  sh /root/subdom.sh
+fi
+EOF
+
+cat <<EOF >> $MYDOMAIN/.sh/subdom.sh
+printf "\033c"
+echo "*************************************************************************************************"
+echo "***********                                                                           ***********"
+echo "***********             SERVIDOR CREADO CON EL CONSTRUCTOR WEB 'VIM-v2.0'             ***********"
+echo "***********                                                                           ***********"
+echo "***********                       !  C O N T I N U E M O S  !                         ***********"
+echo "***********                                                                           ***********"
 echo "===========                                                                           ==========="
 echo "===========      C R E A C I Ó N    D E   S U B D O M I N I O   W O R D P R E S S     ==========="
 echo "===========                                                                           ==========="
@@ -666,12 +702,23 @@ DOMINIO="$MYDOMAIN"
 echo ""
 echo "                                   GENERA LOS DATOS DE ACCESO                                    "
 echo ""
-echo -n " - Escribe el 'SUBDOMINIO', por ejm: para 'abc.\$DOMINIO' escribe solo el subdominio abc = "
+echo -n " - Escribe el 'SUBDOMINIO', debe ser igual al nombre de base de datos que creaste = "
 read INPUT
 if [ \$INPUT ]; then
 SUBB="\$INPUT"
 SUB="\$SUBB.\$DOMINIO"
 export SUB
+fi
+if [ -d \$SUB ]
+then
+  echo "================================================================================================="
+  echo "===========                                                                           ==========="
+  echo "===========             ¡  Ya existe el Subdominio \$SUB  !"
+  echo "===========                                                                           ==========="
+  echo "================================================================================================="
+  exit
+else
+  continue
 fi
 echo ""
 echo -n " - Escribe un 'USUARIO' para ingresar al subdominio de WordPress, luego oprime [enter] = "
