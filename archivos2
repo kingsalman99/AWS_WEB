@@ -432,6 +432,7 @@ echo ""
 echo ""
 echo ""
 rm -f /root/vim
+rm -f /home/nginx/domains/$MYDOMAIN/public/maintenance.html
 EOF
 
 cat <<EOF >> $MYDOMAIN/.sh/ssllabs.sh
