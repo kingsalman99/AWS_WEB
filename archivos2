@@ -729,7 +729,7 @@ else
   cp -ar /root/$MYDOMAIN/* /root/\$SUB
   rm -f /root/\$SUB/uninstall.sh
   sed -i "s/$MYDOMAIN/\$SUB/g" /root/\$SUB/*.sh
-  sed -i 's/RDSNAME="$MYDBNAME"/RDSNAME="\$SUBB"/g' /root/\$SUB/rds.sh
+  sed -i 's/RDSNAME="$MYDBNAME"/RDSNAME="'\$SUBB'"/g' /root/\$SUB/rds.sh
   sed -i "s/subd/\$SUBB/g" /root/\$SUB/*.tf
   sed -i "s/subd/\$SUBB/g" /root/\$SUB/cfsubd
   cp /root/\$SUB/subdominio.sh /root/
@@ -830,6 +830,7 @@ echo ""
 echo "Estos son las Credenciales para tus copias de seguridad"
 echo ""
 echo ""
+rm -f /root/subdominio.sh
 cd ~/\$SUB/
 terraform output
 echo ""
@@ -844,7 +845,8 @@ cat <<EOF >> $MYDOMAIN/.sh/loginrds.sh
 MYSERVER="$MYSERVER"
 RDSHOST="RDSHOSTS"
 RDSPASS="$MYDBPASS"
-mysql -u "\$MYSERVER" -h"\$RDSHOST" -D "\$MYSERVER" -p"\$RDSPASS"
+RDSNAME="$MYDBNAME"
+mysql -u "\$MYSERVER" -h"\$RDSHOST" -D "\$RDSNAME" -p"\$RDSPASS"
 EOF
 
 #S3 SUBD
