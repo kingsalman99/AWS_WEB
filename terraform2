@@ -251,6 +251,10 @@ resource "aws_instance" "web" {
     destination = "/home/centos/sub.sh"
   }
   provisioner "file" {
+    source      = ".sh/subdom.sh"
+    destination = "/home/centos/subdom.sh"
+  }
+  provisioner "file" {
     source      = ".sh/subdominio.sh"
     destination = "/home/centos/subdominio.sh"
   }
