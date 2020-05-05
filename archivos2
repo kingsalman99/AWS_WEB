@@ -330,6 +330,30 @@ rm -r /root/\$DOMINIO/aws-config.sh
 EOF
 
 cat <<EOF >> $MYDOMAIN/.sh/wordpress
+if [ -d /home/nginx/domain/$MYDOMAIN ]
+then
+  printf "\033c"
+  echo "*************************************************************************************************"
+  echo "***********                                                                           ***********"
+  echo "***********             SERVIDOR CREADO CON EL CONSTRUCTOR WEB 'VIM-v2.0'             ***********"
+  echo "***********                                                                           ***********"
+  echo "***********                    https://ventasimpactantes.com/script                   ***********"
+  echo "***********                                                                           ***********"
+  echo "===========                                                                           ==========="
+  echo "===========       !  W O R D P R E S S   Y A   E S T A   I N S T A L A D O  !         ==========="
+  echo "===========                                                                           ==========="
+  echo "===========                                                                           ==========="
+  echo "================================================================================================="
+  echo "***********                                                                           ***********"
+  echo "***********    Si necesitas instalar WordPress desde cero debes eliminarlo primero    ***********"
+  echo "***********    sh $MYDOMAIN/uninstall.sh                                           "
+  echo "***********                                                                           ***********"
+  echo "*************************************************************************************************"
+  echo ""
+  exit
+else
+  continue
+fi
 DOMINIO="$MYDOMAIN"
 WPUSER="WPSR"
 WPPASS="WPPS"
