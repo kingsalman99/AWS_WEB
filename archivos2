@@ -407,6 +407,7 @@ echo "           https://\$DOMINIO/wp-admin/                                    
 echo ""
 echo ""
 echo ""
+rm -f /root/vim
 EOF
 
 cat <<EOF >> $MYDOMAIN/.sh/ssllabs.sh
@@ -491,8 +492,7 @@ wp theme delete twentynineteen --path="\$PTH" --allow-root
 wp post create --post_type=page --post_title='Política de Privacidad' --post_status=future --path="\$PTH" --allow-root
 wp post create --post_type=page --post_title='Términos y Condiciones' --post_status=future --path="\$PTH" --allow-root
 wp post create --post_type=page --post_title='Cookies' --post_status=future --path="\$PTH" --allow-root
-wp post create --post_type=page --post_title='Privacidad' --post_status=future --path="\$PTH" --allow-root
-wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/astra-pro-addon.zip --activate --path="\$PTH" --allow-root
+ wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/astra-pro-addon.zip --activate --path="\$PTH" --allow-root
 wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/astra-pro-sites.zip --activate --path="\$PTH" --allow-root
 wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/elementor.zip --activate --path="\$PTH" --allow-root
 wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/elementor-pro.zip --activate --path="\$PTH" --allow-root
@@ -541,7 +541,7 @@ DOMINIO="$MYDOMAIN"
 MYSERVER="$MYSERVER"
 RDSHOST="RDSHOSTS"
 RDSPASS="$MYDBPASS"
-RDSNAME="$MYSERVER"
+RDSNAME="$MYDBNAME"
 echo ""
 echo -n "Nombre para la copia de seguridad? = "
 read INPUT
@@ -559,7 +559,7 @@ DOMINIO="$MYDOMAIN"
 MYSERVER="$MYSERVER"
 RDSHOST="RDSHOSTS"
 RDSPASS="$MYDBPASS"
-RDSNAME="$MYSERVER"
+RDSNAME="$MYDBNAME"
 echo ""
 echo -n "Nombre de la copia de seguridad? = "
 read INPUT
