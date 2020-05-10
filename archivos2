@@ -147,16 +147,16 @@ echo ""
 echo "           'USUARIO' de WordPress  = \$WPUSER                                 "
 echo "           'CONTRASEÑA' De Usuario = \$WPPASSS                       "
 echo ""
-echo -n "   ¿ Son Correctas Estas Credenciales ?                                                       "
+echo -n "   ¿ Son Correctos Estos Datos ?                                                       "
 echo ""
 echo ""
-echo -n " -  Escribe 'crear' para crear tu página web de wordpress"
+echo -n " -  Escribe 'crear' para ejecutar wordpress"
 echo ""
 echo -n " -  Escribe 'cambiar' para editar las credenciales de nuevo...                   "
 echo ""
-echo -n " -  Escribe 'cancelar' para salir del script  [ cancelar / cambiar / crear ]: "   
+echo -n " -  Escribe 'salir' para cancelar este proceso  [ salir / cambiar / crear ]: "   
 read INPUT
-if [ \$INPUT = "cancelar" -o \$INPUT = "Cancelar" -o \$INPUT = "CANCELAR" ]
+if [ \$INPUT = "salir" -o \$INPUT = "Salir" -o \$INPUT = "SALIR" ]
 then
   printf "\033c"
   echo "*************************************************************************************************"
@@ -987,10 +987,11 @@ exit
 fi
 cd ~/\$SUB/
 terraform destroy --auto-approve
-echo -e "y" | /root/tools/wp_uninstall_"\$SUB".sh
-rm -f /root/tools/wp_uninstall_"\$SUB".sh
-rm -rf /root/"\$SUB"/
-sh /root/"$MYDOMAIN"/restart.sh
+cd
+echo -e "y" | /root/tools/wp_uninstall_\$SUB.sh
+rm -f /root/tools/wp_uninstall_\$SUB.sh
+sh /root/\$SUB/restart.sh
+rm -rf /root/\$SUB/
 PASS="\$(cat /root/.my.cnf | grep 'password' | sed -e 's/password=//g')"
 mysql -u root -p"\$PASS"
 EOF
