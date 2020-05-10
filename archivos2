@@ -73,7 +73,7 @@ cat <<EOF >> $MYDOMAIN/.sh/sh.sh
 DOMINIO=$MYDOMAIN
 mkdir ".\$DOMINIO"
 sudo chmod +x *.sh
-sudo mv centminmod.sh wp.sh aws-config.sh ssllabs.sh restart.sh bk-local.sh rds.sh ejecutelocal.sh wordpress.sh permisos.sh createbak.sh ejecutebak.sh deletebak.sh uninstall.sh sub.sh mysql.sh loginrds.sh terraform.tfvars s3.tf s3.tf s3_var.tf subdoutputs.tf subdom.sh subdominio.sh cfsubd subuninstall.sh .\$DOMINIO
+sudo mv centminmod.sh wp.sh varwp.sh aws-config.sh ssllabs.sh restart.sh bk-local.sh rds.sh ejecutelocal.sh wordpress.sh permisos.sh createbak.sh ejecutebak.sh deletebak.sh uninstall.sh sub.sh mysql.sh loginrds.sh terraform.tfvars s3.tf s3.tf s3_var.tf subdoutputs.tf subdom.sh subdominio.sh cfsubd subuninstall.sh .\$DOMINIO
 sudo yum -y update
 sudo yum install nano wget curl bind-utils unzip -y
 sudo cp -ar ".\$DOMINIO" /root/"\$DOMINIO"
@@ -102,14 +102,17 @@ DOMINIO=$MYDOMAIN
 MAIL=$EML
 CFAP=$CFAPI
 curl -X GET "https://api.cloudflare.com/client/v4/zones?name=\$DOMINIO&page=1&per_page=20&order=status&direction=desc&match=all" \-H "X-Auth-Email: \$MAIL" \-H "X-Auth-Key: \$CFAP" \-H "Content-Type: application/json" >> zone.txt
-STATUS="\$(cat zone.txt | sed -r 's/","/\n/g' | sed '2,\$d' | sed 's/{.*":"//' | sed 's/status":"//' )"
+STATUS="\$(cat zone.txt | sed -r 's/","/\n/g' | sed -n '/status/p' | sed 's/{.*":"//' | sed 's/status":"//' )"
 NMSERV="\$(cat zone.txt | sed -r 's/","/\n/g' | sed -r 's/\["/\n/g' | sed -r 's/"\]/\n/g' | sed -n '/ns.cloudflare.com/p' | sed 's/{.*":\]//' )"
 echo \$NMSERV >> dn.txt
 sed 's/ /\n/g' dn.txt >> dnscf.txt
 DNS1="\$(sed -n 1p dnscf.txt)"
 DNS2="\$(sed -n 2p dnscf.txt)"
-if [ \$STATUS="pending" ]
+if [ \$STATUS="active" ]
 then
+  rm -f zone.txt dn.txt dnscf.txt
+  sh /root/$MYDOMAIN/varwp.sh
+else
   printf "\033c"
   echo "*************************************************************************************************"
   echo "***********                                                                           ***********"
@@ -136,9 +139,6 @@ then
   echo "*************************************************************************************************"
   rm -f zone.txt dn.txt dnscf.txt
   exit
-else
-  rm -f zone.txt dn.txt dnscf.txt
-  sh /root/$MYDOMAIN/varwp.sh
 fi
 EOF
 
