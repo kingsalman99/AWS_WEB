@@ -238,8 +238,8 @@ resource "aws_instance" "web" {
     destination = "/home/centos/centminmod.sh"
   }
   provisioner "file" {
-    source      = ".sh/wordpress"
-    destination = "/home/centos/wordpress"
+    source      = ".sh/wp.sh"
+    destination = "/home/centos/wp.sh"
   }
   provisioner "file" {
     source      = ".sh/aws-config.sh"
