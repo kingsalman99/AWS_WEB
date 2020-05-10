@@ -125,7 +125,7 @@ else
   echo "================================================================================================="
   echo "===========                                                                           ==========="
   echo "=========== Asegúrate de cambiar y actualizar los DNS generados por Cloudflare en     ==========="
-  echo "=========== Namecheap (o donde hayas registrado tu dominio), estos son los DNS:       ==========="
+  echo "=========== Namecheap.com (o donde hayas registrado tu dominio), estos son los DNS:   ==========="
   echo "===========                                                                           ==========="
   echo "=========== \$DNS1                                                                     "
   echo "=========== \$DNS2                                                                     "
@@ -133,7 +133,8 @@ else
   echo "================================================================================================="
   echo "***********                                                                           ***********"
   echo "*********** Cuando este activo el dominio ejecuta de nuevo el script escribiendo:     ***********"
-  echo "*********** sh vim y oprime [enter]                                                 ***********"
+  echo "***********                                                                           ***********"
+  echo "***********                        sh vim y oprime [enter]                            ***********"
   echo "***********                                                                           ***********"
   echo "*************************************************************************************************"
   rm -f zone.txt dn.txt dnscf.txt
