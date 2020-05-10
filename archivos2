@@ -124,7 +124,7 @@ if [ \$INPUT ]; then
 WPUSER="\$INPUT"
 fi
 echo ""
-echo -n " - Escribe una 'CONTRASEÑA' para este usuario que haz creado y oprime [enter]  = "
+echo -n " - Crea una 'CONTRASEÑA' que contenga mayúsculas y símbolos y oprime [enter] = "
 read INPUT
 if [ \$INPUT ]; then
 WPPASSS="\$INPUT"
@@ -281,6 +281,7 @@ crontab -l > cronjoblist
 sed -i '/csfcf.sh/d' cronjoblist
 echo "23 */36 * * * /usr/local/src/centminmod/tools/csfcf.sh auto >/dev/null 2>&1" >> cronjoblist
 crontab cronjoblist
+rm -f cronjoblist
 
 #PHP
 sed -i 's/max_execution_time = 60/max_execution_time = 600/g' /etc/centminmod/php.d/a_customphp.ini
@@ -299,6 +300,7 @@ sudo touch /etc/ssl/private/pure-ftpd-dhparams.pem
 sed -i '5i return 444;' /usr/local/nginx/conf/conf.d/virtual.conf
 rm -rf /usr/local/nginx/conf/conf.d/demodomain.com.conf
 rm -rf /home/nginx/domains/demodomain.com
+rm -f /root/centminmod.sh
 sh /root/wordpress
 EOF
 
@@ -623,7 +625,7 @@ echo -n " * ¿ ESTAS SEGURO DE ELIMINAR EL SITIO WORDPRESS \$DOMINIO Y BORRAR TO
 echo ""
 echo -n " - Asegúrate de haber realizado una copia de seguridad de tus datos en \$DOMINIO"
 echo ""
-echo -n " * ESTE PROCESO ES ¡IRREVERSIBLE!. Escribe 'eliminar' para proceder  [ eliminar / cancelar ]: "
+echo -n " * ESTE PROCESO ES ¡IRREVERSIBLE!. Escribe 'eliminar' para proceder  [ salir / eliminar ]: "
 read INPUT
 if [ \$INPUT = "ELIMINAR" -o \$INPUT = "Eliminar" -o \$INPUT = "eliminar" ]
 then
@@ -654,11 +656,11 @@ echo "===========                    A N T E S   D E   C O N T I N U A R        
 echo "===========                                                                           ==========="
 echo "================================================================================================="
 echo ""
-echo " Crea una base de datos en RDS con el nombre del subdiminio que vas a crear: abc.$MYDOMAIN. "
+echo " Crea una base de datos en RDS con el nombre del subdiminio que vas a crear: sub.$MYDOMAIN "
 echo ""
-echo " Al dirigirte a RDS, crear la base de datos escribienso en mayúscula lo siguiente: "
+echo " Al dirigirte a RDS, crear la base de datos escribiendo en mayúscula lo siguiente: "
 echo ""
-echo " CREATE DATABASE abc; (abc = solo el subdominio) pon el punto y coma (;) y oprime [enter]"
+echo " CREATE DATABASE sub; (el subdominio en minúscula y pon el punto y coma) y oprime [enter]"
 echo ""
 echo " Luego escribe exit [enter] para salir y vuelve a ejecutar este Script escribiendo 'sh sub'  "
 echo ""
@@ -719,11 +721,12 @@ WPUSER="\$INPUT"
 export WPUSER
 fi
 echo ""
-echo -n " - Escribe una 'CONTRASEÑA' para este usuario que haz creado y oprime [enter] = "
+echo -n " - Crea una 'CONTRASEÑA' que contenga mayúsculas y símbolos y oprime [enter] = "
 read INPUT
 if [ \$INPUT ]; then
 WPPASSS="\$INPUT"
-WPPASS="\$(echo "\$WPPASSS" | sed 's/\\$/\\\\$/g')"
+WPPAS="\$(echo "\$WPPASSS" | sed 's/\\$/\\\\$/g')"
+WPPASS="\$(echo "\$WPPAS" | sed 's/\\$/\\\\$/g')"
 export WPPASS
 fi
 printf "\033c"
@@ -786,14 +789,13 @@ else
   mkdir /root/\$SUB
   cp -ar /root/$MYDOMAIN/* /root/\$SUB
   rm -f /root/\$SUB/uninstall.sh
-  sed -i "s/$MYDOMAIN/'\$SUB'/g" /root/\$SUB/*.sh
-  sed -i "s/$MYDBNAME/'\$SUBB'/g" /root/\$SUB/*.sh
-  sed -i "s/subd/'\$SUBB'/g" /root/\$SUB/*.tf
-  sed -i "s/subd/'\$SUBB'/g" /root/\$SUB/cfsubd
-  sed -i "s/SUBDD/'\$SUB'/g" /root/\$SUB/subdominio.sh
-  sed -i "s/WPSR/'\$WPUSER'/g" /root/\$SUB/subdominio.sh
-  sed -i "s/WPPS/'\$WPPASS'/g" /root/\$SUB/subdominio.sh
-  sed -i "s/EMIL/'\$EMAIL'/g" /root/\$SUB/subdominio.sh
+  sed -i "s/$MYDOMAIN/\$SUB/g" /root/\$SUB/*.sh
+  sed -i 's/RDSNAME="$MYDBNAME"/RDSNAME="'\$SUBB'"/g' /root/\$SUB/*.sh
+  sed -i "s/subd/\$SUBB/g" /root/\$SUB/*.tf
+  sed -i "s/subd/\$SUBB/g" /root/\$SUB/cfsubd
+  sed -i "s/SUBDD/\$SUB/g" /root/\$SUB/subdominio.sh
+  sed -i "s/WPSR/\$WPUSER/g" /root/\$SUB/subdominio.sh
+  sed -i "s/WPPS/\$WPPASS/g" /root/\$SUB/subdominio.sh
   sh /root/\$SUB/subdominio.sh
 fi
 EOF
@@ -989,7 +991,7 @@ terraform destroy --auto-approve
 echo -e "y" | /root/tools/wp_uninstall_"\$SUB".sh
 rm -f /root/tools/wp_uninstall_"\$SUB".sh
 rm -rf /root/"\$SUB"/
-sh /root/"\$DOMINIO"/restart.sh
+sh /root/"$MYDOMAIN"/restart.sh
 PASS="\$(cat /root/.my.cnf | grep 'password' | sed -e 's/password=//g')"
 mysql -u root -p"\$PASS"
 EOF
