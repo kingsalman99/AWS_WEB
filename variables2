@@ -54,17 +54,6 @@ then
     export MYDBNAME
     MYSERVER=$(echo "$MYDOMAIN" | sed 's/\.//g')
     export MYSERVER
-    echo ""
-    echo -n " - Escribe una 'CONTRASEÑA' para la Base de Datos Amazon RDS y oprime [enter]   = "
-    read INPUT
-    if [ $INPUT ]; then
-        DBPASS="$INPUT"
-        export DBPASS
-    fi
-    MYDBPASS=$(echo "$DBPASS" | sed 's/\$/\\$/g')
-    export MYDBPASS
-    MYDBPASSS=$(echo "$MYDBPASS" | sed 's/\$/\\$/g')
-    export MYDBPASSS
     printf "\033c"
     echo "*************************************************************************************************"
     echo "***********                                                                           ***********"
@@ -84,7 +73,6 @@ then
     echo "           'ID DE CLAVE DE ACCESO' de AWS      = $accesskey                             "
     echo "           'CLAVE DE ACCESO SECRETA' de AWS    = $secretkey                             "
     echo "           'DOMINIO' para crear tu página web  = $MYDOMAIN                              "
-    echo "           'CONTRASEÑA' de Base de Datos RDS   = $DBPASS                                "
     echo ""
     echo -n "   ¿ Son Correctas Estas Credenciales ?                                                       "
     echo ""
@@ -93,13 +81,13 @@ then
     echo ""
     echo -n " -  Escribe 'cambiar' para editar las Credenciales de nuevo...                   "
     echo ""
-    echo -n " -  Escribe 'cancelar' para salir del script  [ cancelar / cambiar / crear ]: "   
+    echo -n " -  Escribe 'salir' para cancelar este script  [ salir / cambiar / crear ]: "   
     read INPUT
     if [ $INPUT = "crear" -o $INPUT = "CREAR" -o $INPUT = "Crear" ]
     then
         wget -qO archivos https://raw.githubusercontent.com/iversating/vimzwei/master/archivos2
         sh archivos
-    elif [ $INPUT = "cancelar" -o $INPUT = "Cancelar" -o $INPUT = "CANCELAR" ]
+    elif [ $INPUT = "salir" -o $INPUT = "Salir" -o $INPUT = "SALIR" ]
     then
         printf "\033c"
         echo "*************************************************************************************************"
@@ -169,17 +157,6 @@ else
     export MYDBNAME
     MYSERVER=$(echo "$MYDOMAIN" | sed 's/\.//g')
     export MYSERVER
-    echo ""
-    echo -n " - Escribe una 'CONTRASEÑA' para Amazon RDS [enter]      = "
-    read INPUT
-    if [ $INPUT ]; then
-        DBPASS="$INPUT"
-        export DBPASS
-    fi
-    MYDBPASS=$(echo "$DBPASS" | sed 's/\$/\\$/g')
-    export MYDBPASS
-    MYDBPASSS=$(echo "$MYDBPASS" | sed 's/\$/\\$/g')
-    export MYDBPASSS
     EML="$EML"
     export EML
     accesskey="$ACK"
@@ -205,7 +182,6 @@ else
     echo "           'ID DE CLAVE DE ACCESO' de AWS      = $ACK                                   "
     echo "           'CLAVE DE ACCESO SECRETA' de AWS    = $SCK                                   "
     echo "           'DOMINIO' para crear tu página web  = $MYDOMAIN                              "
-    echo "           'CONTRASEÑA' de Base de Datos RDS   = $DBPASS                                "
     echo ""
     echo -n "   ¿ Son Correctas Estas Credenciales ?                                                        "
     echo ""
@@ -214,13 +190,13 @@ else
     echo ""
     echo -n " -  Escribe 'cambiar' para editar las credenciales...                   "
     echo ""
-    echo -n " -  Escribe 'cancelar' para salir del script  [ cancelar / cambiar / crear ]: "   
+    echo -n " -  Escribe 'salir' para cancelar este script  [ salir / cambiar / crear ]: "   
     read INPUT
     if [ $INPUT = "crear" -o $INPUT = "CREAR" -o $INPUT = "Crear" ]
     then
         wget -qO archivos https://raw.githubusercontent.com/iversating/vimzwei/master/archivos2
         sh archivos
-    elif [ $INPUT = "cancelar" -o $INPUT = "Cancelar" -o $INPUT = "CANCELAR" ]
+    elif [ $INPUT = "salir" -o $INPUT = "Salir" -o $INPUT = "SALIR" ]
     then
         printf "\033c"
         echo "*************************************************************************************************"
