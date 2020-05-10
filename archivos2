@@ -108,8 +108,7 @@ echo \$NMSERV >> dn.txt
 sed 's/ /\n/g' dn.txt >> dnscf.txt
 DNS1="\$(sed -n 1p dnscf.txt)"
 DNS2="\$(sed -n 2p dnscf.txt)"
-if [ \$STATUS="active" ]
-then
+if [ \$STATUS = active ]; then
   rm -f zone.txt dn.txt dnscf.txt
   sh /root/$MYDOMAIN/varwp.sh
 else
@@ -156,7 +155,7 @@ echo "===========                                                               
 echo "================================================================================================="
 DOMINIO=$MYDOMAIN
 echo ""
-echo "                  Genera los datos de acceso para tu página web \$DOMINIO                              "
+echo "            Genera los datos de acceso para tu página web \$DOMINIO                              "
 echo ""
 echo -n " - Escribe un 'USUARIO' para ingresar al sitio WordPress, luego oprime [enter] = "
 read INPUT
@@ -831,7 +830,7 @@ else
   echo "================================================================================================="
   mkdir /root/\$SUB
   cp -ar /root/$MYDOMAIN/* /root/\$SUB
-  rm -f /root/\$SUB/uninstall.sh
+  rm -f /root/\$SUB/uninstall.sh /root/\$SUB/wp.sh /root/\$SUB/mysql.sh /root/\$SUB/loginrds.sh /root/\$SUB/subdom.sh
   sed -i "s/$MYDOMAIN/\$SUB/g" /root/\$SUB/*.sh
   sed -i 's/RDSNAME="$MYDBNAME"/RDSNAME="'\$SUBB'"/g' /root/\$SUB/*.sh
   sed -i "s/subd/\$SUBB/g" /root/\$SUB/*.tf
@@ -912,7 +911,8 @@ echo ""
 echo ""
 rm -f /home/nginx/domains/\$SUB/public/maintenance.html
 cd ~/\$SUB/
-terraform output
+terraform 
+rm -f /root/\$SUB/subdominio.sh
 echo ""
 EOF
 
