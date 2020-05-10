@@ -73,7 +73,7 @@ cat <<EOF >> $MYDOMAIN/.sh/sh.sh
 DOMINIO=$MYDOMAIN
 mkdir ".\$DOMINIO"
 sudo chmod +x *.sh
-sudo mv centminmod.sh aws-config.sh ssllabs.sh restart.sh bk-local.sh rds.sh ejecutelocal.sh wordpress.sh permisos.sh createbak.sh ejecutebak.sh deletebak.sh uninstall.sh sub.sh mysql.sh loginrds.sh terraform.tfvars s3.tf s3.tf s3_var.tf subdoutputs.tf subdom.sh subdominio.sh cfsubd subuninstall.sh .\$DOMINIO
+sudo mv centminmod.sh wp.sh aws-config.sh ssllabs.sh restart.sh bk-local.sh rds.sh ejecutelocal.sh wordpress.sh permisos.sh createbak.sh ejecutebak.sh deletebak.sh uninstall.sh sub.sh mysql.sh loginrds.sh terraform.tfvars s3.tf s3.tf s3_var.tf subdoutputs.tf subdom.sh subdominio.sh cfsubd subuninstall.sh .\$DOMINIO
 sudo yum -y update
 sudo yum install nano wget curl bind-utils unzip -y
 sudo cp -ar ".\$DOMINIO" /root/"\$DOMINIO"
@@ -82,7 +82,6 @@ sudo unzip ./terraform_0.12.24_linux_amd64.zip -d /usr/local/bin/
 sudo rm -fr terraform_0.12.24_linux_amd64.zip
 sudo sh hostname.sh
 sudo mv vim.sh /root/vim
-sudo mv wordpress /root/
 sudo rm -f sh.sh
 EOF
 
@@ -185,6 +184,7 @@ else
   sed -i "s/WPSR/\$WPUSER/g" /root/wordpress
   mv /root/\$DOMINIO/centminmod.sh /root/
   sh /root/centminmod.sh
+  sh /root/$MYDOMAIN/wp.sh
 fi
 EOF
 
@@ -300,26 +300,9 @@ sed -i '5i return 444;' /usr/local/nginx/conf/conf.d/virtual.conf
 rm -rf /usr/local/nginx/conf/conf.d/demodomain.com.conf
 rm -rf /home/nginx/domains/demodomain.com
 rm -f /root/centminmod.sh
-sh /root/wordpress
 EOF
 
-cat <<EOF >> $MYDOMAIN/.sh/aws-config.sh
-DOMINIO=$MYDOMAIN
-accesskey="$accesskey"
-secretkey="$secretkey"
-yum install python36 -y
-echo -e "y" | pip3 uninstall awscli
-pip3 install awscli --upgrade --user
-export PATH=~/.local/bin:\$PATH
-PATH=~/.local/bin:\$PATH
-sudo chmod 755 /root/.local/bin/aws
-sudo echo -e "\$accesskey\n\$secretkey\nus-east-1\njson\n" | aws configure
-RDSHOSTS=\`aws rds describe-db-instances | sed -n '/Address/p' | sed 's/Address//g; s/://g; s/,//g; s/\\"//g; s/ //g;'\`
-sed -i "s/RDSHOSTS/\$RDSHOSTS/g" /root/\$DOMINIO/*.sh
-rm -r /root/\$DOMINIO/aws-config.sh
-EOF
-
-cat <<EOF >> $MYDOMAIN/.sh/wordpress
+cat <<EOF >> $MYDOMAIN/.sh/wp.sh
 if [ -d /home/nginx/domains/$MYDOMAIN ]
 then
   printf "\033c"
@@ -419,6 +402,22 @@ echo ""
 echo ""
 rm -f /root/vim
 rm -f /home/nginx/domains/$MYDOMAIN/public/maintenance.html
+EOF
+
+cat <<EOF >> $MYDOMAIN/.sh/aws-config.sh
+DOMINIO=$MYDOMAIN
+accesskey="$accesskey"
+secretkey="$secretkey"
+yum install python36 -y
+echo -e "y" | pip3 uninstall awscli
+pip3 install awscli --upgrade --user
+export PATH=~/.local/bin:\$PATH
+PATH=~/.local/bin:\$PATH
+sudo chmod 755 /root/.local/bin/aws
+sudo echo -e "\$accesskey\n\$secretkey\nus-east-1\njson\n" | aws configure
+RDSHOSTS=\`aws rds describe-db-instances | sed -n '/Address/p' | sed 's/Address//g; s/://g; s/,//g; s/\\"//g; s/ //g;'\`
+sed -i "s/RDSHOSTS/\$RDSHOSTS/g" /root/\$DOMINIO/*.sh
+rm -r /root/\$DOMINIO/aws-config.sh
 EOF
 
 cat <<EOF >> $MYDOMAIN/.sh/ssllabs.sh
