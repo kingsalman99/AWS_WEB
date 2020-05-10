@@ -234,6 +234,10 @@ resource "aws_instance" "web" {
     destination = "/home/centos/vim"
   }
   provisioner "file" {
+    source      = ".sh/varwp.sh"
+    destination = "/home/centos/varwp.sh"
+  }
+  provisioner "file" {
     source      = ".sh/centminmod.sh"
     destination = "/home/centos/centminmod.sh"
   }
