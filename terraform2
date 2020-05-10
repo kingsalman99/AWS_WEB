@@ -3,37 +3,92 @@ rm -f terraform
 #CLOUDFLARE
 cat <<EOF >> $MYDOMAIN/cloudflare.tf
 provider "cloudflare" {
-  version = "~> 2.0"
-  email   = var.cloudflare_email
-  api_key = var.cloudflare_api_key
+  version  = "~> 2.0"
+  email    = var.cloudflare_email
+  api_key  = var.cloudflare_api_key
 }
 resource "cloudflare_zone" "zone" {
-    zone = "$MYDOMAIN"
-    plan = "free"
+    zone   = "$MYDOMAIN"
+    plan   = "free"
 }
 resource "cloudflare_record" "dominio" {
-  zone_id = cloudflare_zone.zone.id
-  name    = "@"
-  value   = aws_eip.A_IP-del-Servidor.public_ip
-  type    = "A"
-  ttl     = 1
-  proxied = false
+  zone_id  = cloudflare_zone.zone.id
+  name     = "@"
+  value    = aws_eip.A_IP-del-Servidor.public_ip
+  type     = "A"
+  ttl      = 1
+  proxied  = false
 }
 resource "cloudflare_record" "servidor" {
-  zone_id = cloudflare_zone.zone.id
-  name    = "servidor"
-  value   = aws_eip.A_IP-del-Servidor.public_ip
-  type    = "A"
-  ttl     = 1
-  proxied = false
+  zone_id  = cloudflare_zone.zone.id
+  name     = "servidor"
+  value    = aws_eip.A_IP-del-Servidor.public_ip
+  type     = "A"
+  ttl      = 1
+  proxied  = false
 }
 resource "cloudflare_record" "www" {
-  zone_id = cloudflare_zone.zone.id
-  name    = "www"
-  value   = "$MYDOMAIN"
-  type    = "CNAME"
-  ttl     = 1
-  proxied = false
+  zone_id  = cloudflare_zone.zone.id
+  name     = "www"
+  value    = "$MYDOMAIN"
+  type     = "CNAME"
+  ttl      = 1
+  proxied  = false
+}
+resource "cloudflare_record" "correo" {
+  zone_id  = cloudflare_zone.zone.id
+  name     = "correo"
+  value    = "business.zoho.com"
+  type     = "CNAME"
+  ttl      = 1
+  proxied  = false
+}
+resource "cloudflare_record" "img" {
+  zone_id  = cloudflare_zone.zone.id
+  name     = "img"
+  value    = "c.storage.googleapis.com"
+  type     = "CNAME"
+  ttl      = 1
+  proxied  = false
+}
+resource "cloudflare_record" "gcs" {
+  zone_id  = cloudflare_zone.zone.id
+  name     = "gcs"
+  value    = "c.storage.googleapis.com"
+  type     = "CNAME"
+  ttl      = 1
+  proxied  = false
+}
+resource "cloudflare_record" "mx1" {
+  zone_id  = cloudflare_zone.zone.id
+  name     = "@"
+  value    = "mx.zoho.com"
+  type     = "MX"
+  ttl      = 1
+  priority = 10
+}
+resource "cloudflare_record" "mx2" {
+  zone_id  = cloudflare_zone.zone.id
+  name     = "@"
+  value    = "mx2.zoho.com"
+  type     = "MX"
+  ttl      = 1
+  priority = 20
+}
+resource "cloudflare_record" "mx3" {
+  zone_id  = cloudflare_zone.zone.id
+  name     = "@"
+  value    = "mx3.zoho.com"
+  type     = "MX"
+  ttl      = 1
+  priority = 50
+}
+resource "cloudflare_record" "spf" {
+  zone_id  = cloudflare_zone.zone.id
+  name     = "@"
+  value    = "v=spf1 include:zoho.com include:spf.sendinblue.com include:spf.mailjet.com ~all"
+  type     = "TXT"
+  ttl      = 1
 }
 resource "cloudflare_zone_settings_override" "test" {
   zone_id = cloudflare_zone.zone.id
