@@ -52,7 +52,7 @@ cd ~/\$DOMINIO/
 terraform destroy --auto-approve
 cd
 rm -r \$DOMINIO --force
-rm destruir credenciales archivos pem terraform.tfstate -f
+rm destruir cred archivos pem terraform.tfstate -f
 EOF
 
 cat <<EOF >> cred
