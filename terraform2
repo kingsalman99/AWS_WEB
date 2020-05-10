@@ -501,7 +501,7 @@ variable "username" {
   description = "User name"
 }
 variable "password" {
-  default     = "$DBPASS"
+  default     = "$MYSERVER"
   description = "password, provide through your ENV variables"
 }
 EOF
