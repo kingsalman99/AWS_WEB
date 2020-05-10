@@ -31,7 +31,6 @@ echo "***********                                                               
 echo "===========                                                                           ==========="
 echo "===========                           !  A T E N C I Ó N  !                           ==========="
 echo "===========                                                                           ==========="
-echo "===========                                                                           ==========="
 echo "================================================================================================="
 DOMINIO=$MYDOMAIN
 echo ""
@@ -41,7 +40,7 @@ echo ""
 echo -n " - Asegúrate de haber realizado una copia de seguridad de tus datos en \$DOMINIO"
 echo ""
 echo ""
-echo -n " * ESTE PROCESO ES ¡IRREVERSIBLE!. Escribe 'eliminar' para proceder  [ eliminar / cancelar ]: "
+echo -n " * ESTE PROCESO ES ¡IRREVERSIBLE!. Escribe 'eliminar' para proceder  [ salir / eliminar ]: "
 read INPUT
 if [ \$INPUT = "ELIMINAR" -o \$INPUT = "Eliminar" -o \$INPUT = "eliminar" ]
 then
@@ -56,7 +55,7 @@ rm -r \$DOMINIO --force
 rm destruir credenciales archivos pem terraform.tfstate -f
 EOF
 
-cat <<EOF >> credenciales
+cat <<EOF >> cred
 DOMINIO=$MYDOMAIN
 cd ~/\$DOMINIO/
 terraform output
@@ -132,12 +131,6 @@ WPPASSS="\$INPUT"
 WPPAS="\$(echo "\$WPPASSS" | sed 's/\\$/\\\\$/g')"
 WPPASS="\$(echo "\$WPPAS" | sed 's/\\$/\\\\$/g')"
 fi
-echo ""
-echo -n " - 'CORREO' para la cuenta, en lo posible comercial ejm: web@\$DOMINIO [enter] = "
-read INPUT
-if [ \$INPUT ]; then
-EMAIL="\$INPUT"
-fi
 printf "\033c"
 echo "*************************************************************************************************"
 echo "***********                                                                           ***********"
@@ -154,7 +147,6 @@ echo "                     ESTAS SON LOS DATOS DE ACCESO PARA \$DOMINIO:        
 echo ""
 echo "           'USUARIO' de WordPress  = \$WPUSER                                 "
 echo "           'CONTRASEÑA' De Usuario = \$WPPASSS                       "
-echo "           'CORREO' Electrónico    = \$EMAIL                             "
 echo ""
 echo -n "   ¿ Son Correctas Estas Credenciales ?                                                       "
 echo ""
@@ -177,7 +169,6 @@ then
   echo "===========                                                                           ==========="
   echo "===========                          !  C A N C E L A D O  !                          ==========="
   echo "===========                                                                           ==========="
-  echo "===========                                                                           ==========="
   echo "================================================================================================="
   echo "***********                                                                           ***********"
   echo "***********                                                                           ***********" 
@@ -193,7 +184,6 @@ then
 else
   sed -i "s/WPPS/\$WPPASS/g" /root/wordpress
   sed -i "s/WPSR/\$WPUSER/g" /root/wordpress
-  sed -i "s/EMIL/\$EMAIL/g" /root/wordpress
   mv /root/\$DOMINIO/centminmod.sh /root/
   sh /root/centminmod.sh
 fi
@@ -207,7 +197,6 @@ echo "***********             SERVIDOR CREADO CON EL CONSTRUCTOR WEB 'VIM-v2.0' 
 echo "***********                                                                           ***********"
 echo "===========                                                                           ==========="
 echo "===========     C O N F I G U R A C I Ó N   I N I C I A L   D E   S E R V I D O R     ==========="
-echo "===========                                                                           ==========="
 echo "===========                                                                           ==========="
 echo "================================================================================================="
 echo "***********                                                                           ***********"
@@ -330,7 +319,7 @@ rm -r /root/\$DOMINIO/aws-config.sh
 EOF
 
 cat <<EOF >> $MYDOMAIN/.sh/wordpress
-if [ -d /home/nginx/domain/$MYDOMAIN ]
+if [ -d /home/nginx/domains/$MYDOMAIN ]
 then
   printf "\033c"
   echo "*************************************************************************************************"
@@ -341,7 +330,6 @@ then
   echo "***********                                                                           ***********"
   echo "===========                                                                           ==========="
   echo "===========       !  W O R D P R E S S   Y A   E S T A   I N S T A L A D O  !         ==========="
-  echo "===========                                                                           ==========="
   echo "===========                                                                           ==========="
   echo "================================================================================================="
   echo "***********                                                                           ***********"
@@ -357,7 +345,7 @@ fi
 DOMINIO="$MYDOMAIN"
 WPUSER="WPSR"
 WPPASS="WPPS"
-EMAIL="EMIL"
+EMAIL='admin@$MYDOMAIN'
 printf "\033c"
 echo "*************************************************************************************************"
 echo "***********                                                                           ***********"
@@ -385,7 +373,6 @@ echo "***********                                                               
 echo "===========                                                                           ==========="
 echo "===========      !  I N I C I A N D O    C R E A C I Ó N    W O R D P R E S S  !      ==========="
 echo "===========                                                                           ==========="
-echo "===========                                                                           ==========="
 echo "================================================================================================="
 echo -e "22\ny\n\$DOMINIO\ny\ny\n4\n\n\n\n\nn\nn\ny\ny\n\$WPUSER\n\$WPPASS\n\$EMAIL\n1\nn\ny\n24\ny\n24" | centmin
 sh /root/"\$DOMINIO"/ssllabs.sh
@@ -400,7 +387,6 @@ echo "***********                   https://ventasimpactantes.com/script        
 echo "***********                                                                           ***********"
 echo "===========                                                                           ==========="
 echo "===========             !  C O N F I G U R A N D O   W O R D P R E S S  !             ==========="
-echo "===========                                                                           ==========="
 echo "===========                                                                           ==========="
 echo "================================================================================================="
 sh /root/"\$DOMINIO"/wordpress.sh
@@ -418,7 +404,6 @@ echo "***********                             ¡ G E N I A L !                  
 echo "***********                                                                           ***********"
 echo "===========                                                                           ==========="
 echo "===========    ! W O R D P R E S S   I N S T A L A D O   E X I T O S A M E N T E !    ==========="
-echo "===========                                                                           ==========="
 echo "===========                                                                           ==========="
 echo "================================================================================================="
 echo ""
@@ -517,6 +502,8 @@ wp theme delete twentynineteen --path="\$PTH" --allow-root
 wp post create --post_type=page --post_title='Política de Privacidad' --post_status=future --path="\$PTH" --allow-root
 wp post create --post_type=page --post_title='Términos y Condiciones' --post_status=future --path="\$PTH" --allow-root
 wp post create --post_type=page --post_title='Cookies' --post_status=future --path="\$PTH" --allow-root
+wp plugin deactivate cache-enabler --path="\$PTH" --allow-root
+wp plugin uninstall cache-enabler --path="\$PTH" --allow-root
 wp plugin install elementor --activate --path="\$PTH" --allow-root
 wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/elementor-pro.zip --activate --path="\$PTH" --allow-root
 wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/astra-pro-addon.zip --activate --path="\$PTH" --allow-root
@@ -535,6 +522,7 @@ wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/cartflow
 wp plugin install https://github.com/epayco/Plugin_ePayco_WooCommerce/releases/download/V4.0.x/Plugin_ePayco_WooCommerce_4.0.x.zip --activate --path="\$PTH" --allow-root
 wp plugin activate akismet --path="\$PTH" --allow-root
 wp plugin install code-snippets --activate --path="\$PTH" --allow-root
+wp plugin install aws-cdn-by-wpadmin --activate --path="\$PTH" --allow-root
 wp plugin install duracelltomi-google-tag-manager --activate --activate --path="\$PTH" --allow-root
 wp plugin install smartcrawl-seo --activate --path="\$PTH" --allow-root
 wp plugin install post-smtp --activate --path="\$PTH" --allow-root
@@ -545,6 +533,8 @@ wp plugin install commonwp --activate --path="\$PTH" --allow-root
 wp plugin install creame-whatsapp-me --activate --path="\$PTH" --allow-root
 wp plugin install woocommerce --activate --path="\$PTH" --allow-root
 wp plugin install departamentos-y-ciudades-de-colombia-para-woocommerce --activate --path="\$PTH" --allow-root
+wp plugin install facebook-for-woocommerce --activate --path="\$PTH" --allow-root
+wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/google-ads-for-woocommerce.zip --activate --path="\$PTH" --allow-root
 wp plugin install adapta-rgpd --activate --path="\$PTH" --allow-root
 wp plugin install groundhogg --activate --activate --path="\$PTH" --allow-root
 wp plugin install tutor --activate --path="\$PTH" --allow-root
@@ -626,7 +616,6 @@ echo "***********                                                               
 echo "===========                                                                           ==========="
 echo "===========                           !  A T E N C I Ó N  !                           ==========="
 echo "===========                                                                           ==========="
-echo "===========                                                                           ==========="
 echo "================================================================================================="
 DOMINIO=$MYDOMAIN
 echo ""
@@ -675,14 +664,13 @@ echo " Luego escribe exit [enter] para salir y vuelve a ejecutar este Script esc
 echo ""
 echo " -  Si ya creaste la base de datos escribe 'sub' para seguir con la creación del subdominio "
 echo ""
-echo " -  Para ser redirigido a RDS y crear la base de datos escribe 'rds' ?  [ sub / rds ]: "
+echo -n " -  Para ser redirigido a RDS y crear la base de datos escribe 'rds' ?  [ sub / rds ]: "
 read INPUT
-if [ $INPUT = "rds" -o $INPUT = "RDS" -o $INPUT = "Rds" ]
+if [ \$INPUT = "rds" -o \$INPUT = "RDS" -o \$INPUT = "Rds" ]
 then
   sh /root/$MYDOMAIN/loginrds.sh
 else
-  mv /root/$MYDOMAIN/subdom.sh /root/
-  sh /root/subdom.sh
+  sh /root/$MYDOMAIN/subdom.sh
 fi
 EOF
 
@@ -692,11 +680,8 @@ echo "**************************************************************************
 echo "***********                                                                           ***********"
 echo "***********             SERVIDOR CREADO CON EL CONSTRUCTOR WEB 'VIM-v2.0'             ***********"
 echo "***********                                                                           ***********"
-echo "***********                       !  C O N T I N U E M O S  !                         ***********"
-echo "***********                                                                           ***********"
 echo "===========                                                                           ==========="
 echo "===========      C R E A C I Ó N    D E   S U B D O M I N I O   W O R D P R E S S     ==========="
-echo "===========                                                                           ==========="
 echo "===========                                                                           ==========="
 echo "================================================================================================="
 DOMINIO="$MYDOMAIN"
@@ -717,6 +702,11 @@ then
   echo "===========             ¡  Ya existe el Subdominio \$SUB  !"
   echo "===========                                                                           ==========="
   echo "================================================================================================="
+  echo "***********                                                                           ***********"
+  echo "***********    Para instalar este subdominio desde cero debes eliminarlo primero      ***********"
+  echo "***********    sh \$SUB/subuninstall.sh                                           "
+  echo "***********                                                                           ***********"
+  echo "*************************************************************************************************"
   exit
 else
   continue
@@ -736,19 +726,10 @@ WPPASSS="\$INPUT"
 WPPASS="\$(echo "\$WPPASSS" | sed 's/\\$/\\\\$/g')"
 export WPPASS
 fi
-echo ""
-echo -n " - 'CORREO' para WordPress, se recomienda uno comercial del tipo: web@\$DOMINIO [enter] = "
-read INPUT
-if [ \$INPUT ]; then
-EMAIL="\$INPUT"
-export EMAIL
-fi
 printf "\033c"
 echo "*************************************************************************************************"
 echo "***********                                                                           ***********"
 echo "***********             SERVIDOR CREADO CON EL CONSTRUCTOR WEB 'VIM-v2.0'             ***********"
-echo "***********                                                                           ***********"
-echo "***********                    https://ventasimpactantes.com/script                   ***********"
 echo "***********                                                                           ***********"
 echo "===========                                                                           ==========="
 echo "===========                          !  R E V I S E M O S  !                          ==========="
@@ -760,7 +741,6 @@ echo ""
 echo "           'SUBDOMINIO' a crear    = \$SUB           "
 echo "           'USUARIO' de WordPress  = \$WPUSER                                 "
 echo "           'CONTRASEÑA' De Usuario = \$WPPASSS                       "
-echo "           'CORREO' Electrónico    = \$EMAIL                             "
 echo ""
 echo -n "   ¿ Son Correctas Estas Credenciales ?                                                       "
 echo ""
@@ -778,11 +758,8 @@ then
   echo "***********                                                                           ***********"
   echo "***********             SERVIDOR CREADO CON EL CONSTRUCTOR WEB 'VIM-v2.0'             ***********"
   echo "***********                                                                           ***********"
-  echo "***********                    https://ventasimpactantes.com/script                   ***********"
-  echo "***********                                                                           ***********"
   echo "===========                                                                           ==========="
   echo "===========                          !  C A N C E L A D O  !                          ==========="
-  echo "===========                                                                           ==========="
   echo "===========                                                                           ==========="
   echo "================================================================================================="
   echo "***********                                                                           ***********"
@@ -797,50 +774,43 @@ elif [ \$INPUT = "cambiar" -o \$INPUT = "CAMBIAR" -o \$INPUT = "Cambiar"  ]
 then
   sh /root/sub
 else
+  printf "\033c"
+  echo "*************************************************************************************************"
+  echo "***********                                                                           ***********"
+  echo "***********             SERVIDOR CREADO CON EL CONSTRUCTOR WEB 'VIM-v2.0'             ***********"
+  echo "***********                                                                           ***********"
+  echo "===========                                                                           ==========="
+  echo "===========     !  C R E A N D O   A R C H I V O S   Y   D I R E C T O R I O S  !     ==========="
+  echo "===========                                                                           ==========="
+  echo "================================================================================================="
   mkdir /root/\$SUB
   cp -ar /root/$MYDOMAIN/* /root/\$SUB
   rm -f /root/\$SUB/uninstall.sh
-  sed -i "s/$MYDOMAIN/\$SUB/g" /root/\$SUB/*.sh
-  sed -i 's/RDSNAME="$MYDBNAME"/RDSNAME="'\$SUBB'"/g' /root/\$SUB/rds.sh
-  sed -i "s/subd/\$SUBB/g" /root/\$SUB/*.tf
-  sed -i "s/subd/\$SUBB/g" /root/\$SUB/cfsubd
-  cp /root/\$SUB/subdominio.sh /root/
-  sed -i 's/SUBDD/\$SUB/g' /root/subdominio.sh
-  sed -i 's/WPSR/\$WPUSER/g' /root/subdominio.sh
-  sed -i 's/WPPS/\$WPPASS/g' /root/subdominio.sh
-  sed -i 's/EMIL/\$EMAIL/g' /root/subdominio.sh
-  sh /root/subdominio.sh
+  sed -i "s/$MYDOMAIN/'\$SUB'/g" /root/\$SUB/*.sh
+  sed -i "s/$MYDBNAME/'\$SUBB'/g" /root/\$SUB/*.sh
+  sed -i "s/subd/'\$SUBB'/g" /root/\$SUB/*.tf
+  sed -i "s/subd/'\$SUBB'/g" /root/\$SUB/cfsubd
+  sed -i "s/SUBDD/'\$SUB'/g" /root/\$SUB/subdominio.sh
+  sed -i "s/WPSR/'\$WPUSER'/g" /root/\$SUB/subdominio.sh
+  sed -i "s/WPPS/'\$WPPASS'/g" /root/\$SUB/subdominio.sh
+  sed -i "s/EMIL/'\$EMAIL'/g" /root/\$SUB/subdominio.sh
+  sh /root/\$SUB/subdominio.sh
 fi
 EOF
 
 cat <<EOF >> $MYDOMAIN/.sh/subdominio.sh
-SUB="SUBDD"
-WPUSER="WPSR"
-WPPASS="WPPS"
-EMAIL="EMIL"
-printf "\033c"
-echo "*************************************************************************************************"
-echo "***********                                                                           ***********"
-echo "***********             SERVIDOR CREADO CON EL CONSTRUCTOR WEB 'VIM-v2.0'             ***********"
-echo "***********                                                                           ***********"
-echo "***********                   https://ventasimpactantes.com/script                    ***********"
-echo "***********                                                                           ***********"
-echo "===========                                                                           ==========="
-echo "===========        !  A G R E G A N D O   D N S   E N   C L O U D F L A R E  !        ==========="
-echo "===========                                                                           ==========="
-echo "===========                                                                           ==========="
-echo "================================================================================================="
+SUB=SUBDD
+WPUSER=WPSR
+WPPASS=WPPS
+EMAIL='admin@$MYDOMAIN'
 sh /root/\$SUB/cfsubd
 printf "\033c"
 echo "*************************************************************************************************"
 echo "***********                                                                           ***********"
 echo "***********             SERVIDOR CREADO CON EL CONSTRUCTOR WEB 'VIM-v2.0'             ***********"
 echo "***********                                                                           ***********"
-echo "***********                   https://ventasimpactantes.com/script                    ***********"
-echo "***********                                                                           ***********"
 echo "===========                                                                           ==========="
 echo "===========   ! I N I C I A N D O    C R E A C I Ó N    D E   S U B D O M I N I O  !  ==========="
-echo "===========                                                                           ==========="
 echo "===========                                                                           ==========="
 echo "================================================================================================="
 echo -e "22\ny\n\$SUB\ny\ny\n4\n\n\n\n\nn\nn\ny\ny\n\$WPUSER\n\$WPPASS\n\$EMAIL\n1\nn\ny\n24\ny\n24" | centmin
@@ -851,11 +821,8 @@ echo "**************************************************************************
 echo "***********                                                                           ***********"
 echo "***********             SERVIDOR CREADO CON EL CONSTRUCTOR WEB 'VIM-v2.0'             ***********"
 echo "***********                                                                           ***********"
-echo "***********                   https://ventasimpactantes.com/script                    ***********"
-echo "***********                                                                           ***********"
 echo "===========                                                                           ==========="
 echo "===========             !  C O N F I G U R A N D O   W O R D P R E S S  !             ==========="
-echo "===========                                                                           ==========="
 echo "===========                                                                           ==========="
 echo "================================================================================================="
 sh /root/"\$SUB"/wordpress.sh
@@ -867,11 +834,8 @@ echo "**************************************************************************
 echo "***********                                                                           ***********"
 echo "***********             SERVIDOR CREADO CON EL CONSTRUCTOR WEB 'VIM-v2.0'             ***********"
 echo "***********                                                                           ***********"
-echo "***********                   https://ventasimpactantes.com/script                    ***********"
-echo "***********                                                                           ***********"
 echo "===========                                                                           ==========="
 echo "===========            !  C R E A N D O   B U K E T   A M A Z O N   S 3  !            ==========="
-echo "===========                                                                           ==========="
 echo "===========                                                                           ==========="
 echo "================================================================================================="
 cd ~/\$SUB/
@@ -888,7 +852,6 @@ echo "***********                                                               
 echo "===========                                                                           ==========="
 echo "===========    ! W O R D P R E S S   I N S T A L A D O   E X I T O S A M E N T E !    ==========="
 echo "===========                                                                           ==========="
-echo "===========                                                                           ==========="
 echo "================================================================================================="
 echo ""
 echo "           ¡ F A B U L O S O ! Ya puedes entrar a tu Panel de Wordpress en el siguiente          "
@@ -902,7 +865,7 @@ echo ""
 echo "Estos son las Credenciales para tus copias de seguridad"
 echo ""
 echo ""
-rm -f /root/subdominio.sh
+rm -f /home/nginx/domains/\$SUB/public/maintenance.html
 cd ~/\$SUB/
 terraform output
 echo ""
@@ -1003,11 +966,8 @@ echo "**************************************************************************
 echo "***********                                                                           ***********"
 echo "***********             SERVIDOR CREADO CON EL CONSTRUCTOR WEB 'VIM-v2.0'             ***********"
 echo "***********                                                                           ***********"
-echo "***********                   https://ventasimpactantes.com/script                    ***********"
-echo "***********                                                                           ***********"
 echo "===========                                                                           ==========="
 echo "===========                           !  A T E N C I Ó N  !                           ==========="
-echo "===========                                                                           ==========="
 echo "===========                                                                           ==========="
 echo "================================================================================================="
 SUB="$MYDOMAIN"
@@ -1016,7 +976,7 @@ echo -n " * ¿ ESTAS SEGURO DE ELIMINAR EL SUBDOMINIO \$DOMINIO Y BORRAR TODO EL
 echo ""
 echo -n " - Asegúrate de haber realizado una copia de seguridad de tus datos en \$DOMINIO"
 echo ""
-echo -n " * ESTE PROCESO ES ¡IRREVERSIBLE!. Escribe 'eliminar' para proceder  [ eliminar / cancelar ]: "
+echo -n " * ESTE PROCESO ES ¡IRREVERSIBLE!. Escribe 'eliminar' para proceder  [ salir / eliminar ]: "
 read INPUT
 if [ \$INPUT = "ELIMINAR" -o \$INPUT = "Eliminar" -o \$INPUT = "eliminar" ]
 then
