@@ -15,8 +15,8 @@ else
 fi
 
 mkdir $MYDOMAIN/ $MYDOMAIN/.sh/
-cp .ingress/tf.tfvars $MYDOMAIN/terraform.tfvars 
-cp $MYDOMAIN/terraform.tfvars $MYDOMAIN/.sh/terraform.tfvars 
+cp .ingress/tf.tfvars $MYDOMAIN/terraform.tfvars
+cp $MYDOMAIN/terraform.tfvars $MYDOMAIN/.sh/terraform.tfvars
 cloudshell download .ingress/$MYSERVER.pem
 
 cat <<EOF >> destruir
@@ -98,9 +98,51 @@ rm -f hostname.sh
 EOF
 
 cat <<EOF >> $MYDOMAIN/.sh/vim.sh
-SERVIDOR=servidor.$MYDOMAIN
-IP="\$(dig myip.opendns.com @resolver1.opendns.com +short)"
-echo \$IP \$SERVIDOR hostname >> /etc/hosts
+DOMINIO=$MYDOMAIN
+MAIL=$EML
+CFAP=$CFAPI
+curl -X GET "https://api.cloudflare.com/client/v4/zones?name=\$DOMINIO&page=1&per_page=20&order=status&direction=desc&match=all" \-H "X-Auth-Email: \$MAIL" \-H "X-Auth-Key: \$CFAP" \-H "Content-Type: application/json" >> zone.txt
+STATUS="\$(cat zone.txt | sed -r 's/","/\n/g' | sed '2,\$d' | sed 's/{.*":"//' | sed 's/status":"//' )"
+NMSERV="\$(cat zone.txt | sed -r 's/","/\n/g' | sed -r 's/\["/\n/g' | sed -r 's/"\]/\n/g' | sed -n '/ns.cloudflare.com/p' | sed 's/{.*":\]//' )"
+echo \$NMSERV >> dn.txt
+sed 's/ /\n/g' dn.txt >> dnscf.txt
+DNS1="\$(sed -n 1p dnscf.txt)"
+DNS2="\$(sed -n 2p dnscf.txt)"
+if [ \$STATUS="pending" ]
+then
+  printf "\033c"
+  echo "*************************************************************************************************"
+  echo "***********                                                                           ***********"
+  echo "***********             SERVIDOR CREADO CON EL CONSTRUCTOR WEB 'VIM-v2.0'             ***********"
+  echo "***********                                                                           ***********"
+  echo "***********                         !  A T E N C I Ó N  !                             ***********"
+  echo "***********                                                                           ***********"
+  echo "===========                                                                           ==========="
+  echo "===========         E L   D O M I N I O   A Ú N   N O   E S T A   A C T I V O         ==========="
+  echo "===========                                                                           ==========="
+  echo "================================================================================================="
+  echo "===========                                                                           ==========="
+  echo "=========== Asegúrate de cambiar y actualizar los DNS generados por Cloudflare en     ==========="
+  echo "=========== Namecheap (o donde hayas registrado tu dominio), estos son los DNS:       ==========="
+  echo "===========                                                                           ==========="
+  echo "=========== \$DNS1                                                                     "
+  echo "=========== \$DNS2                                                                     "
+  echo "===========                                                                           ==========="
+  echo "================================================================================================="
+  echo "***********                                                                           ***********"
+  echo "*********** Cuando este activo el dominio ejecuta de nuevo el script escribiendo:     ***********"
+  echo "*********** sh vim y oprime [enter]                                                 ***********"
+  echo "***********                                                                           ***********"
+  echo "*************************************************************************************************"
+  rm -f zone.txt dn.txt dnscf.txt
+  exit
+else
+  rm -f zone.txt dn.txt dnscf.txt
+  sh /root/$MYDOMAIN/varwp.sh
+fi
+EOF
+
+cat <<EOF >> $MYDOMAIN/.sh/varwp.sh
 printf "\033c"
 echo "*************************************************************************************************"
 echo "***********                                                                           ***********"
@@ -153,7 +195,7 @@ echo -n " -  Escribe 'crear' para ejecutar wordpress"
 echo ""
 echo -n " -  Escribe 'cambiar' para editar las credenciales de nuevo...                   "
 echo ""
-echo -n " -  Escribe 'salir' para cancelar este proceso  [ salir / cambiar / crear ]: "   
+echo -n " -  Escribe 'salir' para cancelar este proceso  [ salir / cambiar / crear ]: "
 read INPUT
 if [ \$INPUT = "salir" -o \$INPUT = "Salir" -o \$INPUT = "SALIR" ]
 then
@@ -169,7 +211,7 @@ then
   echo "===========                                                                           ==========="
   echo "================================================================================================="
   echo "***********                                                                           ***********"
-  echo "***********                                                                           ***********" 
+  echo "***********                                                                           ***********"
   echo "***********    Para ejecutar de nuevo el Script escribe 'sh vim' y oprime [enter]     ***********"
   echo "***********                                                                           ***********"
   echo "***********                                                                           ***********"
@@ -178,7 +220,7 @@ then
   exit
 elif [ \$INPUT = "cambiar" -o \$INPUT = "CAMBIAR" -o \$INPUT = "Cambiar"  ]
 then
-  sh /root/vim
+  sh /root/$MYDOMAIN/varwp.sh
 else
   sed -i "s/WPPS/\$WPPASS/g" /root/wordpress
   sed -i "s/WPSR/\$WPUSER/g" /root/wordpress
@@ -189,6 +231,9 @@ fi
 EOF
 
 cat <<EOF >> $MYDOMAIN/.sh/centminmod.sh
+SERVIDOR=servidor.$MYDOMAIN
+IP="\$(dig myip.opendns.com @resolver1.opendns.com +short)"
+echo \$IP \$SERVIDOR hostname >> /etc/hosts
 printf "\033c"
 echo "*************************************************************************************************"
 echo "***********                                                                           ***********"
@@ -750,7 +795,7 @@ echo -n " -  Escribe 'crear' para construir el subdominio en wordpress"
 echo ""
 echo -n " -  Escribe 'cambiar' para editar las credenciales de nuevo...                   "
 echo ""
-echo -n " -  Escribe 'cancelar' para salir del script  [ cancelar / cambiar / crear ]: "   
+echo -n " -  Escribe 'cancelar' para salir del script  [ cancelar / cambiar / crear ]: "
 read INPUT
 if [ \$INPUT = "cancelar" -o \$INPUT = "Cancelar" -o \$INPUT = "CANCELAR" ]
 then
@@ -764,7 +809,7 @@ then
   echo "===========                                                                           ==========="
   echo "================================================================================================="
   echo "***********                                                                           ***********"
-  echo "***********                                                                           ***********" 
+  echo "***********                                                                           ***********"
   echo "***********      Para crear un nuevo subdominio escribe 'sh sub' y oprime [enter]     ***********"
   echo "***********                                                                           ***********"
   echo "***********                                                                           ***********"
@@ -999,8 +1044,8 @@ cat <<EOF >> $MYDOMAIN/.sh/cfsubd
 DOMINIO=$MYDOMAIN
 MAIL=$EML
 CFAP=$CFAPI
-curl -X GET "https://api.cloudflare.com/client/v4/accounts?page=1&per_page=20&direction=desc" \-H "X-Auth-Email: \$MAIL" \-H "X-Auth-Key: \$CFAP" \-H "Content-Type: application/json" >> id.txt
-CFID="\$(cat id.txt | sed -r 's/","/\n/g' | sed -n '/id/p' | sed 's/{.*":"//' )"
+#curl -X GET "https://api.cloudflare.com/client/v4/accounts?page=1&per_page=20&direction=desc" \-H "X-Auth-Email: \$MAIL" \-H "X-Auth-Key: \$CFAP" \-H "Content-Type: application/json" >> id.txt
+#CFID="\$(cat id.txt | sed -r 's/","/\n/g' | sed -n '/id/p' | sed 's/{.*":"//' )"
 rm -f id.txt
 curl -X GET "https://api.cloudflare.com/client/v4/zones?name=\$DOMINIO&page=1&per_page=20&order=status&direction=desc&match=all" \-H "X-Auth-Email: \$MAIL" \-H "X-Auth-Key: \$CFAP" \-H "Content-Type: application/json" >> zone.txt
 ZONEID="\$(cat zone.txt | sed -r 's/","/\n/g' | sed '2,\$d' | sed 's/{.*":"//' )"
