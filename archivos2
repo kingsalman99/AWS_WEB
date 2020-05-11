@@ -222,8 +222,8 @@ elif [ \$INPUT = "cambiar" -o \$INPUT = "CAMBIAR" -o \$INPUT = "Cambiar"  ]
 then
   sh /root/$MYDOMAIN/varwp.sh
 else
-  sed -i "s/WPPS/\$WPPASS/g" /root/wordpress
-  sed -i "s/WPSR/\$WPUSER/g" /root/wordpress
+  sed -i "s/WPPS/\$WPPASS/g" /root/$MYDOMAIN/wp.sh
+  sed -i "s/WPSR/\$WPUSER/g" /root/$MYDOMAIN/wp.sh
   mv /root/\$DOMINIO/centminmod.sh /root/
   sh /root/centminmod.sh
   sh /root/$MYDOMAIN/wp.sh
@@ -508,7 +508,7 @@ cat <<EOF >> $MYDOMAIN/.sh/rds.sh
 DOMINIO="$MYDOMAIN"
 MYSERVER="$MYSERVER"
 RDSHOST="RDSHOSTS"
-RDSPASS="$MYDBPASS"
+RDSPASS="$MYSERVER"
 RDSNAME="$MYDBNAME"
 if ! grep -q "3306" /etc/csf/csf.conf ;
 then
@@ -601,7 +601,7 @@ cat <<EOF >> $MYDOMAIN/.sh/createbak.sh
 DOMINIO="$MYDOMAIN"
 MYSERVER="$MYSERVER"
 RDSHOST="RDSHOSTS"
-RDSPASS="$MYDBPASS"
+RDSPASS="$MYSERVER"
 RDSNAME="$MYDBNAME"
 echo ""
 echo -n "Nombre para la copia de seguridad? = "
@@ -619,7 +619,7 @@ cat <<EOF >> $MYDOMAIN/.sh/ejecutebak.sh
 DOMINIO="$MYDOMAIN"
 MYSERVER="$MYSERVER"
 RDSHOST="RDSHOSTS"
-RDSPASS="$MYDBPASS"
+RDSPASS="$MYSERVER"
 RDSNAME="$MYDBNAME"
 echo ""
 echo -n "Nombre de la copia de seguridad? = "
@@ -638,7 +638,7 @@ cat <<EOF >> $MYDOMAIN/.sh/deletebak.sh
 DOMINIO="$MYDOMAIN"
 MYSERVER="$MYSERVER"
 RDSHOST="RDSHOSTS"
-RDSPASS="$MYDBPASS"
+RDSPASS="$MYSERVER"
 echo ""
 echo -n "Nombre de la copia a borrar? = "
 read INPUT
@@ -788,7 +788,7 @@ echo "           'SUBDOMINIO' a crear    = \$SUB           "
 echo "           'USUARIO' de WordPress  = \$WPUSER                                 "
 echo "           'CONTRASEÑA' De Usuario = \$WPPASSS                       "
 echo ""
-echo -n "   ¿ Son Correctas Estas Credenciales ?                                                       "
+echo -n "   ¿ Son Correctos Estos Datos ?                                                       "
 echo ""
 echo ""
 echo -n " -  Escribe 'crear' para construir el subdominio en wordpress"
@@ -831,7 +831,7 @@ else
   echo "================================================================================================="
   mkdir /root/\$SUB
   cp -ar /root/$MYDOMAIN/* /root/\$SUB
-  rm -f /root/\$SUB/uninstall.sh /root/\$SUB/wp.sh /root/\$SUB/mysql.sh /root/\$SUB/loginrds.sh /root/\$SUB/subdom.sh
+  rm -f /root/\$SUB/uninstall.sh /root/\$SUB/wp.sh /root/\$SUB/mysql.sh /root/\$SUB/loginrds.sh /root/\$SUB/subdom.sh /root/\$SUB/varwp.sh
   sed -i "s/$MYDOMAIN/\$SUB/g" /root/\$SUB/*.sh
   sed -i 's/RDSNAME="$MYDBNAME"/RDSNAME="'\$SUBB'"/g' /root/\$SUB/*.sh
   sed -i "s/subd/\$SUBB/g" /root/\$SUB/*.tf
@@ -912,7 +912,7 @@ echo ""
 echo ""
 rm -f /home/nginx/domains/\$SUB/public/maintenance.html
 cd ~/\$SUB/
-terraform 
+terraform output
 rm -f /root/\$SUB/subdominio.sh
 echo ""
 EOF
@@ -925,7 +925,7 @@ EOF
 cat <<EOF >> $MYDOMAIN/.sh/loginrds.sh
 MYSERVER="$MYSERVER"
 RDSHOST="RDSHOSTS"
-RDSPASS="$MYDBPASS"
+RDSPASS="$MYSERVER"
 RDSNAME="$MYDBNAME"
 mysql -u "\$MYSERVER" -h"\$RDSHOST" -D "\$RDSNAME" -p"\$RDSPASS"
 EOF
