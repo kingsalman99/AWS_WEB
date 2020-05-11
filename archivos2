@@ -522,7 +522,7 @@ fi
 WPDBNAME=\`cat /home/nginx/domains/"\$DOMINIO"/public/bk-wp-config-local.php | grep DB_NAME | cut -d \\' -f 4\`
 WPDBUSER=\`cat /home/nginx/domains/"\$DOMINIO"/public/bk-wp-config-local.php | grep DB_USER | cut -d \\' -f 4\`
 WPDBPASS=\`cat /home/nginx/domains/"\$DOMINIO"/public/bk-wp-config-local.php | grep DB_PASSWORD | cut -d \\' -f 4\`
-mysql -u "\$MYSERVER" -h"\$RDSHOST" -D "\$RDSNAME" -p"\$RDSPASS" < /root/"\$DOMINIO"/backups-db/local-"\$DOMINIO"-db-bk.sql
+mysql -u "\$MYSERVER" -h"\$RDSHOST" "\$RDSNAME" -p"\$RDSPASS" < /root/"\$DOMINIO"/backups-db/local-"\$DOMINIO"-db-bk.sql
 sed -i "s/\$WPDBNAME/\$RDSNAME/g; s/\$WPDBUSER/\$MYSERVER/g; s/localhost/\$RDSHOST/g; s/'\$WPDBPASS'/'\$RDSPASS'/g" /home/nginx/domains/"\$DOMINIO"/public/wp-config.php
 EOF
 
@@ -629,7 +629,7 @@ if [ \$INPUT ]; then
 fi
 rm -r /home/nginx/domains/"\$DOMINIO" --force
 cp -ar /root/"\$DOMINIO"/backups-wp/"\$BAK"-"\$DOMINIO" /home/nginx/domains/"\$DOMINIO"
-mysql -u \$MYSERVER -h"\$RDSHOST" -D \$RDSNAME -p"\$RDSPASS" < /root/"\$DOMINIO"/backups-db/"\$BAK"-db-bk.sql
+mysql -u \$MYSERVER -h"\$RDSHOST" \$RDSNAME -p"\$RDSPASS" < /root/"\$DOMINIO"/backups-db/"\$BAK"-db-bk.sql
 sh /root/"\$DOMINIO"/restart.sh
 EOF
 
