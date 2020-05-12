@@ -41,7 +41,7 @@ resource "cloudflare_record" "correo" {
   value    = "business.zoho.com"
   type     = "CNAME"
   ttl      = 1
-  proxied  = false
+  proxied  = true
 }
 resource "cloudflare_record" "img" {
   zone_id  = cloudflare_zone.zone.id
@@ -49,7 +49,7 @@ resource "cloudflare_record" "img" {
   value    = "c.storage.googleapis.com"
   type     = "CNAME"
   ttl      = 1
-  proxied  = false
+  proxied  = true
 }
 resource "cloudflare_record" "gcs" {
   zone_id  = cloudflare_zone.zone.id
@@ -57,7 +57,7 @@ resource "cloudflare_record" "gcs" {
   value    = "c.storage.googleapis.com"
   type     = "CNAME"
   ttl      = 1
-  proxied  = false
+  proxied  = true
 }
 resource "cloudflare_record" "mx1" {
   zone_id  = cloudflare_zone.zone.id
@@ -89,6 +89,28 @@ resource "cloudflare_record" "spf" {
   value    = "v=spf1 include:zoho.com include:spf.sendinblue.com include:spf.mailjet.com ~all"
   type     = "TXT"
   ttl      = 1
+}
+resource "cloudflare_record" "awscaa" {
+  zone_id  = cloudflare_zone.zone.id
+  name    = "@"
+  data    = {
+    flags = "0"
+    tag   = "issue"
+    value = "letsencrypt.org"
+  }
+  type    = "CAA"
+  ttl     = 1
+}
+resource "cloudflare_record" "letcaa" {
+  zone_id  = cloudflare_zone.zone.id
+  name    = "@"
+  data    = {
+    flags = "0"
+    tag   = "issue"
+    value = "amazon.com"
+  }
+  type    = "CAA"
+  ttl     = 1
 }
 resource "cloudflare_zone_settings_override" "test" {
   zone_id = cloudflare_zone.zone.id
