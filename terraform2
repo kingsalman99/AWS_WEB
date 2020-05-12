@@ -96,7 +96,7 @@ resource "cloudflare_record" "awscaa" {
   data    = {
     flags = "0"
     tag   = "issue"
-    value = '"letsencrypt.org"'
+    value = "'letsencrypt.org'"
   }
   type    = "CAA"
   ttl     = 1
@@ -107,7 +107,7 @@ resource "cloudflare_record" "letcaa" {
   data    = {
     flags = "0"
     tag   = "issue"
-    value = '"amazon.com"'
+    value = "'amazon.com'"
   }
   type    = "CAA"
   ttl     = 1
