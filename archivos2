@@ -375,6 +375,9 @@ DOMINIO="$MYDOMAIN"
 WPUSER="WPSR"
 WPPASS="WPPS"
 EMAIL='admin@$MYDOMAIN'
+ACK=$accesskey
+SCKK=$secretkey
+SCK="\$(echo "\$SCKK" | sed 's/\//\\//g')"
 printf "\033c"
 echo "*************************************************************************************************"
 echo "***********                                                                           ***********"
@@ -420,6 +423,7 @@ echo "===========                                                               
 echo "================================================================================================="
 sh /root/"\$DOMINIO"/wordpress.sh
 sh /root/"\$DOMINIO"/permisos.sh
+sed -i "s/\/\* That/define( 'WP_STATELESS_MEDIA_CACHE_BUSTING', 'false' );\ndefine( 'WPOSES_AWS_ACCESS_KEY_ID', '$ACK' );\ndefine( 'WPOSES_AWS_SECRET_ACCESS_KEY', '$SCK' );\n\/\* That/g" /home/nginx/domains/\$DOMINIO/public/wp-config.php
 echo "Creando Copia de Seguridad"
 echo -e "inicio" | sh /root/"\$DOMINIO"/createbak.sh > /dev/null 2>&1
 #rm -f /root/wordpress
@@ -546,7 +550,7 @@ wp theme delete twentyseventeen --path="\$PTH" --allow-root
 wp theme delete twentynineteen --path="\$PTH" --allow-root
 wp post create --post_type=page --post_title='Política de Privacidad' --post_status=future --path="\$PTH" --allow-root
 wp post create --post_type=page --post_title='Términos y Condiciones' --post_status=future --path="\$PTH" --allow-root
-wp post create --post_type=page --post_title='Cookies' --post_status=future --path="\$PTH" --allow-root
+wp post create --post_type=page --post_title='Política de Cookies' --post_status=future --path="\$PTH" --allow-root
 wp plugin deactivate cache-enabler --path="\$PTH" --allow-root
 wp plugin uninstall cache-enabler --path="\$PTH" --allow-root
 wp plugin deactivate sucuri-scanner --path="\$PTH" --allow-root
@@ -879,6 +883,7 @@ echo "===========                                                               
 echo "================================================================================================="
 sh /root/"\$SUB"/wordpress.sh
 sh /root/"\$SUB"/permisos.sh
+sed -i "s/_';/_';\ndefine( 'WP_STATELESS_MEDIA_CACHE_BUSTING', 'false' );/g" /home/nginx/domains/\$SUB/public/wp-config.php
 echo "Creando Copia de Seguridad"
 echo -e "inicio" | sh /root/"\$SUB"/createbak.sh > /dev/null 2>&1
 printf "\033c"
