@@ -423,7 +423,7 @@ echo "===========                                                               
 echo "================================================================================================="
 sh /root/"\$DOMINIO"/wordpress.sh
 sh /root/"\$DOMINIO"/permisos.sh
-sed -i "s/\/\* That/define( 'WP_STATELESS_MEDIA_CACHE_BUSTING', 'false' );\ndefine( 'WPOSES_AWS_ACCESS_KEY_ID', '$ACK' );\ndefine( 'WPOSES_AWS_SECRET_ACCESS_KEY', '$SCK' );\n\/\* That/g" /home/nginx/domains/\$DOMINIO/public/wp-config.php
+sed -i "s/\/\* That/define( 'WP_STATELESS_MEDIA_CACHE_BUSTING', 'false' );\ndefine( 'WPOSES_AWS_ACCESS_KEY_ID', '\$ACK' );\ndefine( 'WPOSES_AWS_SECRET_ACCESS_KEY', '\$SCK' );\n\/\* That/g" /home/nginx/domains/\$DOMINIO/public/wp-config.php
 echo "Creando Copia de Seguridad"
 echo -e "inicio" | sh /root/"\$DOMINIO"/createbak.sh > /dev/null 2>&1
 #rm -f /root/wordpress
@@ -886,7 +886,7 @@ echo "===========                                                               
 echo "================================================================================================="
 sh /root/"\$SUB"/wordpress.sh
 sh /root/"\$SUB"/permisos.sh
-sed -i "s/\/\* That/define( 'WP_STATELESS_MEDIA_CACHE_BUSTING', 'false' );\ndefine( 'WPOSES_AWS_ACCESS_KEY_ID', '$ACK' );\ndefine( 'WPOSES_AWS_SECRET_ACCESS_KEY', '$SCK' );\n\/\* That/g" /home/nginx/domains/\$SUB/public/wp-config.php
+sed -i "s/\/\* That/define( 'WP_STATELESS_MEDIA_CACHE_BUSTING', 'false' );\ndefine( 'WPOSES_AWS_ACCESS_KEY_ID', '\$ACK' );\ndefine( 'WPOSES_AWS_SECRET_ACCESS_KEY', '\$SCK' );\n\/\* That/g" /home/nginx/domains/\$SUB/public/wp-config.php
 echo "Creando Copia de Seguridad"
 echo -e "inicio" | sh /root/"\$SUB"/createbak.sh > /dev/null 2>&1
 printf "\033c"
