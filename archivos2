@@ -855,6 +855,7 @@ fi
 EOF
 
 cat <<EOF >> $MYDOMAIN/.sh/subdominio.sh
+SUB=SUBDD
 WPUSER=WPSR
 WPPASS=WPPS
 EMAIL='admin@$MYDOMAIN'
