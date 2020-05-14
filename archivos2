@@ -168,8 +168,8 @@ echo -n " - Crea una 'CONTRASEÑA' que contenga mayúsculas y símbolos y oprime
 read INPUT
 if [ \$INPUT ]; then
 WPPASSS="\$INPUT"
-WPPAS="\$(echo "\$WPPASSS" | sed 's/\\$/\\\\$/g')"
-WPPASS="\$(echo "\$WPPAS" | sed 's/\\$/\\\\$/g')"
+WPPAS=\$(echo "\$WPPASSS" | sed 's/\\$/\\\\$/g')
+WPPASS=\$(echo "\$WPPAS" | sed 's/\\$/\\\\$/g')
 fi
 printf "\033c"
 echo "*************************************************************************************************"
@@ -375,9 +375,9 @@ DOMINIO="$MYDOMAIN"
 WPUSER="WPSR"
 WPPASS="WPPS"
 EMAIL='admin@$MYDOMAIN'
-ACK=$accesskey
-SCKK=$secretkey
-SCK="\$(echo "\$SCKK" | sed 's/\//\\//g')"
+ACK="$accesskey"
+SCKK="$secretkey"
+SCK=\$(echo "\$SCKK" | sed 's/\//\\\//g')
 printf "\033c"
 echo "*************************************************************************************************"
 echo "***********                                                                           ***********"
@@ -855,13 +855,12 @@ fi
 EOF
 
 cat <<EOF >> $MYDOMAIN/.sh/subdominio.sh
-SUB=SUBDD
 WPUSER=WPSR
 WPPASS=WPPS
 EMAIL='admin@$MYDOMAIN'
-ACK=$accesskey
-SCKK=$secretkey
-SCK="\$(echo "\$SCKK" | sed 's/\//\\//g')"
+ACK="$accesskey"
+SCKK="$secretkey"
+SCK=\$(echo "\$SCKK" | sed 's/\//\\\//g')
 sh /root/\$SUB/cfsubd
 printf "\033c"
 echo "*************************************************************************************************"
@@ -886,7 +885,7 @@ echo "===========                                                               
 echo "================================================================================================="
 sh /root/"\$SUB"/wordpress.sh
 sh /root/"\$SUB"/permisos.sh
-sed -i "s/\/\* That/define( 'WP_STATELESS_MEDIA_CACHE_BUSTING', 'false' );\ndefine( 'WPOSES_AWS_ACCESS_KEY_ID', '\$ACK' );\ndefine( 'WPOSES_AWS_SECRET_ACCESS_KEY', '\$SCK' );\n\/\* That/g" /home/nginx/domains/\$SUB/public/wp-config.php
+sed -i "s/\/\* That/define( 'WP_STATELESS_MEDIA_CACHE_BUSTING', 'false' );\ndefine( 'WPOSES_AWS_ACCESS_KEY_ID', '\$ACK' );\ndefine( 'WPOSES_AWS_SECRET_ACCESS_KEY', '\$SCK' );\n\/\* That/g" /home/nginx/domains/"\$SUB"/public/wp-config.php
 echo "Creando Copia de Seguridad"
 echo -e "inicio" | sh /root/"\$SUB"/createbak.sh > /dev/null 2>&1
 printf "\033c"
