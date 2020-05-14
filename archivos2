@@ -168,8 +168,8 @@ echo -n " - Crea una 'CONTRASEÑA' que contenga mayúsculas y símbolos y oprime
 read INPUT
 if [ \$INPUT ]; then
 WPPASSS="\$INPUT"
-WPPAS=\$(echo "\$WPPASSS" | sed 's/\\$/\\\\$/g')
-WPPASS=\$(echo "\$WPPAS" | sed 's/\\$/\\\\$/g')
+WPPAS="\$(echo "\$WPPASSS" | sed 's/\\$/\\\\$/g')"
+WPPASS="\$(echo "\$WPPAS" | sed 's/\\$/\\\\$/g')"
 fi
 printf "\033c"
 echo "*************************************************************************************************"
@@ -377,7 +377,7 @@ WPPASS="WPPS"
 EMAIL='admin@$MYDOMAIN'
 ACK="$accesskey"
 SCKK="$secretkey"
-SCK=\$(echo "\$SCKK" | sed 's/\//\\\//g')
+SCK="\$(echo "\$SCKK" | sed 's/\//\\\//g')"
 printf "\033c"
 echo "*************************************************************************************************"
 echo "***********                                                                           ***********"
@@ -861,7 +861,7 @@ WPPASS=WPPS
 EMAIL='admin@$MYDOMAIN'
 ACK="$accesskey"
 SCKK="$secretkey"
-SCK=\$(echo "\$SCKK" | sed 's/\//\\\//g')
+SCK="\$(echo "\$SCKK" | sed 's/\//\\\//g')"
 sh /root/\$SUB/cfsubd
 printf "\033c"
 echo "*************************************************************************************************"
