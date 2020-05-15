@@ -90,24 +90,13 @@ resource "cloudflare_record" "spf" {
   type     = "TXT"
   ttl      = 1
 }
-resource "cloudflare_record" "awscaa" {
+resource "cloudflare_record" "caa" {
   zone_id  = cloudflare_zone.zone.id
-  name    = "@"
+  name    = "www"
   data    = {
     flags = "0"
-    tag   = "issue"
-    value = "'letsencrypt.org'"
-  }
-  type    = "CAA"
-  ttl     = 1
-}
-resource "cloudflare_record" "letcaa" {
-  zone_id  = cloudflare_zone.zone.id
-  name    = "@"
-  data    = {
-    flags = "0"
-    tag   = "issue"
-    value = "'amazon.com'"
+    tag   = "issuewild"
+    value = ";"
   }
   type    = "CAA"
   ttl     = 1
