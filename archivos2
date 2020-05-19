@@ -73,7 +73,7 @@ cat <<EOF >> $MYDOMAIN/.sh/sh.sh
 DOMINIO=$MYDOMAIN
 mkdir ".\$DOMINIO"
 sudo chmod +x *.sh
-sudo mv centminmod.sh wp.sh varwp.sh aws-config.sh ssllabs.sh restart.sh bk-local.sh rds.sh ejecutelocal.sh wordpress.sh permisos.sh createbak.sh ejecutebak.sh deletebak.sh uninstall.sh sub.sh mysql.sh loginrds.sh terraform.tfvars s3.tf s3.tf s3_var.tf subdoutputs.tf subdom.sh subdominio.sh cfsubd subuninstall.sh .\$DOMINIO
+sudo mv centminmod.sh wp.sh varwp.sh aws-config.sh ssllabs.sh restart.sh bk-local.sh rds.sh ejecutelocal.sh wordpress.sh configwp.sh permisos.sh createbak.sh ejecutebak.sh deletebak.sh uninstall.sh sub.sh mysql.sh loginrds.sh terraform.tfvars s3.tf s3.tf s3_var.tf subdoutputs.tf subdom.sh subdominio.sh cfsubd subuninstall.sh .\$DOMINIO
 sudo yum -y update
 sudo yum install nano wget curl bind-utils unzip -y
 sudo cp -ar ".\$DOMINIO" /root/"\$DOMINIO"
@@ -375,9 +375,6 @@ DOMINIO="$MYDOMAIN"
 WPUSER="WPSR"
 WPPASS="WPPS"
 EMAIL='admin@$MYDOMAIN'
-ACK="$accesskey"
-SCKK="$secretkey"
-SCK="\$(echo "\$SCKK" | sed 's/\//\\\\\\//g')"
 printf "\033c"
 echo "*************************************************************************************************"
 echo "***********                                                                           ***********"
@@ -422,8 +419,8 @@ echo "===========             !  C O N F I G U R A N D O   W O R D P R E S S  ! 
 echo "===========                                                                           ==========="
 echo "================================================================================================="
 sh /root/"\$DOMINIO"/wordpress.sh
+sh /root/"\$DOMINIO"/configwp.sh
 sh /root/"\$DOMINIO"/permisos.sh
-sed -i "s/\/\* That/define( 'WP_STATELESS_MEDIA_CACHE_BUSTING', 'false' );\ndefine( 'WPOSES_AWS_ACCESS_KEY_ID', '\$ACK' );\ndefine( 'WPOSES_AWS_SECRET_ACCESS_KEY', '\$SCK' );\n\/\* That/g" /home/nginx/domains/\$DOMINIO/public/wp-config.php
 echo "Creando Copia de Seguridad"
 echo -e "inicio" | sh /root/"\$DOMINIO"/createbak.sh > /dev/null 2>&1
 #rm -f /root/wordpress
@@ -553,8 +550,11 @@ wp post create --post_type=page --post_title='Términos y Condiciones' --post_st
 wp post create --post_type=page --post_title='Política de Cookies' --post_status=future --path="\$PTH" --allow-root
 wp plugin deactivate cache-enabler --path="\$PTH" --allow-root
 wp plugin uninstall cache-enabler --path="\$PTH" --allow-root
+wp plugin deactivate cdn-enabler --path="\$PTH" --allow-root
+wp plugin uninstall cdn-enabler --path="\$PTH" --allow-root
 wp plugin deactivate sucuri-scanner --path="\$PTH" --allow-root
 wp plugin uninstall sucuri-scanner --path="\$PTH" --allow-root
+wp plugin activate akismet --path="\$PTH" --allow-root
 wp plugin install elementor --activate --path="\$PTH" --allow-root
 wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/elementor-pro.zip --activate --path="\$PTH" --allow-root
 wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/astra-pro-addon.zip --activate --path="\$PTH" --allow-root
@@ -568,19 +568,21 @@ wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/thrive-u
 wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/thrive-headline-optimizer.zip --activate --path="\$PTH" --allow-root
 wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/updraftplus-premium.zip --activate --path="\$PTH" --allow-root
 wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/wp-fusion.zip --activate --path="\$PTH" --allow-root
-wp plugin install cartflows --path="\$PTH" --allow-root
-wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/cartflows-pro.zip --path="\$PTH" --allow-root
 wp plugin install https://github.com/epayco/Plugin_ePayco_WooCommerce/releases/download/V4.0.x/Plugin_ePayco_WooCommerce_4.0.x.zip --activate --path="\$PTH" --allow-root
-wp plugin activate akismet --path="\$PTH" --allow-root
+wp plugin install https://github.com/vlipco/woocommerce-wompi-plugin/releases/download/0.1.0/Wompi_WooCommerce_Plugin_0.1.0.zip --activate --path="\$PTH" --allow-root
+wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/cartflows-pro.zip --path="\$PTH" --allow-root
+wp plugin install cartflows --path="\$PTH" --allow-root
+wp plugin install jetpack --path="\$PTH" --allow-root
+wp plugin install adapta-rgpd --activate --path="\$PTH" --allow-root
+wp plugin install seo-by-rank-math --activate --path="\$PTH" --allow-root
 wp plugin install code-snippets --activate --path="\$PTH" --allow-root
 wp plugin install aws-cdn-by-wpadmin --activate --path="\$PTH" --allow-root
 wp plugin install wp-ses --activate --path="\$PTH" --allow-root
-wp plugin install duracelltomi-google-tag-manager --activate --activate --path="\$PTH" --allow-root
 wp plugin install post-smtp --activate --path="\$PTH" --allow-root
+wp plugin install duracelltomi-google-tag-manager --activate --activate --path="\$PTH" --allow-root
+wp plugin install hummingbird-performance --activate --path="\$PTH" --allow-root
 wp plugin install defender-security --activate --path="\$PTH" --allow-root
 wp plugin install wp-smushit --activate --path="\$PTH" --allow-root
-wp plugin install smartcrawl-seo --activate --path="\$PTH" --allow-root
-wp plugin install hummingbird-performance --activate --path="\$PTH" --allow-root
 wp plugin install redirection --activate --path="\$PTH" --allow-root
 wp plugin install wp-stateless --activate --path="\$PTH" --allow-root
 wp plugin install commonwp --activate --path="\$PTH" --allow-root
@@ -589,13 +591,20 @@ wp plugin install woocommerce --activate --path="\$PTH" --allow-root
 wp plugin install departamentos-y-ciudades-de-colombia-para-woocommerce --activate --path="\$PTH" --allow-root
 wp plugin install facebook-for-woocommerce --activate --path="\$PTH" --allow-root
 wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/google-ads-for-woocommerce.zip --activate --path="\$PTH" --allow-root
-wp plugin install adapta-rgpd --activate --path="\$PTH" --allow-root
 wp plugin install groundhogg --activate --activate --path="\$PTH" --allow-root
 wp plugin install tutor --activate --path="\$PTH" --allow-root
 wp language plugin update --all --path="\$PTH" --allow-root
 wp language theme update --all --path="\$PTH" --allow-root
 rm -f /home/nginx/domains/"\$DOMINIO"/public/maintenance.html
 rm -f /home/nginx/domains/"\$DOMINIO"/public/wp-content/advanced-cache.php
+EOF
+
+cat <<EOF >> $MYDOMAIN/.sh/configwp.sh
+DOMINIO=$MYDOMAIN
+ACK="$accesskey"
+SCKK="$secretkey"
+SCK="\$(echo "\$SCKK" | sed 's/\//\\\\\\//g')"
+sed -i "s/\/\* That/define( 'WP_STATELESS_MEDIA_CACHE_BUSTING', 'false' );\ndefine( 'WPOSES_AWS_ACCESS_KEY_ID', '\$ACK' );\ndefine( 'WPOSES_AWS_SECRET_ACCESS_KEY', '\$SCK' );\n\/\* That/g" /home/nginx/domains/\$DOMINIO/public/wp-config.php
 EOF
 
 cat <<EOF >> $MYDOMAIN/.sh/permisos.sh
@@ -605,6 +614,7 @@ find /home/nginx/domains/"\$DOMINIO"/public/. -type d -exec chmod 775 {} +
 chmod 660 /home/nginx/domains/"\$DOMINIO"/public/wp-config.php
 chmod 777 -R /home/nginx/domains/"\$DOMINIO"/public/wp-content/plugins/
 chmod 777 -R /home/nginx/domains/"\$DOMINIO"/public/wp-content/themes/
+chmod 777 -R /home/nginx/domains/"\$DOMINIO"/public/wp-content/languages/
 sh /root/"\$DOMINIO"/restart.sh
 EOF
 
@@ -885,8 +895,8 @@ echo "===========             !  C O N F I G U R A N D O   W O R D P R E S S  ! 
 echo "===========                                                                           ==========="
 echo "================================================================================================="
 sh /root/"\$SUB"/wordpress.sh
+sh /root/"\$SUB"/configwp.sh
 sh /root/"\$SUB"/permisos.sh
-sed -i "s/\/\* That/define( 'WP_STATELESS_MEDIA_CACHE_BUSTING', 'false' );\ndefine( 'WPOSES_AWS_ACCESS_KEY_ID', '\$ACK' );\ndefine( 'WPOSES_AWS_SECRET_ACCESS_KEY', '\$SCK' );\n\/\* That/g" /home/nginx/domains/"\$SUB"/public/wp-config.php
 echo "Creando Copia de Seguridad"
 echo -e "inicio" | sh /root/"\$SUB"/createbak.sh > /dev/null 2>&1
 printf "\033c"
