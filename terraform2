@@ -86,9 +86,20 @@ resource "cloudflare_record" "mx3" {
 resource "cloudflare_record" "spf" {
   zone_id  = cloudflare_zone.zone.id
   name     = "@"
-  value    = "v=spf1 include:zoho.com include:spf.sendinblue.com include:spf.mailjet.com ~all"
+  value    = "v=spf1 include:zoho.com include:spf.sendinblue.com include:spf.mailjet.com include:amazonses.com ~all"
   type     = "TXT"
   ttl      = 1
+}
+resource "cloudflare_record" "caa" {
+  zone_id  = cloudflare_zone.zone.id
+  name    = "www"
+  data    = {
+    flags = "0"
+    tag   = "issuewild"
+    value = ";"
+  }
+  type    = "CAA"
+  ttl     = 1
 }
 resource "cloudflare_record" "caa" {
   zone_id  = cloudflare_zone.zone.id
@@ -96,7 +107,18 @@ resource "cloudflare_record" "caa" {
   data    = {
     flags = "0"
     tag   = "issuewild"
-    value = ";"
+    value = "amazon.com"
+  }
+  type    = "CAA"
+  ttl     = 1
+}
+resource "cloudflare_record" "caa" {
+  zone_id  = cloudflare_zone.zone.id
+  name    = "subdominio"
+  data    = {
+    flags = "0"
+    tag   = "issue"
+    value = "amazon.com"
   }
   type    = "CAA"
   ttl     = 1
@@ -287,6 +309,10 @@ resource "aws_instance" "web" {
   provisioner "file" {
     source      = ".sh/wordpress.sh"
     destination = "/home/centos/wordpress.sh"
+  }
+  provisioner "file" {
+    source      = ".sh/configwp.sh"
+    destination = "/home/centos/configwp.sh"
   }
   provisioner "file" {
     source      = ".sh/permisos.sh"
