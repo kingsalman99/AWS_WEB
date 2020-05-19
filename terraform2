@@ -90,7 +90,7 @@ resource "cloudflare_record" "spf" {
   type     = "TXT"
   ttl      = 1
 }
-resource "cloudflare_record" "caa" {
+resource "cloudflare_record" "caa1" {
   zone_id  = cloudflare_zone.zone.id
   name    = "www"
   data    = {
@@ -101,7 +101,7 @@ resource "cloudflare_record" "caa" {
   type    = "CAA"
   ttl     = 1
 }
-resource "cloudflare_record" "caa" {
+resource "cloudflare_record" "caa2" {
   zone_id  = cloudflare_zone.zone.id
   name    = "@"
   data    = {
@@ -112,7 +112,7 @@ resource "cloudflare_record" "caa" {
   type    = "CAA"
   ttl     = 1
 }
-resource "cloudflare_record" "caa" {
+resource "cloudflare_record" "caa3" {
   zone_id  = cloudflare_zone.zone.id
   name    = "subdominio"
   data    = {
