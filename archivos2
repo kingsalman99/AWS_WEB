@@ -11,7 +11,7 @@ EOF
 else
     continue
 fi
-if [ ! -f .ingress/$MYSERVER.pem ]
+if [ ! -f .ingress/"$MYSERVER".pem ]
 then
   openssl genrsa -out .ingress/$MYSERVER.pem 2048
   ssh-keygen -y -f .ingress/$MYSERVER.pem > .ingress/$MYSERVER.pub
