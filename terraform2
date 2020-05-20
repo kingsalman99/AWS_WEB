@@ -486,7 +486,7 @@ resource "aws_db_instance" "rdb-db" {
   multi_az                  = false
   skip_final_snapshot       = true
   backup_retention_period   = 35
-  parameter_group_name      = "default.mysql5.7"
+#  parameter_group_name      = "default.mysql5.7"
   availability_zone         = "\${var.aws_region}a"
   apply_immediately         = "true"
 }
@@ -522,12 +522,12 @@ variable "storage" {
   description = "Storage size in GB"
 }
 variable "engine" {
-  default     = "mysql"
+  default     = "mariadb"
   description = "Engine type, example values mysql, postgres"
 }
 variable "engine_version" {
   description = "Engine version"
-  default = "5.7.26"
+  default = "10.4.8"
   }
 variable "instance_class" {
   default     = "db.t2.micro"
