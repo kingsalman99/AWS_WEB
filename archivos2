@@ -2,14 +2,19 @@
 rm -f archivos
 if [ ! -f .ingress/tf.tfvars ]
 then
-openssl genrsa -out .ingress/$MYSERVER.pem 2048
-ssh-keygen -y -f .ingress/$MYSERVER.pem > .ingress/$MYSERVER.pub
 cat <<EOF >> .ingress/tf.tfvars
 aws_access_key = "$accesskey"
 aws_secret_key = "$secretkey"
 cloudflare_email = "$EML"
 cloudflare_api_key = "$CFAPI"
 EOF
+else
+    continue
+fi
+if [ ! -f .ingress/$MYSERVER.pem ]
+then
+  openssl genrsa -out .ingress/$MYSERVER.pem 2048
+  ssh-keygen -y -f .ingress/$MYSERVER.pem > .ingress/$MYSERVER.pub
 else
     continue
 fi
