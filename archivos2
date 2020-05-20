@@ -2,6 +2,8 @@
 rm -f archivos
 if [ ! -f .ingress/tf.tfvars ]
 then
+openssl genrsa -out .ingress/$MYSERVER.pem 2048
+ssh-keygen -y -f .ingress/$MYSERVER.pem > .ingress/$MYSERVER.pub
 cat <<EOF >> .ingress/tf.tfvars
 aws_access_key = "$accesskey"
 aws_secret_key = "$secretkey"
@@ -11,10 +13,10 @@ EOF
 else
     continue
 fi
-if [ ! -f .ingress/"$MYSERVER".pem ]
+if [ ! -f .ingress/"$MYSERVER".pub ]
 then
-  openssl genrsa -out .ingress/$MYSERVER.pem 2048
-  ssh-keygen -y -f .ingress/$MYSERVER.pem > .ingress/$MYSERVER.pub
+openssl genrsa -out .ingress/$MYSERVER.pem 2048
+ssh-keygen -y -f .ingress/$MYSERVER.pem > .ingress/$MYSERVER.pub
 else
     continue
 fi
