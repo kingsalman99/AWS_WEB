@@ -568,9 +568,6 @@ wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/thrive-u
 wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/thrive-headline-optimizer.zip --activate --path="\$PTH" --allow-root
 wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/updraftplus-premium.zip --activate --path="\$PTH" --allow-root
 wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/wp-fusion.zip --activate --path="\$PTH" --allow-root
-wp plugin install https://github.com/epayco/Plugin_ePayco_WooCommerce/releases/download/V4.0.x/Plugin_ePayco_WooCommerce_4.0.x.zip --activate --path="\$PTH" --allow-root
-wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/google-ads-for-woocommerce.zip --activate --path="\$PTH" --allow-root
-wp plugin install https://github.com/vlipco/woocommerce-wompi-plugin/releases/download/0.1.0/Wompi_WooCommerce_Plugin_0.1.0.zip --activate --path="\$PTH" --allow-root
 wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/cartflows-pro.zip --path="\$PTH" --allow-root
 wp plugin install cartflows --path="\$PTH" --allow-root
 wp plugin install jetpack --path="\$PTH" --allow-root
@@ -591,8 +588,12 @@ wp plugin install creame-whatsapp-me --activate --path="\$PTH" --allow-root
 wp plugin install woocommerce --activate --path="\$PTH" --allow-root
 wp plugin install departamentos-y-ciudades-de-colombia-para-woocommerce --activate --path="\$PTH" --allow-root
 wp plugin install facebook-for-woocommerce --activate --path="\$PTH" --allow-root
+wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/google-ads-for-woocommerce.zip --activate --path="\$PTH" --allow-root
+wp plugin install https://github.com/epayco/Plugin_ePayco_WooCommerce/releases/download/V4.0.x/Plugin_ePayco_WooCommerce_4.0.x.zip --activate --path="\$PTH" --allow-root
+wp plugin install https://github.com/vlipco/woocommerce-wompi-plugin/releases/download/0.1.0/Wompi_WooCommerce_Plugin_0.1.0.zip --activate --path="\$PTH" --allow-root
 wp plugin install groundhogg --activate --activate --path="\$PTH" --allow-root
 wp plugin install tutor --activate --path="\$PTH" --allow-root
+wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/tutor-pro.zip --path="\$PTH" --allow-root
 wp language plugin update --all --path="\$PTH" --allow-root
 wp language theme update --all --path="\$PTH" --allow-root
 rm -f /home/nginx/domains/"\$DOMINIO"/public/maintenance.html
