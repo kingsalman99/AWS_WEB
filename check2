@@ -29,11 +29,11 @@ then
     echo -n "   ¿ Que Deseas Hacer ?              "
     echo ""
     echo ""
-    echo -n " -  Escribe 'continuar' para desplegar un nuevo servidor con estas Credenciales...                      "
+    echo -n " -  Escribe 'seguir' para desplegar un nuevo servidor con estas Credenciales...                      "
     echo ""
     echo -n " -  Escribe 'cambiar' para crear unas credenciales nuevas...                   "
     echo ""
-    echo -n " -  Escribe 'salir' para cancelar esta operación  [ salir / cambiar / continuar ]: "
+    echo -n " -  Escribe 'salir' para cancelar esta operación  [ salir / cambiar / seguir ]: "
     read INPUT
     if [ $INPUT = "cambiar" -o $INPUT = "Cambiar" -o $INPUT = "CAMBIAR" ]
     then
