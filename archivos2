@@ -33,7 +33,7 @@ echo "**************************************************************************
 echo "***********                                                                           ***********"
 echo "***********                         CONSTRUCTOR WEB 'VIM-v2.0'                        ***********"
 echo "***********                                                                           ***********"
-echo "***********                    https://ventasimpactantes.com/script                   ***********"
+echo "***********                       https://academiavim.com/script                      ***********"
 echo "***********                                                                           ***********"
 echo "===========                                                                           ==========="
 echo "===========                           !  A T E N C I Ó N  !                           ==========="
@@ -181,9 +181,9 @@ fi
 printf "\033c"
 echo "*************************************************************************************************"
 echo "***********                                                                           ***********"
-echo "***********             SERVIDOR CREADO CON EL CONSTRUCTOR WEB 'VIM-v2.0'             ***********"
+echo "***********              SERVIDOR CREADO CON EL CONSTRUCTOR WEB 'VIM-v2.0'            ***********"
 echo "***********                                                                           ***********"
-echo "***********                    https://ventasimpactantes.com/script                   ***********"
+echo "***********                       https://academiavim.com/script                      ***********"
 echo "***********                                                                           ***********"
 echo "===========                                                                           ==========="
 echo "===========                          !  R E V I S E M O S  !                          ==========="
@@ -209,9 +209,9 @@ then
   printf "\033c"
   echo "*************************************************************************************************"
   echo "***********                                                                           ***********"
-  echo "***********             SERVIDOR CREADO CON EL CONSTRUCTOR WEB 'VIM-v2.0'             ***********"
+  echo "***********              SERVIDOR CREADO CON EL CONSTRUCTOR WEB 'VIM-v2.0'            ***********"
   echo "***********                                                                           ***********"
-  echo "***********                    https://ventasimpactantes.com/script                   ***********"
+  echo "***********                       https://academiavim.com/script                      ***********"
   echo "***********                                                                           ***********"
   echo "===========                                                                           ==========="
   echo "===========                          !  C A N C E L A D O  !                          ==========="
@@ -360,12 +360,12 @@ then
   printf "\033c"
   echo "*************************************************************************************************"
   echo "***********                                                                           ***********"
-  echo "***********             SERVIDOR CREADO CON EL CONSTRUCTOR WEB 'VIM-v2.0'             ***********"
+  echo "***********              SERVIDOR CREADO CON EL CONSTRUCTOR WEB 'VIM-v2.0'            ***********"
   echo "***********                                                                           ***********"
-  echo "***********                    https://ventasimpactantes.com/script                   ***********"
+  echo "***********                       https://academiavim.com/script                      ***********"
   echo "***********                                                                           ***********"
   echo "===========                                                                           ==========="
-  echo "===========       !  W O R D P R E S S   Y A   E S T A   I N S T A L A D O  !         ==========="
+  echo "===========        !  W O R D P R E S S   Y A   E S T A   I N S T A L A D O  !        ==========="
   echo "===========                                                                           ==========="
   echo "================================================================================================="
   echo "***********                                                                           ***********"
@@ -387,10 +387,10 @@ echo "**************************************************************************
 echo "***********                                                                           ***********"
 echo "***********             SERVIDOR CREADO CON EL CONSTRUCTOR WEB 'VIM-v2.0'             ***********"
 echo "***********                                                                           ***********"
-echo "***********                   https://ventasimpactantes.com/script                    ***********"
+echo "***********                      https://academiavim.com/script                       ***********"
 echo "***********                                                                           ***********"
 echo "===========                                                                           ==========="
-echo "===========           !  C O N F I G U R A N D O   A M A Z O N   R D S  !             ==========="
+echo "===========            !  C O N F I G U R A N D O   A M A Z O N   R D S  !            ==========="
 echo "===========                                                                           ==========="
 echo "================================================================================================="
 if [ ! -d .aws ]
@@ -404,7 +404,7 @@ echo "**************************************************************************
 echo "***********                                                                           ***********"
 echo "***********             SERVIDOR CREADO CON EL CONSTRUCTOR WEB 'VIM-v2.0'             ***********"
 echo "***********                                                                           ***********"
-echo "***********                   https://ventasimpactantes.com/script                    ***********"
+echo "***********                      https://academiavim.com/script                       ***********"
 echo "***********                                                                           ***********"
 echo "===========                                                                           ==========="
 echo "===========      !  I N I C I A N D O    C R E A C I Ó N    W O R D P R E S S  !      ==========="
@@ -419,7 +419,7 @@ echo "**************************************************************************
 echo "***********                                                                           ***********"
 echo "***********             SERVIDOR CREADO CON EL CONSTRUCTOR WEB 'VIM-v2.0'             ***********"
 echo "***********                                                                           ***********"
-echo "***********                   https://ventasimpactantes.com/script                    ***********"
+echo "***********                      https://academiavim.com/script                       ***********"
 echo "***********                                                                           ***********"
 echo "===========                                                                           ==========="
 echo "===========             !  C O N F I G U R A N D O   W O R D P R E S S  !             ==========="
@@ -573,6 +573,9 @@ wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/thrive-l
 wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/thrive-optimize.zip --activate --path="\$PTH" --allow-root
 wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/thrive-ultimatum.zip --activate --path="\$PTH" --allow-root
 wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/thrive-headline-optimizer.zip --activate --path="\$PTH" --allow-root
+wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/thrive-ovation.zip --activate --path="\$PTH" --allow-root
+wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/thrive-quiz-builder.zip --activate --path="\$PTH" --allow-root
+wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/thrive-headline-optimizer.zip --activate --path="\$PTH" --allow-root
 wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/updraftplus-premium.zip --activate --path="\$PTH" --allow-root
 wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/wp-fusion.zip --activate --path="\$PTH" --allow-root
 wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/cartflows-pro.zip --path="\$PTH" --allow-root
@@ -600,7 +603,7 @@ wp plugin install https://github.com/epayco/Plugin_ePayco_WooCommerce/releases/d
 wp plugin install https://github.com/vlipco/woocommerce-wompi-plugin/releases/download/0.1.0/Wompi_WooCommerce_Plugin_0.1.0.zip --activate --path="\$PTH" --allow-root
 wp plugin install groundhogg --activate --activate --path="\$PTH" --allow-root
 wp plugin install tutor --activate --path="\$PTH" --allow-root
-wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/tutor-pro.zip --path="\$PTH" --allow-root
+wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/tutor-pro.zip --activate --path="\$PTH" --allow-root
 wp language plugin update --all --path="\$PTH" --allow-root
 wp language theme update --all --path="\$PTH" --allow-root
 rm -f /home/nginx/domains/"\$DOMINIO"/public/maintenance.html
@@ -685,7 +688,7 @@ echo "**************************************************************************
 echo "***********                                                                           ***********"
 echo "***********             SERVIDOR CREADO CON EL CONSTRUCTOR WEB 'VIM-v2.0'             ***********"
 echo "***********                                                                           ***********"
-echo "***********                   https://ventasimpactantes.com/script                    ***********"
+echo "***********                      https://academiavim.com/script                       ***********"
 echo "***********                                                                           ***********"
 echo "===========                                                                           ==========="
 echo "===========                           !  A T E N C I Ó N  !                           ==========="
