@@ -425,7 +425,7 @@ cat <<EOF >> $MYDOMAIN/s3.tf
 resource "aws_s3_bucket" "s3-bak" {
   bucket = "s3-bak-\${var.server}"
   acl    = "private"
-  #acceleration_status = "Disabled"
+  acceleration_status = "Suspended"
   force_destroy = true
   tags = {
     Name        = "My bucket Bak"
