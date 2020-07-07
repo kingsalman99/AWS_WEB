@@ -425,11 +425,28 @@ cat <<EOF >> $MYDOMAIN/s3.tf
 resource "aws_s3_bucket" "s3-bak" {
   bucket = "s3-bak-\${var.server}"
   acl    = "private"
-  acceleration_status = "Suspended"
+  acceleration_status = "Enabled"
   force_destroy = true
   tags = {
     Name        = "My bucket Bak"
     Environment = "Dev"
+  }
+}
+#BUCKET S3 IMG
+resource "aws_s3_bucket" "s3-img" {
+  bucket = "s3-img-\${var.server}"
+  acl    = "private"
+  acceleration_status = "Suspended"
+  force_destroy = true
+  tags = {
+    Name        = "My bucket img"
+    Environment = "Dev"
+  }
+  cors_rule {
+    allowed_headers = ["*"]
+    allowed_methods = ["GET", "PUT", "POST", "HEAD"]
+    allowed_origins = ["*"]
+    max_age_seconds = 3000
   }
 }
 # IAM group
@@ -437,6 +454,7 @@ resource "aws_iam_group_membership" "gp-dominio" {
   name = "grupo-\${var.server}"
   users = [
     aws_iam_user.user-s3-bak.name,
+    aws_iam_user.user-s3-img.name,
   ]
   group = aws_iam_group.gp-dominio.name
 }
@@ -465,6 +483,52 @@ resource "aws_iam_user_policy" "policys3-bak" {
   ]
 }
 	EOF
+}
+# IAM Users Bucket IMG
+resource "aws_iam_user" "user-s3-img" {
+  name = "user-s3-img-\${var.server}"
+}
+resource "aws_iam_access_key" "key-s3-img" {
+  user = aws_iam_user.user-s3-img.name
+}
+resource "aws_iam_user_policy" "policys3-img" {
+  name = "policys3-img"
+  user = aws_iam_user.user-s3-img.name
+  policy = <<EOF
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:DeleteObjectTagging",
+                "s3:ListBucketMultipartUploads",
+                "s3:DeleteObjectVersion",
+                "s3:ListBucket",
+                "s3:DeleteObjectVersionTagging",
+                "s3:GetBucketAcl",
+                "s3:ListMultipartUploadParts",
+                "s3:PutObject",
+                "s3:GetObjectAcl",
+                "s3:GetObject",
+                "s3:AbortMultipartUpload",
+                "s3:DeleteObject",
+                "s3:GetBucketLocation",
+                "s3:PutObjectAcl"
+            ],
+            "Resource": [
+                "arn:aws:s3:::s3-img-$MYSERVER/*",
+                "arn:aws:s3:::s3-img-$MYSERVER"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": "s3:HeadBucket",
+            "Resource": "*"
+        }
+    ]
+}
+    EOF  
 }
 EOF
 
@@ -558,7 +622,7 @@ cat <<EOF >> $MYDOMAIN/outputs.tf
 output "A_IP-del-Servidor" {
   value = "\${aws_eip.A_IP-del-Servidor.public_ip}"
 }
-output "B_Clave-de-Acceso-S3" {
+output "B_Clave-de-Acceso-s3-bak" {
   description = "The access key ID"
   value = element(
     concat(
@@ -569,15 +633,34 @@ output "B_Clave-de-Acceso-S3" {
     0,
   )
 }
-output "C_Clave-Secreta-de-S3" {
+output "C_Clave-Secreta-de-s3-bak" {
   description = "The access key secret"
   value       = element(concat(aws_iam_access_key.key-s3-bak.*.secret, [""]), 0)
 }
-output "D_Nombre_Ubicación_de_s3" {
+output "D_Nombre_Ubicación_de_s3-bak" {
   description = "The name bucket"
   value       = "\${aws_s3_bucket.s3-bak.bucket}"
 }
-output "E_Nombres-de-Servidores" {
+output "E_Clave-de-Acceso-s3-img" {
+  description = "The access key ID"
+  value = element(
+    concat(
+      aws_iam_access_key.key-s3-bak.*.id,
+      aws_iam_access_key.key-s3-bak.*.id,
+      [""],
+    ),
+    0,
+  )
+}
+output "F_Clave-Secreta-de-s3-img" {
+  description = "The access key secret"
+  value       = element(concat(aws_iam_access_key.key-s3-bak.*.secret, [""]), 0)
+}
+output "G_Nombre_Ubicación_de_s3-img" {
+  description = "The name bucket"
+  value       = "\${aws_s3_bucket.s3-bak.bucket}"
+}
+output "H_Nombres-de-Servidores" {
   value = "\${cloudflare_zone.zone.name_servers}"
 }
 output "zone" {
