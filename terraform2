@@ -641,32 +641,32 @@ output "D_Nombre_Ubicación_de_s3-bak" {
   description = "The name bucket"
   value       = "\${aws_s3_bucket.s3-bak.bucket}"
 }
-output "E_Clave-de-Acceso-s3-img" {
-  description = "The access key ID"
-  value = element(
-    concat(
-      aws_iam_access_key.key-s3-bak.*.id,
-      aws_iam_access_key.key-s3-bak.*.id,
-      [""],
-    ),
-    0,
-  )
-}
-output "F_Clave-Secreta-de-s3-img" {
-  description = "The access key secret"
-  value       = element(concat(aws_iam_access_key.key-s3-bak.*.secret, [""]), 0)
-}
-output "G_Nombre_Ubicación_de_s3-img" {
-  description = "The name bucket"
-  value       = "\${aws_s3_bucket.s3-bak.bucket}"
-}
-output "H_Nombres-de-Servidores" {
+output "E_Nombres-de-Servidores" {
   value = "\${cloudflare_zone.zone.name_servers}"
 }
 output "zone" {
   value = "\${cloudflare_zone.zone.id}"
 }
-#output "E_Host-Base-de-Datos-RDS"{
+output "F_Clave-de-Acceso-s3-img" {
+  description = "The access key ID"
+  value = element(
+    concat(
+      aws_iam_access_key.key-s3-img.*.id,
+      aws_iam_access_key.key-s3-img.*.id,
+      [""],
+    ),
+    0,
+  )
+}
+output "G_Clave-Secreta-de-s3-img" {
+  description = "The access key secret"
+  value       = element(concat(aws_iam_access_key.key-s3-img.*.secret, [""]), 0)
+}
+output "H_Nombre_Ubicación_de_s3-img" {
+  description = "The name bucket"
+  value       = "\${aws_s3_bucket.s3-img.bucket}"
+}
+#output "I_Host-Base-de-Datos-RDS"{
 #  value = "\${aws_db_instance.rdb-db.address}"
 #}
 EOF
