@@ -574,6 +574,8 @@ wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/updraftp
 wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/wp-fusion.zip --activate --path="\$PTH" --allow-root
 wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/cartflows.zip --path="\$PTH" --allow-root
 wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/cartflows-pro.zip --path="\$PTH" --allow-root
+wp plugin install contact-form-7 --activate --path="\$PTH" --allow-root
+wp plugin install wpcf7-redirect --activate --path="\$PTH" --allow-root
 wp plugin install adapta-rgpd --activate --path="\$PTH" --allow-root
 wp plugin install search-engine-insights --activate --path="\$PTH" --allow-root
 wp plugin install seo-by-rank-math --activate --path="\$PTH" --allow-root
