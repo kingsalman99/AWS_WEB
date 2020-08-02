@@ -647,25 +647,25 @@ output "E_Nombres-de-Servidores" {
 output "zone" {
   value = "\${cloudflare_zone.zone.id}"
 }
-output "F_Clave-de-Acceso-s3-img" {
-  description = "The access key ID"
-  value = element(
-    concat(
-      aws_iam_access_key.key-s3-img.*.id,
-      aws_iam_access_key.key-s3-img.*.id,
-      [""],
-    ),
-    0,
-  )
-}
-output "G_Clave-Secreta-de-s3-img" {
-  description = "The access key secret"
-  value       = element(concat(aws_iam_access_key.key-s3-img.*.secret, [""]), 0)
-}
-output "H_Nombre_Ubicación_de_s3-img" {
-  description = "The name bucket"
-  value       = "\${aws_s3_bucket.s3-img.bucket}"
-}
+#output "F_Clave-de-Acceso-s3-img" {
+#  description = "The access key ID"
+#  value = element(
+#    concat(
+#      aws_iam_access_key.key-s3-img.*.id,
+#      aws_iam_access_key.key-s3-img.*.id,
+#      [""],
+#    ),
+#    0,
+#  )
+#}
+#output "G_Clave-Secreta-de-s3-img" {
+#  description = "The access key secret"
+#  value       = element(concat(aws_iam_access_key.key-s3-img.*.secret, [""]), 0)
+#}
+#output "H_Nombre_Ubicación_de_s3-img" {
+#  description = "The name bucket"
+#  value       = "\${aws_s3_bucket.s3-img.bucket}"
+#}
 #output "I_Host-Base-de-Datos-RDS"{
 #  value = "\${aws_db_instance.rdb-db.address}"
 #}
@@ -675,7 +675,7 @@ rm -f terraform.sh
 printf "\033c"
 echo "*************************************************************************************************"
 echo "***********                                                                           ***********"
-echo "***********                         CONSTRUCTOR WEB 'VIM-v2.0'                        ***********"
+echo "***********                      CONSTRUCTOR WEB 'Script-VIM-v2.0'                    ***********"
 echo "***********                                                                           ***********"
 echo "***********                              ! G E N I A L !                              ***********"
 echo "***********                                                                           ***********"
@@ -687,7 +687,7 @@ terraform init
 printf "\033c"
 echo "*************************************************************************************************"
 echo "***********                                                                           ***********"
-echo "***********                         CONSTRUCTOR WEB 'VIM-v2.0'                        ***********"
+echo "***********                      CONSTRUCTOR WEB 'Script-VIM-v2.0'                    ***********"
 echo "***********                                                                           ***********"
 echo "***********                              ! G E N I A L !                              ***********"
 echo "***********                                                                           ***********"
