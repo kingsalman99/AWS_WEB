@@ -31,7 +31,7 @@ cat <<EOF >> destruir
 printf "\033c"
 echo "*************************************************************************************************"
 echo "***********                                                                           ***********"
-echo "***********                         CONSTRUCTOR WEB 'VIM-v2.0'                        ***********"
+echo "***********                      CONSTRUCTOR WEB 'Script-VIM_v2.0'                    ***********"
 echo "***********                                                                           ***********"
 echo "***********                       https://academiavim.com/script                      ***********"
 echo "***********                                                                           ***********"
@@ -122,7 +122,7 @@ else
   printf "\033c"
   echo "*************************************************************************************************"
   echo "***********                                                                           ***********"
-  echo "***********             SERVIDOR CREADO CON EL CONSTRUCTOR WEB 'VIM-v2.0'             ***********"
+  echo "***********                  SERVIDOR CREADO CON 'Script-VIM_v2.0'                    ***********"
   echo "***********                                                                           ***********"
   echo "***********                         !  A T E N C I Ó N  !                             ***********"
   echo "***********                                                                           ***********"
@@ -153,7 +153,7 @@ cat <<EOF >> $MYDOMAIN/.sh/varwp.sh
 printf "\033c"
 echo "*************************************************************************************************"
 echo "***********                                                                           ***********"
-echo "***********             SERVIDOR CREADO CON EL CONSTRUCTOR WEB 'VIM-v2.0'             ***********"
+echo "***********                   SERVIDOR CREADO CON 'Script-VIM_v2.0'                   ***********"
 echo "***********                                                                           ***********"
 echo "***********                         !  B I E N V E N I D O  !                         ***********"
 echo "***********                                                                           ***********"
@@ -181,7 +181,7 @@ fi
 printf "\033c"
 echo "*************************************************************************************************"
 echo "***********                                                                           ***********"
-echo "***********              SERVIDOR CREADO CON EL CONSTRUCTOR WEB 'VIM-v2.0'            ***********"
+echo "***********                    SERVIDOR CREADO CON 'Script-VIM_v2.0'                  ***********"
 echo "***********                                                                           ***********"
 echo "***********                       https://academiavim.com/script                      ***********"
 echo "***********                                                                           ***********"
@@ -209,7 +209,7 @@ then
   printf "\033c"
   echo "*************************************************************************************************"
   echo "***********                                                                           ***********"
-  echo "***********              SERVIDOR CREADO CON EL CONSTRUCTOR WEB 'VIM-v2.0'            ***********"
+  echo "***********                    SERVIDOR CREADO CON 'Script-VIM_v2.0'                  ***********"
   echo "***********                                                                           ***********"
   echo "***********                       https://academiavim.com/script                      ***********"
   echo "***********                                                                           ***********"
@@ -244,7 +244,7 @@ echo \$IP \$SERVIDOR hostname >> /etc/hosts
 printf "\033c"
 echo "*************************************************************************************************"
 echo "***********                                                                           ***********"
-echo "***********             SERVIDOR CREADO CON EL CONSTRUCTOR WEB 'VIM-v2.0'             ***********"
+echo "***********                  SERVIDOR CREADO CON 'Script-VIM_v2.0'                    ***********"
 echo "***********                                                                           ***********"
 echo "===========                                                                           ==========="
 echo "===========     C O N F I G U R A C I Ó N   I N I C I A L   D E   S E R V I D O R     ==========="
@@ -360,7 +360,7 @@ then
   printf "\033c"
   echo "*************************************************************************************************"
   echo "***********                                                                           ***********"
-  echo "***********              SERVIDOR CREADO CON EL CONSTRUCTOR WEB 'VIM-v2.0'            ***********"
+  echo "***********                    SERVIDOR CREADO CON 'Script-VIM_v2.0'                  ***********"
   echo "***********                                                                           ***********"
   echo "***********                       https://academiavim.com/script                      ***********"
   echo "***********                                                                           ***********"
@@ -385,7 +385,7 @@ EMAIL='admin@$MYDOMAIN'
 printf "\033c"
 echo "*************************************************************************************************"
 echo "***********                                                                           ***********"
-echo "***********             SERVIDOR CREADO CON EL CONSTRUCTOR WEB 'VIM-v2.0'             ***********"
+echo "***********                   SERVIDOR CREADO CON 'Script-VIM_v2.0'                   ***********"
 echo "***********                                                                           ***********"
 echo "***********                      https://academiavim.com/script                       ***********"
 echo "***********                                                                           ***********"
@@ -402,7 +402,7 @@ fi
 printf "\033c"
 echo "*************************************************************************************************"
 echo "***********                                                                           ***********"
-echo "***********             SERVIDOR CREADO CON EL CONSTRUCTOR WEB 'VIM-v2.0'             ***********"
+echo "***********                   SERVIDOR CREADO CON 'Script-VIM_v2.0'                   ***********"
 echo "***********                                                                           ***********"
 echo "***********                      https://academiavim.com/script                       ***********"
 echo "***********                                                                           ***********"
@@ -410,14 +410,14 @@ echo "===========                                                               
 echo "===========      !  I N I C I A N D O    C R E A C I Ó N    W O R D P R E S S  !      ==========="
 echo "===========                                                                           ==========="
 echo "================================================================================================="
-echo -e "22\ny\n\$DOMINIO\ny\ny\n4\n\n\n\n\nn\nn\ny\ny\n\$WPUSER\n\$WPPASS\n\$EMAIL\n1\nn\ny\n24\ny\n24" | centmin
+echo -e "22\ny\n\$DOMINIO\ny\ny\n4\n\n\n\n\nn\nn\ny\ny\n\$WPUSER\n\$WPPASS\n\$EMAIL\n1\nn\ny\n24" | centmin
 sh /root/"\$DOMINIO"/ssllabs.sh
 sh /root/"\$DOMINIO"/bk-local.sh
 sh /root/"\$DOMINIO"/rds.sh
 printf "\033c"
 echo "*************************************************************************************************"
 echo "***********                                                                           ***********"
-echo "***********             SERVIDOR CREADO CON EL CONSTRUCTOR WEB 'VIM-v2.0'             ***********"
+echo "***********                   SERVIDOR CREADO CON 'Script-VIM_v2.0'                   ***********"
 echo "***********                                                                           ***********"
 echo "***********                      https://academiavim.com/script                       ***********"
 echo "***********                                                                           ***********"
@@ -435,7 +435,7 @@ mv /root/"\$DOMINIO"/sub.sh /root/sub
 printf "\033c"
 echo "*************************************************************************************************"
 echo "***********                                                                           ***********"
-echo "***********             SERVIDOR CREADO CON EL CONSTRUCTOR WEB 'VIM-v2.0'             ***********"
+echo "***********                   SERVIDOR CREADO CON 'Script-VIM_v2.0'                   ***********"
 echo "***********                                                                           ***********"
 echo "***********                             ¡ G E N I A L !                               ***********"
 echo "***********                                                                           ***********"
@@ -461,12 +461,11 @@ cat <<EOF >> $MYDOMAIN/.sh/aws-config.sh
 DOMINIO=$MYDOMAIN
 accesskey="$accesskey"
 secretkey="$secretkey"
-yum install python36 -y
-echo -e "y" | pip3 uninstall awscli
-pip3 install awscli --upgrade --user
-export PATH=~/.local/bin:\$PATH
-PATH=~/.local/bin:\$PATH
-sudo chmod 755 /root/.local/bin/aws
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
+rm -f awscliv2.zip
+rm -r -f aws
 sudo echo -e "\$accesskey\n\$secretkey\nus-east-1\njson\n" | aws configure
 RDSHOSTS=\`aws rds describe-db-instances | sed -n '/Address/p' | sed 's/Address//g; s/://g; s/,//g; s/\\"//g; s/ //g;'\`
 sed -i "s/RDSHOSTS/\$RDSHOSTS/g" /root/\$DOMINIO/*.sh
@@ -549,6 +548,8 @@ wp option update date_format 'd/m/Y' --path="\$PTH" --allow-root
 wp option update users_can_register 1 --path="\$PTH" --allow-root
 wp post delete 1 --path="\$PTH" --allow-root
 wp theme install astra --activate --path="\$PTH" --allow-root
+wp plugin install astra-sites --activate --path="\$PTH" --allow-root
+wp theme install neve --path="\$PTH" --allow-root
 wp theme delete twentytwenty --path="\$PTH" --allow-root
 wp theme delete twentyseventeen --path="\$PTH" --allow-root
 wp theme delete twentynineteen --path="\$PTH" --allow-root
@@ -561,26 +562,18 @@ wp plugin deactivate cdn-enabler --path="\$PTH" --allow-root
 wp plugin uninstall cdn-enabler --path="\$PTH" --allow-root
 wp plugin deactivate sucuri-scanner --path="\$PTH" --allow-root
 wp plugin uninstall sucuri-scanner --path="\$PTH" --allow-root
-wp plugin activate akismet --path="\$PTH" --allow-root
-wp plugin install elementor --activate --path="\$PTH" --allow-root
+wp plugin uninstall akismet --path="\$PTH" --allow-root
+wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/elementor-free.zip --activate --path="\$PTH" --allow-root
 wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/elementor-pro.zip --activate --path="\$PTH" --allow-root
 wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/astra-pro-addon.zip --activate --path="\$PTH" --allow-root
-wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/astra-pro-sites.zip --activate --path="\$PTH" --allow-root
+wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/neve-pro-addon.zip --activate --path="\$PTH" --allow-root
 wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/ultimate-elementor.zip --activate --path="\$PTH" --allow-root
+wp plugin install envato-elements --activate --path="\$PTH" --allow-root
 wp plugin install essential-addons-for-elementor-lite --activate --path="\$PTH" --allow-root
-wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/thrive-architect.zip --activate --path="\$PTH" --allow-root
-wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/thrive-leads.zip --activate --path="\$PTH" --allow-root
-wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/thrive-optimize.zip --activate --path="\$PTH" --allow-root
-wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/thrive-ultimatum.zip --activate --path="\$PTH" --allow-root
-wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/thrive-headline-optimizer.zip --activate --path="\$PTH" --allow-root
-wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/thrive-ovation.zip --activate --path="\$PTH" --allow-root
-wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/thrive-quiz-builder.zip --activate --path="\$PTH" --allow-root
-wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/thrive-headline-optimizer.zip --activate --path="\$PTH" --allow-root
 wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/updraftplus-premium.zip --activate --path="\$PTH" --allow-root
 wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/wp-fusion.zip --activate --path="\$PTH" --allow-root
+wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/cartflows.zip --path="\$PTH" --allow-root
 wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/cartflows-pro.zip --path="\$PTH" --allow-root
-wp plugin install cartflows --path="\$PTH" --allow-root
-wp plugin install jetpack --path="\$PTH" --allow-root
 wp plugin install adapta-rgpd --activate --path="\$PTH" --allow-root
 wp plugin install search-engine-insights --activate --path="\$PTH" --allow-root
 wp plugin install seo-by-rank-math --activate --path="\$PTH" --allow-root
@@ -591,19 +584,14 @@ wp plugin install post-smtp --activate --path="\$PTH" --allow-root
 wp plugin install duracelltomi-google-tag-manager --activate --activate --path="\$PTH" --allow-root
 wp plugin install hummingbird-performance --activate --path="\$PTH" --allow-root
 wp plugin install defender-security --activate --path="\$PTH" --allow-root
-wp plugin install wp-smushit --activate --path="\$PTH" --allow-root
-wp plugin install wp-stateless --activate --path="\$PTH" --allow-root
+wp plugin install amazon-s3-and-cloudfront --activate --path="\$PTH" --allow-root
 wp plugin install commonwp --activate --path="\$PTH" --allow-root
 wp plugin install creame-whatsapp-me --activate --path="\$PTH" --allow-root
-wp plugin install woocommerce --activate --path="\$PTH" --allow-root
 wp plugin install departamentos-y-ciudades-de-colombia-para-woocommerce --activate --path="\$PTH" --allow-root
-wp plugin install facebook-for-woocommerce --activate --path="\$PTH" --allow-root
 wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/google-ads-for-woocommerce.zip --activate --path="\$PTH" --allow-root
 wp plugin install https://github.com/epayco/Plugin_ePayco_WooCommerce/releases/download/V4.0.x/Plugin_ePayco_WooCommerce_4.0.x.zip --activate --path="\$PTH" --allow-root
 wp plugin install https://github.com/vlipco/woocommerce-wompi-plugin/releases/download/0.1.0/Wompi_WooCommerce_Plugin_0.1.0.zip --activate --path="\$PTH" --allow-root
-wp plugin install groundhogg --activate --activate --path="\$PTH" --allow-root
-wp plugin install tutor --activate --path="\$PTH" --allow-root
-wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/tutor-pro.zip --activate --path="\$PTH" --allow-root
+wp plugin install groundhogg --activate --path="\$PTH" --allow-root
 wp language plugin update --all --path="\$PTH" --allow-root
 wp language theme update --all --path="\$PTH" --allow-root
 rm -f /home/nginx/domains/"\$DOMINIO"/public/maintenance.html
@@ -615,7 +603,8 @@ DOMINIO=$MYDOMAIN
 ACK="$accesskey"
 SCKK="$secretkey"
 SCK="\$(echo "\$SCKK" | sed 's/\//\\\\\\//g')"
-sed -i "s/\/\* That/define( 'WP_STATELESS_MEDIA_CACHE_BUSTING', 'false' );\ndefine( 'WPOSES_AWS_ACCESS_KEY_ID', '\$ACK' );\ndefine( 'WPOSES_AWS_SECRET_ACCESS_KEY', '\$SCK' );\n\/\* That/g" /home/nginx/domains/\$DOMINIO/public/wp-config.php
+sed -i "s/\/\* That/define( 'WPOSES_AWS_ACCESS_KEY_ID', '\$ACK' );\ndefine( 'WPOSES_AWS_SECRET_ACCESS_KEY', '\$SCK' );\n\/\* That/g" /home/nginx/domains/\$DOMINIO/public/wp-config.php
+sed -i "s/\/\* That/define( 'AS3CF_SETTINGS', serialize( array(\n    'provider' => 'aws',\n    'access-key-id' => '\$ACK',\n    'secret-access-key' => '\$SCK',\n) ) );\n\/\* That/g" /home/nginx/domains/\$DOMINIO/public/wp-config.php
 EOF
 
 cat <<EOF >> $MYDOMAIN/.sh/permisos.sh
@@ -686,7 +675,7 @@ cat <<EOF >> $MYDOMAIN/.sh/uninstall.sh
 printf "\033c"
 echo "*************************************************************************************************"
 echo "***********                                                                           ***********"
-echo "***********             SERVIDOR CREADO CON EL CONSTRUCTOR WEB 'VIM-v2.0'             ***********"
+echo "***********                   SERVIDOR CREADO CON 'Script-VIM_v2.0'                   ***********"
 echo "***********                                                                           ***********"
 echo "***********                      https://academiavim.com/script                       ***********"
 echo "***********                                                                           ***********"
@@ -721,7 +710,7 @@ cat <<EOF >> $MYDOMAIN/.sh/sub.sh
 printf "\033c"
 echo "*************************************************************************************************"
 echo "***********                                                                           ***********"
-echo "***********             SERVIDOR CREADO CON EL CONSTRUCTOR WEB 'VIM-v2.0'             ***********"
+echo "***********                   SERVIDOR CREADO CON 'Script-VIM_v2.0'                   ***********"
 echo "***********                                                                           ***********"
 echo "***********                          ! B I E N V E N I D O !                          ***********"
 echo "***********                                                                           ***********"
@@ -755,7 +744,7 @@ cat <<EOF >> $MYDOMAIN/.sh/subdom.sh
 printf "\033c"
 echo "*************************************************************************************************"
 echo "***********                                                                           ***********"
-echo "***********             SERVIDOR CREADO CON EL CONSTRUCTOR WEB 'VIM-v2.0'             ***********"
+echo "***********                   SERVIDOR CREADO CON 'Script-VIM_v2.0'                   ***********"
 echo "***********                                                                           ***********"
 echo "===========                                                                           ==========="
 echo "===========      C R E A C I Ó N    D E   S U B D O M I N I O   W O R D P R E S S     ==========="
@@ -807,7 +796,7 @@ fi
 printf "\033c"
 echo "*************************************************************************************************"
 echo "***********                                                                           ***********"
-echo "***********             SERVIDOR CREADO CON EL CONSTRUCTOR WEB 'VIM-v2.0'             ***********"
+echo "***********                   SERVIDOR CREADO CON 'Script-VIM_v2.0'                   ***********"
 echo "***********                                                                           ***********"
 echo "===========                                                                           ==========="
 echo "===========                          !  R E V I S E M O S  !                          ==========="
@@ -834,7 +823,7 @@ then
   printf "\033c"
   echo "*************************************************************************************************"
   echo "***********                                                                           ***********"
-  echo "***********             SERVIDOR CREADO CON EL CONSTRUCTOR WEB 'VIM-v2.0'             ***********"
+  echo "***********                   SERVIDOR CREADO CON 'Script-VIM_v2.0'                   ***********"
   echo "***********                                                                           ***********"
   echo "===========                                                                           ==========="
   echo "===========                          !  C A N C E L A D O  !                          ==========="
@@ -855,7 +844,7 @@ else
   printf "\033c"
   echo "*************************************************************************************************"
   echo "***********                                                                           ***********"
-  echo "***********             SERVIDOR CREADO CON EL CONSTRUCTOR WEB 'VIM-v2.0'             ***********"
+  echo "***********                   SERVIDOR CREADO CON 'Script-VIM_v2.0'                   ***********"
   echo "***********                                                                           ***********"
   echo "===========                                                                           ==========="
   echo "===========     !  C R E A N D O   A R C H I V O S   Y   D I R E C T O R I O S  !     ==========="
@@ -887,7 +876,7 @@ sh /root/\$SUB/cfsubd
 printf "\033c"
 echo "*************************************************************************************************"
 echo "***********                                                                           ***********"
-echo "***********             SERVIDOR CREADO CON EL CONSTRUCTOR WEB 'VIM-v2.0'             ***********"
+echo "***********                   SERVIDOR CREADO CON 'Script-VIM_v2.0'                   ***********"
 echo "***********                                                                           ***********"
 echo "===========                                                                           ==========="
 echo "===========   ! I N I C I A N D O    C R E A C I Ó N    D E   S U B D O M I N I O  !  ==========="
@@ -899,7 +888,7 @@ sh /root/"\$SUB"/rds.sh
 printf "\033c"
 echo "*************************************************************************************************"
 echo "***********                                                                           ***********"
-echo "***********             SERVIDOR CREADO CON EL CONSTRUCTOR WEB 'VIM-v2.0'             ***********"
+echo "***********                   SERVIDOR CREADO CON 'Script-VIM_v2.0'                   ***********"
 echo "***********                                                                           ***********"
 echo "===========                                                                           ==========="
 echo "===========             !  C O N F I G U R A N D O   W O R D P R E S S  !             ==========="
@@ -913,7 +902,7 @@ echo -e "inicio" | sh /root/"\$SUB"/createbak.sh > /dev/null 2>&1
 printf "\033c"
 echo "*************************************************************************************************"
 echo "***********                                                                           ***********"
-echo "***********             SERVIDOR CREADO CON EL CONSTRUCTOR WEB 'VIM-v2.0'             ***********"
+echo "***********                   SERVIDOR CREADO CON 'Script-VIM_v2.0'                   ***********"
 echo "***********                                                                           ***********"
 echo "===========                                                                           ==========="
 echo "===========            !  C R E A N D O   B U K E T   A M A Z O N   S 3  !            ==========="
@@ -926,7 +915,7 @@ terraform apply --auto-approve
 printf "\033c"
 echo "*************************************************************************************************"
 echo "***********                                                                           ***********"
-echo "***********                SERVIDOR CREADO POR EL CONSTRUCTOR 'VIM-v2.0'              ***********"
+echo "***********                   SERVIDOR CREADO CON 'Script-VIM_v2.0'                   ***********"
 echo "***********                                                                           ***********"
 echo "***********                             ¡  G E N I A L  !                             ***********"
 echo "***********                                                                           ***********"
@@ -973,6 +962,7 @@ provider "aws" {
   secret_key = var.aws_secret_key
   region = var.aws_region
 }
+#BUCKET S3 BAK
 resource "aws_s3_bucket" "s3-bak-subd" {
   bucket = "s3-bak-subd-$MYSERVER"
   acl    = "private"
@@ -981,6 +971,23 @@ resource "aws_s3_bucket" "s3-bak-subd" {
   tags = {
     Name        = "My bucket Bak"
     Environment = "Dev"
+  }
+}
+#BUCKET S3 IMG
+resource "aws_s3_bucket" "s3-img" {
+  bucket = "s3-img-\${var.server}"
+  acl    = "private"
+  acceleration_status = "Suspended"
+  force_destroy = true
+  tags = {
+    Name        = "My bucket img"
+    Environment = "Dev"
+  }
+  cors_rule {
+    allowed_headers = ["*"]
+    allowed_methods = ["GET", "PUT", "POST", "HEAD"]
+    allowed_origins = ["*"]
+    max_age_seconds = 3000
   }
 }
 # IAM Users Bucket BAK
@@ -1005,6 +1012,52 @@ resource "aws_iam_user_policy" "policys3-bak-subd" {
   ]
 }
 	EOF
+}
+# IAM Users Bucket IMG
+resource "aws_iam_user" "user-s3-img" {
+  name = "user-s3-img-\${var.server}"
+}
+resource "aws_iam_access_key" "key-s3-img" {
+  user = aws_iam_user.user-s3-img.name
+}
+resource "aws_iam_user_policy" "policys3-img" {
+  name = "policys3-img"
+  user = aws_iam_user.user-s3-img.name
+  policy = <<EOF
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:DeleteObjectTagging",
+                "s3:ListBucketMultipartUploads",
+                "s3:DeleteObjectVersion",
+                "s3:ListBucket",
+                "s3:DeleteObjectVersionTagging",
+                "s3:GetBucketAcl",
+                "s3:ListMultipartUploadParts",
+                "s3:PutObject",
+                "s3:GetObjectAcl",
+                "s3:GetObject",
+                "s3:AbortMultipartUpload",
+                "s3:DeleteObject",
+                "s3:GetBucketLocation",
+                "s3:PutObjectAcl"
+            ],
+            "Resource": [
+                "arn:aws:s3:::s3-img-$MYSERVER/*",
+                "arn:aws:s3:::s3-img-$MYSERVER"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": "s3:HeadBucket",
+            "Resource": "*"
+        }
+    ]
+}
+    EOF  
 }
 EOF
 
@@ -1046,7 +1099,7 @@ cat <<EOF >> $MYDOMAIN/.sh/subuninstall.sh
 printf "\033c"
 echo "*************************************************************************************************"
 echo "***********                                                                           ***********"
-echo "***********             SERVIDOR CREADO CON EL CONSTRUCTOR WEB 'VIM-v2.0'             ***********"
+echo "***********                   SERVIDOR CREADO CON 'Script-VIM_v2.0'                   ***********"
 echo "***********                                                                           ***********"
 echo "===========                                                                           ==========="
 echo "===========                           !  A T E N C I Ó N  !                           ==========="
