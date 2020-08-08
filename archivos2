@@ -590,6 +590,7 @@ wp plugin install defender-security --activate --path="\$PTH" --allow-root
 wp plugin install amazon-s3-and-cloudfront --activate --path="\$PTH" --allow-root
 wp plugin install commonwp --activate --path="\$PTH" --allow-root
 wp plugin install wp-whatsapp --activate --path="\$PTH" --allow-root
+wp plugin install woocommerce --activate --path="\$PTH" --allow-root
 wp plugin install departamentos-y-ciudades-de-colombia-para-woocommerce --activate --path="\$PTH" --allow-root
 wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/google-ads-for-woocommerce.zip --path="\$PTH" --allow-root
 wp plugin install https://github.com/epayco/Plugin_ePayco_WooCommerce/releases/download/V4.0.x/Plugin_ePayco_WooCommerce_4.0.x.zip --activate --path="\$PTH" --allow-root
