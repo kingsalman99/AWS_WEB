@@ -16,39 +16,39 @@ then
     echo ""
     echo "                              COMPLETA TUS CREDENCIALES PERSONALES                               "
     echo ""   
-    echo -n " - Escribe el 'CORREO' de tu cuenta de Cloudflare y luego oprime [enter]      = "
+    echo -n " 1. Escribe el 'CORREO' de tu cuenta de Cloudflare y luego oprime [enter]      = "
     read INPUT
     if [ $INPUT ]; then
         EML="$INPUT"
         export EML
     fi
     echo ""
-    echo -n " - Pega la 'API KEY' de Cloudflare ('Ctrl V' en tu teclado) y oprime [enter]  = "
+    echo -n " 2. Escribe tu 'DOMINIO' registrado, en minúscula, sin www y oprime [enter]    = "
+    read INPUT
+    if [ $INPUT ]; then
+        MYDOMAIN="$INPUT"
+        export MYDOMAIN
+    fi
+    echo ""
+    echo -n " 3. Pega la 'API KEY' de Cloudflare ('Ctrl V' en tu teclado) y oprime [enter]  = "
     read INPUT
     if [ $INPUT ]; then
         CFAPI="$INPUT"
         export CFAPI
     fi
     echo ""
-    echo -n " - Pega el 'ID DE CLAVE DE ACCESO' de Amazon AWS, (Ctrl V) y oprime [enter]   = "
+    echo -n " 4. Pega el 'ID DE CLAVE DE ACCESO' de Amazon AWS, (Ctrl V) y oprime [enter]   = "
     read INPUT
     if [ $INPUT ]; then
         accesskey="$INPUT"
         export accesskey
     fi
     echo ""
-    echo -n " - Pega aquí la 'CLAVE DE ACCESO SECRETA' de Amazon AWS, (Ctrl V) y [enter]   = "
+    echo -n " 5. Pega aquí la 'CLAVE DE ACCESO SECRETA' de Amazon AWS, (Ctrl V) y [enter]   = "
     read INPUT
     if [ $INPUT ]; then
         secretkey="$INPUT"
         export secretkey
-    fi
-    echo ""
-    echo -n " - Escribe tu 'DOMINIO' registrado, en minúscula, sin www y oprime [enter]    = "
-    read INPUT
-    if [ $INPUT ]; then
-        MYDOMAIN="$INPUT"
-        export MYDOMAIN
     fi
     MYDBNAME=$(echo "$MYDOMAIN" | sed 's/\([[:alnum:]][[:alnum:]]*\)\.\([[:graph:]][[:graph:]]*\)/\1/g')
     export MYDBNAME
@@ -68,11 +68,11 @@ then
     echo ""
     echo "                            ESTAS SON LAS CREDENCIALES QUE INGRESASTE:                           "
     echo ""
-    echo "           'CORREO ELECTRÓNICO' de Cloudflare  = $EML                                   "
-    echo "           'API KEY' de Cloudflare             = $CFAPI                                 "
-    echo "           'ID DE CLAVE DE ACCESO' de AWS      = $accesskey                             "
-    echo "           'CLAVE DE ACCESO SECRETA' de AWS    = $secretkey                             "
-    echo "           'DOMINIO' para crear tu página web  = $MYDOMAIN                              "
+    echo "           '1. CORREO ELECTRÓNICO' de Cloudflare  = $EML                                   "
+    echo "           '2. DOMINIO' para crear tu página web  = $MYDOMAIN                              "
+    echo "           '3. API KEY' de Cloudflare             = $CFAPI                                 "
+    echo "           '4. ID DE CLAVE DE ACCESO' de AWS      = $accesskey                             "
+    echo "           '5. CLAVE DE ACCESO SECRETA' de AWS    = $secretkey                             "
     echo ""
     echo -n "   ¿ Son Correctas Estas Credenciales ?                                              "
     echo ""
