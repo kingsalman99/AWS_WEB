@@ -410,7 +410,7 @@ echo "===========                                                               
 echo "===========      !  I N I C I A N D O    C R E A C I Ó N    W O R D P R E S S  !      ==========="
 echo "===========                                                                           ==========="
 echo "================================================================================================="
-echo -e "22\ny\n\$DOMINIO\ny\ny\n4\n\n\n\n\nn\nn\ny\ny\n\$WPUSER\n\$WPPASS\n\$EMAIL\n1\nn\ny\n24\nn\n24" | centmin
+echo -e "22\ny\n\$DOMINIO\ny\ny\n4\n\n\n\n\nn\nn\ny\ny\n\$WPUSER\n\$WPPASS\n\$EMAIL\n1\nn\ny\n24\ny\n24" | centmin
 sh /root/"\$DOMINIO"/ssllabs.sh
 sh /root/"\$DOMINIO"/bk-local.sh
 sh /root/"\$DOMINIO"/rds.sh
