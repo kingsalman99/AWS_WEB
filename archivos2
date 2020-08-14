@@ -622,7 +622,6 @@ chmod 660 /home/nginx/domains/"\$DOMINIO"/public/wp-config.php
 chmod 777 -R /home/nginx/domains/"\$DOMINIO"/public/wp-content/plugins/
 chmod 777 -R /home/nginx/domains/"\$DOMINIO"/public/wp-content/themes/
 chmod 777 -R /home/nginx/domains/"\$DOMINIO"/public/wp-content/languages/
-chmod 777 -R /home/nginx/domains/"\$DOMINIO"/public/wp-content/updraft/
 sh /root/"\$DOMINIO"/restart.sh
 EOF
 
