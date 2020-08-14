@@ -571,7 +571,7 @@ wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/ultimate
 wp plugin install envato-elements --activate --path="\$PTH" --allow-root
 wp plugin install essential-addons-for-elementor-lite --activate --path="\$PTH" --allow-root
 wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/updraftplus-premium.zip --activate --path="\$PTH" --allow-root
-wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/wp-fusion.zip --activate --path="\$PTH" --allow-root
+wp plugin install wp-fusion-lite --activate --path="\$PTH" --allow-root
 wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/cartflows.zip --path="\$PTH" --allow-root
 wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/cartflows-pro.zip --path="\$PTH" --allow-root
 wp plugin install jetpack --activate --path="\$PTH" --allow-root
@@ -619,6 +619,7 @@ chmod 660 /home/nginx/domains/"\$DOMINIO"/public/wp-config.php
 chmod 777 -R /home/nginx/domains/"\$DOMINIO"/public/wp-content/plugins/
 chmod 777 -R /home/nginx/domains/"\$DOMINIO"/public/wp-content/themes/
 chmod 777 -R /home/nginx/domains/"\$DOMINIO"/public/wp-content/languages/
+chmod 777 -R /home/nginx/domains/"\$DOMINIO"/public/wp-content/updraft/
 sh /root/"\$DOMINIO"/restart.sh
 EOF
 
