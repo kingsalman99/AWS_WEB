@@ -537,6 +537,7 @@ cat <<EOF >> $MYDOMAIN/.sh/wordpress.sh
 DOMINIO=$MYDOMAIN
 PTH="/home/nginx/domains/"\$DOMINIO"/public/"
 wp core language install es_ES --activate --path="\$PTH" --allow-root
+wp language core update --path="$PTH" --allow-root
 wp language plugin update --all --path="\$PTH" --allow-root
 wp language theme update --all --path="\$PTH" --allow-root
 wp rewrite structure '/%postname%/' --path="\$PTH" --allow-root
@@ -596,6 +597,8 @@ wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/google-a
 wp plugin install https://github.com/epayco/Plugin_ePayco_WooCommerce/releases/download/V4.0.x/Plugin_ePayco_WooCommerce_4.0.x.zip --activate --path="\$PTH" --allow-root
 wp plugin install https://github.com/vlipco/woocommerce-wompi-plugin/releases/download/0.1.0/Wompi_WooCommerce_Plugin_0.1.0.zip --path="\$PTH" --allow-root
 wp plugin install groundhogg --activate --path="\$PTH" --allow-root
+wp core language install es_ES --activate --path="\$PTH" --allow-root
+wp language core update --path="$PTH" --allow-root
 wp language plugin update --all --path="\$PTH" --allow-root
 wp language theme update --all --path="\$PTH" --allow-root
 rm -f /home/nginx/domains/"\$DOMINIO"/public/maintenance.html
