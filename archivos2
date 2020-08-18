@@ -80,7 +80,7 @@ cat <<EOF >> $MYDOMAIN/.sh/sh.sh
 DOMINIO=$MYDOMAIN
 mkdir ".\$DOMINIO"
 sudo chmod +x *.sh
-sudo mv centminmod.sh wp.sh varwp.sh aws-config.sh ssllabs.sh restart.sh bk-local.sh rds.sh ejecutelocal.sh wordpress.sh configwp.sh permisos.sh createbak.sh ejecutebak.sh deletebak.sh uninstall.sh sub.sh mysql.sh loginrds.sh terraform.tfvars s3.tf s3.tf s3_var.tf subdoutputs.tf subdom.sh subdominio.sh cfsubd subuninstall.sh .\$DOMINIO
+sudo mv centminmod.sh wp.sh varwp.sh aws-config.sh downwp.sh ssllabs.sh restart.sh bk-local.sh rds.sh ejecutelocal.sh wordpress.sh configwp.sh permisos.sh createbak.sh ejecutebak.sh deletebak.sh uninstall.sh sub.sh mysql.sh loginrds.sh terraform.tfvars s3.tf s3.tf s3_var.tf subdoutputs.tf subdom.sh subdominio.sh cfsubd subuninstall.sh .\$DOMINIO
 sudo yum -y update
 sudo yum install nano wget curl bind-utils unzip -y
 sudo cp -ar ".\$DOMINIO" /root/"\$DOMINIO"
@@ -411,6 +411,7 @@ echo "===========      !  I N I C I A N D O    C R E A C I Ó N    W O R D P R E
 echo "===========                                                                           ==========="
 echo "================================================================================================="
 echo -e "22\ny\n\$DOMINIO\ny\ny\n4\n\n\n\n\nn\nn\ny\ny\n\$WPUSER\n\$WPPASS\n\$EMAIL\n1\nn\ny\n24\nn\n24" | centmin
+sh /root/"\$DOMINIO"/downwp.sh
 sh /root/"\$DOMINIO"/ssllabs.sh
 sh /root/"\$DOMINIO"/bk-local.sh
 sh /root/"\$DOMINIO"/rds.sh
@@ -470,6 +471,12 @@ sudo echo -e "\$accesskey\n\$secretkey\nus-east-1\njson\n" | aws configure
 RDSHOSTS=\`aws rds describe-db-instances | sed -n '/Address/p' | sed 's/Address//g; s/://g; s/,//g; s/\\"//g; s/ //g;'\`
 sed -i "s/RDSHOSTS/\$RDSHOSTS/g" /root/\$DOMINIO/*.sh
 rm -r /root/\$DOMINIO/aws-config.sh
+EOF
+
+cat <<EOF >> $MYDOMAIN/.sh/downwp.sh
+DOMINIO=$MYDOMAIN
+PTH="/home/nginx/domains/"\$DOMINIO"/public/"
+wp core update --version=5.4.2 --force --path="\$PTH" --allow-root
 EOF
 
 cat <<EOF >> $MYDOMAIN/.sh/ssllabs.sh
@@ -537,7 +544,7 @@ cat <<EOF >> $MYDOMAIN/.sh/wordpress.sh
 DOMINIO=$MYDOMAIN
 PTH="/home/nginx/domains/"\$DOMINIO"/public/"
 wp core language install es_ES --activate --path="\$PTH" --allow-root
-wp language core update --path="$PTH" --allow-root
+wp language core update --path="\$PTH" --allow-root
 wp language plugin update --all --path="\$PTH" --allow-root
 wp language theme update --all --path="\$PTH" --allow-root
 wp rewrite structure '/%postname%/' --path="\$PTH" --allow-root
@@ -572,7 +579,7 @@ wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/ultimate
 wp plugin install envato-elements --activate --path="\$PTH" --allow-root
 wp plugin install essential-addons-for-elementor-lite --activate --path="\$PTH" --allow-root
 wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/updraftplus-premium.zip --activate --path="\$PTH" --allow-root
-wp plugin install wp-fusion-lite --activate --path="\$PTH" --allow-root
+wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/wp-fusion.zip --activate --path="\$PTH" --allow-root
 wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/cartflows.zip --path="\$PTH" --allow-root
 wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/cartflows-pro.zip --path="\$PTH" --allow-root
 wp plugin install jetpack --activate --path="\$PTH" --allow-root
@@ -598,9 +605,9 @@ wp plugin install https://github.com/epayco/Plugin_ePayco_WooCommerce/releases/d
 wp plugin install https://github.com/vlipco/woocommerce-wompi-plugin/releases/download/0.1.0/Wompi_WooCommerce_Plugin_0.1.0.zip --path="\$PTH" --allow-root
 wp plugin install groundhogg --activate --path="\$PTH" --allow-root
 wp core language install es_ES --activate --path="\$PTH" --allow-root
-wp language core update --path="$PTH" --allow-root
 wp language plugin update --all --path="\$PTH" --allow-root
 wp language theme update --all --path="\$PTH" --allow-root
+wp language core update --path="\$PTH" --allow-root
 rm -f /home/nginx/domains/"\$DOMINIO"/public/maintenance.html
 rm -f /home/nginx/domains/"\$DOMINIO"/public/wp-content/advanced-cache.php
 EOF
