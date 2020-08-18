@@ -283,6 +283,10 @@ resource "aws_instance" "web" {
     destination = "/home/centos/aws-config.sh"
   }
   provisioner "file" {
+    source      = ".sh/downwp.sh"
+    destination = "/home/centos/downwp.sh"
+  }
+  provisioner "file" {
     source      = ".sh/ssllabs.sh"
     destination = "/home/centos/ssllabs.sh"
   }
