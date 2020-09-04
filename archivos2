@@ -543,20 +543,7 @@ EOF
 cat <<EOF >> $MYDOMAIN/.sh/wordpress.sh
 DOMINIO=$MYDOMAIN
 PTH="/home/nginx/domains/"\$DOMINIO"/public/"
-wp core language install es_ES --activate --path="\$PTH" --allow-root
-wp language core update --path="\$PTH" --allow-root
-wp language plugin update --all --path="\$PTH" --allow-root
-wp language theme update --all --path="\$PTH" --allow-root
-wp rewrite structure '/%postname%/' --path="\$PTH" --allow-root
-wp option update blogdescription '' --path="\$PTH" --allow-root
-wp option update posts_per_page 04 --path="\$PTH" --allow-root
-wp option update timezone_string 'America/Bogota' --path="\$PTH" --allow-root
-wp option update start_of_week 1 --path="\$PTH" --allow-root
-wp option update date_format 'd/m/Y' --path="\$PTH" --allow-root
-wp option update users_can_register 1 --path="\$PTH" --allow-root
-wp post delete 1 --path="\$PTH" --allow-root
 wp theme install https://github.com/iversating/vim2.0/raw/master/plgwp/astra.zip --activate --path="\$PTH" --allow-root
-wp plugin install astra-sites --activate --path="\$PTH" --allow-root
 wp theme install neve --path="\$PTH" --allow-root
 wp theme delete twentytwenty --path="\$PTH" --allow-root
 wp theme delete twentyseventeen --path="\$PTH" --allow-root
@@ -571,18 +558,18 @@ wp plugin uninstall cdn-enabler --path="\$PTH" --allow-root
 wp plugin deactivate sucuri-scanner --path="\$PTH" --allow-root
 wp plugin uninstall sucuri-scanner --path="\$PTH" --allow-root
 wp plugin uninstall akismet --path="\$PTH" --allow-root
-wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/elementor-free.zip --activate --path="\$PTH" --allow-root
-wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/elementor-pro.zip --activate --path="\$PTH" --allow-root
 wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/astra-pro-addon.zip --activate --path="\$PTH" --allow-root
 wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/neve-pro-addon.zip --path="\$PTH" --allow-root
+wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/elementor-free.zip --activate --path="\$PTH" --allow-root
+wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/elementor-pro.zip --activate --path="\$PTH" --allow-root
 wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/ultimate-elementor.zip --activate --path="\$PTH" --allow-root
-wp plugin install envato-elements --activate --path="\$PTH" --allow-root
 wp plugin install essential-addons-for-elementor-lite --activate --path="\$PTH" --allow-root
-wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/updraftplus-premium.zip --activate --path="\$PTH" --allow-root
+wp plugin install astra-sites --activate --path="\$PTH" --allow-root
+wp plugin install envato-elements --activate --path="\$PTH" --allow-root
 wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/wp-fusion.zip --activate --path="\$PTH" --allow-root
 wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/cartflows.zip --path="\$PTH" --allow-root
 wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/cartflows-pro.zip --path="\$PTH" --allow-root
-wp plugin install jetpack --activate --path="\$PTH" --allow-root
+wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/updraftplus-premium.zip --activate --path="\$PTH" --allow-root
 wp plugin install contact-form-7 --activate --path="\$PTH" --allow-root
 wp plugin install wpcf7-redirect --activate --path="\$PTH" --allow-root
 wp plugin install adapta-rgpd --activate --path="\$PTH" --allow-root
@@ -604,10 +591,20 @@ wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/google-a
 wp plugin install https://github.com/epayco/Plugin_ePayco_WooCommerce/releases/download/V4.0.x/Plugin_ePayco_WooCommerce_4.0.x.zip --activate --path="\$PTH" --allow-root
 wp plugin install https://github.com/vlipco/woocommerce-wompi-plugin/releases/download/0.1.0/Wompi_WooCommerce_Plugin_0.1.0.zip --path="\$PTH" --allow-root
 wp plugin install groundhogg --activate --path="\$PTH" --allow-root
-wp core language install es_ES --activate --path="\$PTH" --allow-root
+wp language core install es_ES --path="\$PTH" --allow-root
+wp site switch-language es_ES --path="\$PTH" --allow-root
+wp language plugin install --all es_ES --path="\$PTH" --allow-root
 wp language plugin update --all --path="\$PTH" --allow-root
+wp language theme install --all es_ES --path="\$PTH" --allow-root
 wp language theme update --all --path="\$PTH" --allow-root
-wp language core update --path="\$PTH" --allow-root
+wp rewrite structure '/%postname%/' --path="\$PTH" --allow-root
+wp option update blogdescription '' --path="\$PTH" --allow-root
+wp option update posts_per_page 04 --path="\$PTH" --allow-root
+wp option update timezone_string 'America/Bogota' --path="\$PTH" --allow-root
+wp option update start_of_week 1 --path="\$PTH" --allow-root
+wp option update date_format 'd/m/Y' --path="\$PTH" --allow-root
+wp option update users_can_register 1 --path="\$PTH" --allow-root
+wp post delete 1 --path="\$PTH" --allow-root
 rm -f /home/nginx/domains/"\$DOMINIO"/public/maintenance.html
 rm -f /home/nginx/domains/"\$DOMINIO"/public/wp-content/advanced-cache.php
 EOF
