@@ -395,7 +395,7 @@ echo "===========                                                               
 echo "================================================================================================="
 if [ ! -d .aws ]
 then
-  sh /root/\$DOMINIO/aws-config.sh
+  sh /root/"\$DOMINIO"/aws-config.sh
   sh /root/"\$DOMINIO"/ses.sh
 else
   continue
