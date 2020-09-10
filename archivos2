@@ -396,7 +396,7 @@ echo "==========================================================================
 if [ ! -d .aws ]
 then
   sh /root/"\$DOMINIO"/aws-config.sh
-  sh /root/"\$DOMINIO"/ses.sh
+#  sh /root/"\$DOMINIO"/ses.sh
 else
   continue
 fi
@@ -603,6 +603,7 @@ wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/google-a
 wp plugin install https://github.com/epayco/Plugin_ePayco_WooCommerce/releases/download/V4.0.x/Plugin_ePayco_WooCommerce_4.0.x.zip --activate --path="\$PTH" --allow-root
 wp plugin install https://github.com/vlipco/woocommerce-wompi-plugin/releases/download/0.1.0/Wompi_WooCommerce_Plugin_0.1.0.zip --path="\$PTH" --allow-root
 wp plugin install groundhogg --activate --path="\$PTH" --allow-root
+wp post delete 8 --path="\$PTH" --allow-root --force
 wp post delete 9 --path="\$PTH" --allow-root --force
 wp rewrite structure '/%postname%/' --path="\$PTH" --allow-root
 wp option update blogdescription '' --path="\$PTH" --allow-root
