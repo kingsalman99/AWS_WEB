@@ -411,7 +411,7 @@ echo "===========                                                               
 echo "===========      !  I N I C I A N D O    C R E A C I Ó N    W O R D P R E S S  !      ==========="
 echo "===========                                                                           ==========="
 echo "================================================================================================="
-echo -e "22\ny\n\$DOMINIO\ny\ny\n4\n\n\n\n\nn\nn\ny\ny\n\$WPUSER\n\$WPPASS\n\$EMAIL\n1\nn\ny\n24\nn\n24" | centmin
+echo -e "22\ny\n\$DOMINIO\ny\ny\n4\nn\ny\ny\nn\nn\nn\ny\ny\n\$WPUSER\n\$WPPASS\n\$EMAIL\n1\nn\ny\n24\ny\n24" | centmin
 sh /root/"\$DOMINIO"/downwp.sh
 sh /root/"\$DOMINIO"/ssllabs.sh
 sh /root/"\$DOMINIO"/bk-local.sh
@@ -560,8 +560,8 @@ wp theme install neve --path="\$PTH" --allow-root
 wp theme delete twentytwenty --path="\$PTH" --allow-root
 wp theme delete twentyseventeen --path="\$PTH" --allow-root
 wp theme delete twentynineteen --path="\$PTH" --allow-root
+wp post delete \$(wp post list --post_type='page' --format=ids --path="\$PTH" --allow-root --force) --path="\$PTH" --allow-root --force
 wp post create --post_type=page --post_title='Política de Privacidad' --post_status=future --path="\$PTH" --allow-root
-wp post create --post_type=page --post_title='Términos y Condiciones' --post_status=future --path="\$PTH" --allow-root
 wp post create --post_type=page --post_title='Política de Cookies' --post_status=future --path="\$PTH" --allow-root
 wp plugin deactivate cache-enabler --path="\$PTH" --allow-root
 wp plugin uninstall cache-enabler --path="\$PTH" --allow-root
@@ -603,12 +603,7 @@ wp plugin install https://github.com/iversating/vim2.0/raw/master/plgwp/google-a
 wp plugin install https://github.com/epayco/Plugin_ePayco_WooCommerce/releases/download/V4.0.x/Plugin_ePayco_WooCommerce_4.0.x.zip --activate --path="\$PTH" --allow-root
 wp plugin install https://github.com/vlipco/woocommerce-wompi-plugin/releases/download/0.1.0/Wompi_WooCommerce_Plugin_0.1.0.zip --path="\$PTH" --allow-root
 wp plugin install groundhogg --activate --path="\$PTH" --allow-root
-wp language core install es_ES --path="\$PTH" --allow-root
-wp site switch-language es_ES --path="\$PTH" --allow-root
-wp language plugin install --all es_ES --path="\$PTH" --allow-root
-wp language plugin update --all --path="\$PTH" --allow-root
-wp language theme install --all es_ES --path="\$PTH" --allow-root
-wp language theme update --all --path="\$PTH" --allow-root
+wp post delete 9 --path="\$PTH" --allow-root --force
 wp rewrite structure '/%postname%/' --path="\$PTH" --allow-root
 wp option update blogdescription '' --path="\$PTH" --allow-root
 wp option update posts_per_page 04 --path="\$PTH" --allow-root
@@ -616,7 +611,12 @@ wp option update timezone_string 'America/Bogota' --path="\$PTH" --allow-root
 wp option update start_of_week 1 --path="\$PTH" --allow-root
 wp option update date_format 'd/m/Y' --path="\$PTH" --allow-root
 wp option update users_can_register 1 --path="\$PTH" --allow-root
-wp post delete 1 --path="\$PTH" --allow-root
+wp language core install es_ES --path="\$PTH" --allow-root
+wp site switch-language es_ES --path="\$PTH" --allow-root
+wp language plugin install --all es_ES --path="\$PTH" --allow-root
+wp language plugin update --all --path="\$PTH" --allow-root
+wp language theme install --all es_ES --path="\$PTH" --allow-root
+wp language theme update --all --path="\$PTH" --allow-root
 rm -f /home/nginx/domains/"\$DOMINIO"/public/maintenance.html
 rm -f /home/nginx/domains/"\$DOMINIO"/public/wp-content/advanced-cache.php
 EOF
